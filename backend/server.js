@@ -5,6 +5,7 @@ require("dotenv").config();
 require("./config/db");
 
 const userRoutes = require("./routes/userRoutes");
+const destinationRoutes = require("./routes/destinationRoutes");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
+app.use("/api/destinations", destinationRoutes);
 
 app.get("/", (req, res) => {
     res.send("Explore Nepal Backend is Running!");
