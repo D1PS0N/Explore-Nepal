@@ -20,6 +20,81 @@
 
 <style>
 
+  /* =========================
+   BOOKING SECTION
+========================= */
+
+.booking-form-container {
+    max-width: 720px;
+    margin: 40px auto 0;
+    padding: 32px;
+    background: var(--bg-soft);
+    border: 1px solid rgba(15, 138, 122, 0.12);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+#booking-form {
+    display: grid;
+    gap: 10px;
+}
+
+#booking-form label {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+#booking-form select,
+#booking-form input,
+#booking-form textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid rgba(15, 138, 122, 0.2);
+    border-radius: 10px;
+    background: #fff;
+    font: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#booking-form select:focus,
+#booking-form input:focus,
+#booking-form textarea:focus {
+    outline: none;
+    border-color: #0f8a7a;
+    box-shadow: 0 0 0 3px rgba(15, 138, 122, 0.1);
+}
+
+#booking-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+#booking-form button {
+    margin-top: 18px;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #0f8a7a;
+    color: white;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#booking-form button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .booking-form-container {
+        padding: 22px;
+        margin-top: 25px;
+    }
+}
+
 :root{
 
   /* Core palette: Himalayan daylight — white background + deep teal & marigold accents */
@@ -1863,6 +1938,53 @@ footer {
 
 </section>
 
+</section>
+
+<!-- BOOKING SECTION -->
+<section id="booking" class="section">
+
+    <div class="section-eyebrow">Book a Guide</div>
+
+    <h2>Plan Your Trip With a Local Guide</h2>
+
+    <p class="section-intro">
+        Select your destination and preferred guide to request a booking.
+    </p>
+
+    <div class="booking-form-container">
+
+        <form id="booking-form">
+
+            <label for="booking-destination">Choose a destination</label>
+
+            <select id="booking-destination" required>
+                <option value="">Select destination</option>
+            </select>
+
+            <label for="booking-guide">Choose a guide</label>
+
+            <select id="booking-guide" required>
+                <option value="">Select guide</option>
+            </select>
+
+            <label for="booking-date">Tour date</label>
+            <input type="date" id="booking-date" required>
+
+            <label for="booking-notes">Additional details</label>
+
+            <textarea
+                id="booking-notes"
+                rows="4"
+                placeholder="Tell us anything important about your trip..."
+            ></textarea>
+
+            <button type="submit">Request Booking</button>
+
+        </form>
+
+    </div>
+
+</section>
 
 <!-- LOGIN MODAL (popup, not a page section) -->
 
@@ -2569,6 +2691,96 @@ function showDetails(place){
 
 }
 
+// ---------- BOOKING DESTINATION (US10) ----------
+
+const bookingDestination = document.getElementById("booking-destination");
+
+async function loadBookingDestinations() {
+
+    if (!bookingDestination) return;
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/destinations"
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load destinations.");
+        }
+
+        const destinations = await response.json();
+
+        console.log("Booking destinations:", destinations);
+
+        destinations.forEach(destination => {
+
+            const option = document.createElement("option");
+
+            option.value = destination.id;
+            option.textContent = destination.name;
+
+            bookingDestination.appendChild(option);
+
+        });
+
+    } catch (error) {
+
+        console.error("Error loading booking destinations:", error);
+
+    }
+}
+
+loadBookingDestinations();
+
+// ---------- BOOKING GUIDE (US10) ----------
+
+const bookingGuide = document.getElementById("booking-guide");
+
+bookingDestination.addEventListener("change", async () => {
+
+    const destinationId = bookingDestination.value;
+
+    // Reset guide dropdown
+    bookingGuide.innerHTML = `
+        <option value="">Select guide</option>
+    `;
+
+    if (!destinationId) return;
+
+    try {
+
+        const response = await fetch(
+            `http://127.0.0.1:5000/api/guides/destination/${destinationId}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load guides.");
+        }
+
+        const guides = await response.json();
+
+        console.log("Booking guides:", guides);
+
+        guides.forEach(guide => {
+
+            const option = document.createElement("option");
+
+            option.value = guide.id;
+            option.textContent = guide.name;
+
+            bookingGuide.appendChild(option);
+
+        });
+
+    } catch (error) {
+
+        console.error("Error loading booking guides:", error);
+
+    }
+
+});
+
 // ---------- GUIDE FILTER (US7) ----------
 
 const guideDestination = document.getElementById("guide-destination");
@@ -2692,6 +2904,91 @@ if (toggle) {
     } catch (error) {
 
         console.error("Error fetching guides:", error);
+
+    }
+
+});
+
+// ---------- BOOKING SUBMIT (US10) ----------
+
+const bookingForm = document.getElementById("booking-form");
+
+bookingForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const destinationId = bookingDestination.value;
+    const guideId = bookingGuide.value;
+    const tourDate = document.getElementById("booking-date").value;
+    const notes = document.getElementById("booking-notes").value.trim();
+
+    if (!destinationId || !guideId || !tourDate) {
+        showToast(
+            "Please select a destination, guide, and tour date.",
+            "error"
+        );
+        return;
+    }
+
+    const token =
+        localStorage.getItem("token") ||
+        sessionStorage.getItem("token");
+
+    if (!token) {
+        showToast(
+            "Please log in before requesting a booking.",
+            "error"
+        );
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/bookings",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    destinationId: Number(destinationId),
+                    guideId: Number(guideId),
+                    tourDate,
+                    notes
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Failed to submit booking."
+            );
+        }
+
+        showToast(
+            data.message || "Booking request submitted successfully!",
+            "success"
+        );
+
+        bookingForm.reset();
+
+        // Reset guide dropdown after form reset
+        bookingGuide.innerHTML = `
+            <option value="">Select guide</option>
+        `;
+
+    } catch (error) {
+
+        console.error("Booking error:", error);
+
+        showToast(
+            error.message || "Something went wrong.",
+            "error"
+        );
 
     }
 

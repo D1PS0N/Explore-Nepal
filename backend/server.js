@@ -5,6 +5,7 @@ require("dotenv").config();
 require("./config/db");
 
 const userRoutes = require("./routes/userRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 const destinationRoutes = require("./routes/destinationRoutes");
 const guideRoutes = require("./routes/guideRoutes");
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
+app.use("/api/bookings", bookingRoutes);
 app.use("/api/destinations", destinationRoutes);
 app.use("/api/guides", guideRoutes);
 
