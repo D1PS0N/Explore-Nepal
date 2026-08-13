@@ -2014,7 +2014,82 @@ footer {
       <label for="rememberMe">Remember me on this device</label>
     </div>
 
+    <button type="button" id="forgotPasswordBtn">Forgot Password?</button>
+
     <button id="loginBtn" onclick="loginUser()">Login</button>
+
+  </div>
+
+</div>
+
+<!-- FORGOT / RESET PASSWORD MODAL -->
+<div class="modal-overlay" id="resetPasswordModal">
+
+  <div class="modal-box auth-box">
+
+    <button class="modal-close" id="resetPasswordModalClose" aria-label="Close password reset">
+      &times;
+    </button>
+
+    <div class="section-eyebrow">Account Recovery</div>
+
+    <h2 class="modal-title">Reset Your Password</h2>
+
+    <p class="section-intro modal-intro">
+      Enter your registered email address to recover your account.
+    </p>
+
+    <!-- STEP 1: VERIFY EMAIL -->
+    <div id="forgotPasswordStep">
+
+      <label for="forgotEmail">Email</label>
+
+      <input
+        id="forgotEmail"
+        type="email"
+        placeholder="you@example.com"
+      >
+
+      <span class="input-error" id="forgotEmailError"></span>
+
+      <button type="button" id="verifyEmailBtn">
+        Verify Email
+      </button>
+
+    </div>
+
+    <!-- STEP 2: SET NEW PASSWORD -->
+    <div id="newPasswordStep" style="display: none;">
+
+      <p class="section-intro">
+        Email verified. Enter your new password below.
+      </p>
+
+      <label for="newPassword">New Password</label>
+
+      <input
+        id="newPassword"
+        type="password"
+        placeholder="Enter new password"
+      >
+
+      <span class="input-error" id="newPasswordError"></span>
+
+      <label for="confirmPassword">Confirm New Password</label>
+
+      <input
+        id="confirmPassword"
+        type="password"
+        placeholder="Confirm new password"
+      >
+
+      <span class="input-error" id="confirmPasswordError"></span>
+
+      <button type="button" id="resetPasswordBtn">
+        Reset Password
+      </button>
+
+    </div>
 
   </div>
 
@@ -2435,6 +2510,269 @@ function showToast(msg, type = "success"){
   }, 4000);
 }
 
+// ---------- FORGOT / RESET PASSWORD (US3) ----------
+
+const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+const resetPasswordModal = document.getElementById("resetPasswordModal");
+const resetPasswordModalClose = document.getElementById("resetPasswordModalClose");
+
+const forgotEmail = document.getElementById("forgotEmail");
+const verifyEmailBtn = document.getElementById("verifyEmailBtn");
+const forgotEmailError = document.getElementById("forgotEmailError");
+
+const forgotPasswordStep = document.getElementById("forgotPasswordStep");
+const newPasswordStep = document.getElementById("newPasswordStep");
+
+const newPassword = document.getElementById("newPassword");
+const confirmPassword = document.getElementById("confirmPassword");
+const newPasswordError = document.getElementById("newPasswordError");
+const confirmPasswordError = document.getElementById("confirmPasswordError");
+const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+
+let resetEmail = "";
+
+
+// OPEN RESET PASSWORD MODAL
+
+forgotPasswordBtn?.addEventListener("click", () => {
+
+  loginModal.classList.remove("active");
+
+  resetPasswordModal.classList.add("active");
+
+  document.body.style.overflow = "hidden";
+
+  forgotPasswordStep.style.display = "block";
+  newPasswordStep.style.display = "none";
+
+  forgotEmail.value = "";
+  newPassword.value = "";
+  confirmPassword.value = "";
+
+  forgotEmailError.textContent = "";
+  newPasswordError.textContent = "";
+  confirmPasswordError.textContent = "";
+
+  forgotEmail.focus();
+
+});
+
+
+// CLOSE RESET PASSWORD MODAL
+
+resetPasswordModalClose?.addEventListener("click", () => {
+
+  resetPasswordModal.classList.remove("active");
+
+  document.body.style.overflow = "";
+
+});
+
+
+// CLOSE WHEN CLICKING OUTSIDE
+
+resetPasswordModal?.addEventListener("click", (e) => {
+
+  if(e.target === resetPasswordModal){
+
+    resetPasswordModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+  }
+
+});
+
+
+// VERIFY EMAIL
+
+verifyEmailBtn?.addEventListener("click", async () => {
+
+  const email = forgotEmail.value.trim();
+
+  forgotEmailError.textContent = "";
+
+  if(!isValidEmail(email)){
+
+    forgotEmailError.textContent = "Please enter a valid email address.";
+
+    return;
+
+  }
+
+  const originalLabel = verifyEmailBtn.textContent;
+
+  verifyEmailBtn.disabled = true;
+
+  verifyEmailBtn.textContent = "Checking...";
+
+  try {
+
+    const response = await fetch(`${API}/forgot-password`, {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({ email })
+
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message || "Unable to verify email."
+      );
+
+    }
+
+    resetEmail = email;
+
+    forgotPasswordStep.style.display = "none";
+
+    newPasswordStep.style.display = "block";
+
+    newPassword.focus();
+
+    showToast(
+      "Email verified. Please enter your new password.",
+      "success"
+    );
+
+  } catch(error) {
+
+    forgotEmailError.textContent =
+      error.message || "Unable to verify email.";
+
+  } finally {
+
+    verifyEmailBtn.disabled = false;
+
+    verifyEmailBtn.textContent = originalLabel;
+
+  }
+
+});
+
+
+// RESET PASSWORD
+
+resetPasswordBtn?.addEventListener("click", async () => {
+
+  const password = newPassword.value;
+
+  const confirm = confirmPassword.value;
+
+  newPasswordError.textContent = "";
+
+  confirmPasswordError.textContent = "";
+
+  let hasError = false;
+
+
+  if(password.length < 6){
+
+    newPasswordError.textContent =
+      "Password must be at least 6 characters.";
+
+    hasError = true;
+
+  }
+
+
+  if(password !== confirm){
+
+    confirmPasswordError.textContent =
+      "Passwords do not match.";
+
+    hasError = true;
+
+  }
+
+
+  if(hasError) return;
+
+
+  const originalLabel = resetPasswordBtn.textContent;
+
+  resetPasswordBtn.disabled = true;
+
+  resetPasswordBtn.textContent = "Resetting...";
+
+
+  try {
+
+    const response = await fetch(`${API}/reset-password`, {
+
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        email: resetEmail,
+        newPassword: password
+      })
+
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message || "Password reset failed."
+      );
+
+    }
+
+
+    showToast(
+      data.message || "Password reset successfully!",
+      "success"
+    );
+
+    announce(
+      data.message || "Password reset successfully!"
+    );
+
+
+    resetPasswordModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+    newPassword.value = "";
+
+    confirmPassword.value = "";
+
+    resetEmail = "";
+
+  } catch(error) {
+
+    showToast(
+      error.message || "Password reset failed.",
+      "error"
+    );
+
+    announce(
+      error.message || "Password reset failed."
+    );
+
+  } finally {
+
+    resetPasswordBtn.disabled = false;
+
+    resetPasswordBtn.textContent = originalLabel;
+
+  }
+
+});
+
 // Announces to screen readers via the visually-hidden #message live region
 function announce(msg){
   const liveEl = document.getElementById("message");
@@ -2471,8 +2809,13 @@ function getStoredToken(){
 
 function refreshAuthUI(){
   const token = getStoredToken();
-  const name = localStorage.getItem("userName");
-  const email = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
+  const name =
+  localStorage.getItem("userName") ||
+  sessionStorage.getItem("userName");
+  
+  const email =
+  localStorage.getItem("userEmail") ||
+  sessionStorage.getItem("userEmail");
   const navUserName = document.getElementById("navUserName");
 
   if(token){
@@ -2488,6 +2831,7 @@ function logoutUser(){
   localStorage.removeItem("userName");
   localStorage.removeItem("userEmail");
   sessionStorage.removeItem("token");
+  sessionStorage.removeItem("userName");
   sessionStorage.removeItem("userEmail");
   refreshAuthUI();
   showToast("You have been logged out.", "success");
@@ -2636,11 +2980,17 @@ async function loginUser(){
     announce(data.message || "Login successful!");
 
     if(data.token){
-      const storage = rememberEl.checked ? localStorage : sessionStorage;
-      storage.setItem("token", data.token);
-      storage.setItem("userEmail", email);
-      refreshAuthUI();
-    }
+  const storage = rememberEl.checked ? localStorage : sessionStorage;
+
+  storage.setItem("token", data.token);
+  storage.setItem("userEmail", email);
+
+  if(data.user && data.user.fullName){
+    storage.setItem("userName", data.user.fullName);
+  }
+
+  refreshAuthUI();
+}
 
     passEl.value = "";
     closeLoginModal();
