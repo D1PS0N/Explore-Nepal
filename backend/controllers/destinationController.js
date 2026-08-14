@@ -108,9 +108,46 @@ const deleteDestination = (req, res) => {
     });
 };
 
+const getRecommendedDestinations = (req, res) => {
+    const { interests } = req.query;
+
+    if (!interests) {
+        return res.status(400).json({
+            message: "Please provide at least one interest"
+        });
+    }
+
+    const selectedInterests = interests
+        .split(",")
+        .map(interest => interest.trim())
+        .filter(interest => interest.length > 0);
+
+    if (selectedInterests.length === 0) {
+        return res.status(400).json({
+            message: "Please provide at least one valid interest"
+        });
+    }
+
+    destinationModel.getRecommendedDestinations(
+        selectedInterests,
+        (err, results) => {
+            if (err) {
+                console.error(err);
+
+                return res.status(500).json({
+                    message: "Error fetching recommended destinations"
+                });
+            }
+
+            res.json(results);
+        }
+    );
+};
+
 module.exports = {
     getDestinations,
     createDestination,
     updateDestination,
-    deleteDestination
+    deleteDestination,
+    getRecommendedDestinations
 };

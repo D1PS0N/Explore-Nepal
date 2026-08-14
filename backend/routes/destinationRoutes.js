@@ -5,6 +5,8 @@ const destinationController = require("../controllers/destinationController");
 
 router.get("/", destinationController.getDestinations);
 
+router.get("/recommendations", destinationController.getRecommendedDestinations);
+
 router.post("/", destinationController.createDestination);
 
 router.put("/:id", destinationController.updateDestination);

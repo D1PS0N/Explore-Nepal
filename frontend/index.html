@@ -1480,6 +1480,86 @@ footer {
   text-align-last: center;
 }
 
+/* US14 Recommendation Cards */
+
+.recommendation-interests {
+    margin: 28px auto 34px;
+    text-align: center;
+    max-width: 900px;
+}
+
+.recommendation-interests h3 {
+    margin-bottom: 18px;
+}
+
+.interest-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.interest-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border: 1px solid #d9e5e2;
+    border-radius: 999px;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interest-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.interest-option input {
+    accent-color: #0f766e;
+}
+
+.recommendation-card {
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.recommendation-image {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.recommendation-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.recommendation-card .recommendation-content {
+    padding: 18px 20px 20px;
+}
+
+.recommendation-card .location,
+.recommendation-card h3,
+.recommendation-card p {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.recommendation-card h3 {
+    margin-top: 6px;
+}
+
+.recommendation-card p:last-child {
+    margin-bottom: 0;
+}
+
 </style>
 
 
@@ -1575,6 +1655,62 @@ footer {
 
 </section>
 
+<section id="recommendations" class="section">
+
+    <div class="section-eyebrow">Personalized for You</div>
+
+    <h2>Recommended Destinations</h2>
+
+    <p class="section-intro">
+        Choose your interests and discover destinations that match them.
+    </p>
+
+    <div class="recommendation-interests">
+
+        <h3>What are you interested in?</h3>
+
+        <div class="interest-options">
+
+            <label class="interest-option">
+                <input type="checkbox" value="Trekking">
+                <span>Trekking</span>
+            </label>
+
+            <label class="interest-option">
+                <input type="checkbox" value="Nature">
+                <span>Nature</span>
+            </label>
+
+            <label class="interest-option">
+                <input type="checkbox" value="Culture">
+                <span>Culture</span>
+            </label>
+
+            <label class="interest-option">
+                <input type="checkbox" value="Adventure">
+                <span>Adventure</span>
+            </label>
+
+            <label class="interest-option">
+                <input type="checkbox" value="Mountains">
+                <span>Mountains</span>
+            </label>
+
+        </div>
+
+        <button type="button" id="get-recommendations-btn" class="view-btn">
+            Get Recommendations
+        </button>
+
+    </div>
+
+    <div id="recommendations-grid" class="destination-grid">
+        <p id="recommendations-loading">
+            Select your interests to get recommendations.
+        </p>
+    </div>
+
+</section>
 
 <section id="destinations" class="section">
 
@@ -3343,6 +3479,112 @@ bookingForm.addEventListener("submit", async (e) => {
     }
 
 });
+
+// ================================
+// US14 - Recommended Destinations
+// ================================
+
+async function loadRecommendations(interests) {
+    const recommendationsGrid =
+        document.getElementById("recommendations-grid");
+
+    if (!recommendationsGrid) return;
+
+    if (!interests || interests.length === 0) {
+        recommendationsGrid.innerHTML = `
+            <p>Please select at least one interest.</p>
+        `;
+        return;
+    }
+
+    recommendationsGrid.innerHTML = `
+        <p>Loading recommendations...</p>
+    `;
+
+    try {
+        const interestParam = interests.join(",");
+
+        const response = await fetch(
+            `http://127.0.0.1:5000/api/destinations/recommendations?interests=${encodeURIComponent(interestParam)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Failed to load recommendations."
+            );
+        }
+
+        if (!data || data.length === 0) {
+            recommendationsGrid.innerHTML = `
+                <p>No destinations found for the selected interests.</p>
+            `;
+            return;
+        }
+
+        recommendationsGrid.innerHTML = data.map(destination => `
+            <div class="card destination-card recommendation-card">
+
+    <div class="recommendation-image">
+        <img
+            src="${destination.image}"
+            alt="${destination.name}"
+            onerror="this.style.display='none'"
+        >
+    </div>
+
+    <div class="recommendation-content">
+
+        <div class="location">
+            📍 ${destination.location}
+        </div>
+
+        <h3>${destination.name}</h3>
+
+        <p>${destination.description}</p>
+
+        <p>
+            <strong>Attractions:</strong>
+            ${destination.attractions || "Not specified"}
+        </p>
+
+    </div>
+
+</div>
+        `).join("");
+
+    } catch (error) {
+
+        console.error("Recommendation error:", error);
+
+        recommendationsGrid.innerHTML = `
+            <p>Unable to load recommendations right now.</p>
+        `;
+    }
+}
+
+
+// Get Recommendations button
+
+const recommendationsButton =
+    document.getElementById("get-recommendations-btn");
+
+if (recommendationsButton) {
+
+    recommendationsButton.addEventListener("click", () => {
+
+        const selectedInterests = Array.from(
+            document.querySelectorAll(
+                '.interest-options input[type="checkbox"]:checked'
+            )
+        ).map(input => input.value);
+
+        loadRecommendations(selectedInterests);
+
+    });
+
+}
 
 </script>
 

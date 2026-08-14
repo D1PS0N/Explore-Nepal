@@ -55,9 +55,27 @@ const deleteDestination = (id, callback) => {
     db.query(sql, [id], callback);
 };
 
+const getRecommendedDestinations = (interests, callback) => {
+    if (!interests || interests.length === 0) {
+        return callback(null, []);
+    }
+
+    const conditions = interests.map(() => "interests LIKE ?").join(" OR ");
+    const values = interests.map(interest => `%${interest}%`);
+
+    const sql = `
+        SELECT *
+        FROM destinations
+        WHERE ${conditions}
+    `;
+
+    db.query(sql, values, callback);
+};
+
 module.exports = {
     getAllDestinations,
     createDestination,
     updateDestination,
-    deleteDestination
+    deleteDestination,
+    getRecommendedDestinations
 };
