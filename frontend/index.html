@@ -3141,7 +3141,7 @@ async function loginUser(){
 
 }
 
-function showDetails(place){
+async function showDetails(place){
 
   const details={
 
@@ -3173,7 +3173,40 @@ function showDetails(place){
 
   };
 
-  alert(details[place]);
+  const destinationDetails = details[place] || "Destination details not available.";
+
+  try {
+
+    const response = await fetch(
+      `http://127.0.0.1:5000/api/weather?city=${encodeURIComponent(place)}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Weather information unavailable");
+    }
+
+    const weather = await response.json();
+
+    alert(
+      `${destinationDetails}\n\n` +
+      `🌤️ Current Weather\n` +
+      `🌡️ Temperature: ${weather.temperature}${weather.temperatureUnit}\n` +
+      `☁️ Condition: ${weather.condition}\n` +
+      `💧 Humidity: ${weather.humidity}%\n` +
+      `💨 Wind: ${weather.windSpeed} ${weather.windSpeedUnit}`
+    );
+
+  } catch (error) {
+
+    console.error("Weather error:", error);
+
+    alert(
+      `${destinationDetails}\n\n` +
+      `🌤️ Current Weather\n` +
+      `Weather information is currently unavailable.`
+    );
+
+  }
 
 }
 
