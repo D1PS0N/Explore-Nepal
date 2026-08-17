@@ -4073,19 +4073,60 @@ function mockBook(){
   bookM.shut();
   showToast(`Request sent — ${guideName} will confirm shortly. Your journey is now in My journeys.`, 'success');
 }
-function mockLogin(){
-  isLoggedIn = true;
-  localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
-  updateAccountUI();
-  loginM.shut();
-  showToast('Logged in.', 'success');
-  if(pendingBooking){
-    const booking = pendingBooking;
-    pendingBooking = null;
-    setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
-  } else if(pendingOpenJourneys){
-    pendingOpenJourneys = false;
-    setTimeout(openJourneys, 120);
+
+async function mockLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPass').value;
+
+  if(!email || !password){
+    showToast('Please enter your email and password.', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      showToast(data.message || 'Login failed.', 'error');
+      return;
+    }
+
+    localStorage.setItem('exploreNepalToken', data.token);
+    localStorage.setItem('exploreNepalUser', JSON.stringify(data.user));
+    localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
+
+    isLoggedIn = true;
+    updateAccountUI();
+
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPass').value = '';
+
+    loginM.shut();
+    showToast('Logged in successfully.', 'success');
+
+    if(pendingBooking){
+      const booking = pendingBooking;
+      pendingBooking = null;
+      setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
+    } else if(pendingOpenJourneys){
+      pendingOpenJourneys = false;
+      setTimeout(openJourneys, 120);
+    }
+
+  } catch(error) {
+    console.error('Login error:', error);
+    showToast('Unable to connect to the server.', 'error');
   }
 }
 
@@ -4108,30 +4149,72 @@ function setErr(inputId, errId, msg){
   if(msg){ input.classList.add('invalid'); err.textContent = msg; err.style.display='block'; }
   else { input.classList.remove('invalid'); err.style.display='none'; }
 }
-function mockRegister(){
+
+async function mockRegister(){
   const name = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value;
-  let bad = false;
-  if(!name){ setErr('regName','regNameErr','Enter your full name.'); bad = true; } else setErr('regName','regNameErr','');
-  if(!isValidEmail(email)){ setErr('regEmail','regEmailErr','Enter a valid email.'); bad = true; } else setErr('regEmail','regEmailErr','');
-  if(pass.length < 6){ setErr('regPass','regPassErr','At least 6 characters.'); bad = true; } else setErr('regPass','regPassErr','');
-  if(bad) return;
-  showToast('Account created   welcome, ' + name.split(' ')[0] + '.', 'success');
-  isLoggedIn = true;
-  localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
-  updateAccountUI();
-  document.getElementById('regName').value=''; document.getElementById('regEmail').value=''; document.getElementById('regPass').value='';
-  if(typeof registerM !== 'undefined') registerM.shut();
+  const password = document.getElementById('regPass').value;
 
-  // If signup began from Book Now or My journeys, continue that action automatically.
-  if(pendingBooking){
-    const booking = pendingBooking;
-    pendingBooking = null;
-    setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
-  } else if(pendingOpenJourneys){
-    pendingOpenJourneys = false;
-    setTimeout(openJourneys, 120);
+  let bad = false;
+
+  if(!name){
+    setErr('regName','regNameErr','Enter your full name.');
+    bad = true;
+  } else {
+    setErr('regName','regNameErr','');
+  }
+
+  if(!isValidEmail(email)){
+    setErr('regEmail','regEmailErr','Enter a valid email.');
+    bad = true;
+  } else {
+    setErr('regEmail','regEmailErr','');
+  }
+
+  if(password.length < 6){
+    setErr('regPass','regPassErr','At least 6 characters.');
+    bad = true;
+  } else {
+    setErr('regPass','regPassErr','');
+  }
+
+  if(bad) return;
+
+  try {
+    const response = await fetch('/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fullName: name,
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      showToast(data.message || 'Registration failed.', 'error');
+      return;
+    }
+
+    showToast('Account created successfully. Please log in.', 'success');
+
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regPass').value = '';
+
+    if(typeof registerM !== 'undefined'){
+      registerM.shut();
+    }
+
+    setTimeout(() => loginM.open(), 150);
+
+  } catch(error) {
+    console.error('Registration error:', error);
+    showToast('Unable to connect to the server.', 'error');
   }
 }
 
