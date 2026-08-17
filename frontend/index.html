@@ -2511,7 +2511,7 @@ footer#contact{
 <li class="divider"></li>
 <li><a href="/admin/">Admin</a></li>
 <li class="nav-journeys-link" id="navJourneysItem"><a href="#" id="journeysTrigger">My journeys</a></li>
-<li><a href="#" id="loginTrigger">Log in</a></li>
+<li><a href="#" id="loginTrigger">Log in</a></li><li><a href="#" id="logoutTrigger" style="display:none;">Log out</a></li>
 <li><a class="btn btn-primary btn-sm" href="#" id="registerTrigger">Create account</a></li>
 </ul>
 </nav>
@@ -3521,6 +3521,8 @@ document.getElementById('productionSubmit')?.addEventListener('click', () => {
   const dateEl = document.getElementById('productionDate'); if(dateEl) dateEl.value = '';
 });
 
+document.getElementById('logoutTrigger')?.addEventListener('click', e => { e.preventDefault(); localStorage.removeItem('exploreNepalToken'); localStorage.removeItem('exploreNepalUser'); localStorage.removeItem(LOGIN_STORAGE_KEY); isLoggedIn=false; updateAccountUI(); showToast('Logged out successfully.','success'); });
+
 // Open account creation directly from the login popup.
 document.getElementById('loginCreateAccount')?.addEventListener('click', () => {
   loginM.shut();
@@ -3962,7 +3964,7 @@ function prettyDate(iso){
 }
 function updateAccountUI(){
   const navItem = document.getElementById('navJourneysItem');
-  if(navItem) navItem.classList.toggle('visible', isLoggedIn);
+  if(navItem) navItem.classList.toggle('visible', isLoggedIn); const loginItem=document.getElementById('loginTrigger'); const logoutItem=document.getElementById('logoutTrigger'); if(loginItem) loginItem.parentElement.style.display=isLoggedIn?'none':''; if(logoutItem) logoutItem.style.display=isLoggedIn?'':'none';
 }
 function openJourneys(){
   if(!isLoggedIn){
