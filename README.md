@@ -22,10 +22,9 @@ Explore Nepal is a tourism website developed using HTML, CSS, JavaScript, Node.j
 
 ## Team Members
 
-- Prajwol Lama 
+- Prajwol Shrestha
 - Sayushma Khadka
 - Dipson Dahal
-- Brishan Maharjan
 - Girwani Ghimire
 
 ## How to Run
