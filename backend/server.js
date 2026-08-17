@@ -19,6 +19,11 @@ app.use(express.json());
 
 app.use("/assets", express.static(path.join(__dirname, "../frontend/assets")));
 app.use("/images", express.static(path.join(__dirname, "../frontend/images")));
+app.use("/admin", express.static(path.join(__dirname, "../admin")));
+
+app.get("/admin", (req, res) => {
+    res.sendFile(path.join(__dirname, "../admin/login.html"));
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/bookings", bookingRoutes);
