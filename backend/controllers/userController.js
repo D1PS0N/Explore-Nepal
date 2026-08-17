@@ -516,7 +516,14 @@ const deleteUserByAdmin = (req, res) => {
 
   deleteUserByAdminModel(userId, (err, result) => {
     if (err) {
-      console.error(err);
+  console.error(err);
+
+  if (err.code === "ER_ROW_IS_REFERENCED_2") {
+    return res.status(409).json({
+      success: false,
+      message: "Cannot delete user because they have existing bookings.",
+    });
+  }
 
       return res.status(500).json({
         success: false,
