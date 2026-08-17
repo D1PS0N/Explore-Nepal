@@ -3901,9 +3901,11 @@ Object.assign(GUIDE_STATUS_BY_NAME, {
 let isLoggedIn = false;
 let pendingBooking = null;
 
-function showBookingModal(name, loc){
+function showBookingModal(name, loc, guideId, destinationId){
   document.getElementById('bookGuideName').textContent = name;
   document.getElementById('bookGuideLoc').textContent = loc;
+  window.activeBookingGuideId = guideId || null;
+  window.activeBookingDestinationId = destinationId || null;
 
   const dateInput = document.getElementById('bookDate');
   const note = document.getElementById('bookDateNote');
@@ -3929,13 +3931,34 @@ function showBookingModal(name, loc){
   bookM.open();
 }
 
-function openBooking(name, loc){
+async function openBooking(name, loc, guideId, destinationId){
+  if(!guideId || !destinationId){
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/guides');
+      const guides = await response.json();
+      const found = guides.find(g => String(g.name).trim() === String(name).trim());
+
+      if(found){
+        guideId = found.id;
+        destinationId = found.destination_id;
+      }
+    } catch(error) {
+      console.error('Guide lookup failed:', error);
+    }
+  }
+
+  if(!guideId || !destinationId){
+    showToast('Unable to identify this guide for booking.', 'error');
+    return;
+  }
+
   if(!isLoggedIn){
-    pendingBooking = { name, loc };
+    pendingBooking = { name, loc, guideId, destinationId };
     loginM.open();
     return;
   }
-  showBookingModal(name, loc);
+
+  showBookingModal(name, loc, guideId, destinationId);
 }
 const JOURNEYS_STORAGE_KEY = 'exploreNepalJourneysV1';
 const LOGIN_STORAGE_KEY = 'exploreNepalLoggedInV1';
@@ -4059,26 +4082,80 @@ function submitGuideRating(){
   renderJourneys();
   setTimeout(() => journeysM.open(), 120);
 }
-function mockBook(){
+async function mockBook(){
   const guideName = document.getElementById('bookGuideName').textContent.trim();
   const location = document.getElementById('bookGuideLoc').textContent.trim();
   const startDate = document.getElementById('bookDate').value;
   const groupSize = document.getElementById('bookGroup').value || '1';
   const note = document.getElementById('bookNote').value.trim();
+
   if(!startDate){
     showToast('Choose a start date before sending your request.', 'error');
     return;
   }
-  const journeys = loadJourneys();
-  journeys.push({
-    id: 'journey-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
-    guideName, location, startDate, groupSize, note,
-    createdAt: new Date().toISOString(),
-    rating: null, review: ''
-  });
-  saveJourneys(journeys);
-  bookM.shut();
-  showToast(`Request sent — ${guideName} will confirm shortly. Your journey is now in My journeys.`, 'success');
+
+  const token = localStorage.getItem('exploreNepalToken');
+  const guideId = window.activeBookingGuideId;
+  const destinationId = window.activeBookingDestinationId;
+
+  if(!token || !guideId || !destinationId){
+    showToast('Please log in and select a valid guide before booking.', 'error');
+    return;
+  }
+
+  try{
+    const bookingNotes = 'Group size: ' + groupSize + (note ? ' | ' + note : '');
+
+    const response = await fetch('/api/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        destinationId: destinationId,
+        guideId: guideId,
+        tourDate: startDate,
+        notes: bookingNotes
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.message || 'Failed to create booking');
+    }
+
+    const journeys = loadJourneys();
+
+    journeys.push({
+      id: 'journey-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
+      bookingId: data.bookingId,
+      guideId: guideId,
+      destinationId: destinationId,
+      guideName: guideName,
+      location: location,
+      startDate: startDate,
+      groupSize: groupSize,
+      note: note,
+      createdAt: new Date().toISOString(),
+      rating: null,
+      review: ''
+    });
+
+    saveJourneys(journeys);
+    bookM.shut();
+
+    showToast(
+      (data.message || 'Booking request submitted successfully!') +
+      ' Booking #' + data.bookingId + ' is now in My journeys.',
+      'success'
+    );
+
+  } catch(error) {
+    console.error('Booking error:', error);
+    showToast(error.message || 'Unable to submit booking.', 'error');
+  }
 }
 
 async function mockLogin(){
@@ -4125,7 +4202,7 @@ async function mockLogin(){
     if(pendingBooking){
       const booking = pendingBooking;
       pendingBooking = null;
-      setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
+      setTimeout(() => showBookingModal(booking.name, booking.loc, booking.guideId, booking.destinationId), 120);
     } else if(pendingOpenJourneys){
       pendingOpenJourneys = false;
       setTimeout(openJourneys, 120);
@@ -5348,9 +5425,9 @@ function renderGuides() {
                 class="btn btn-primary g-book"
                 onclick="openBooking(
                     '${displayName}',
-                    '${destinationNames[guide.destination_id] ||
-                    guide.destination_id ||
-                    "Nepal"}'
+                    '${destinationNames[guide.destination_id] || guide.destination_id || "Nepal"}',
+                    ${guide.id},
+                    ${guide.destination_id}
                 )">
                 Book guide
             </button>
