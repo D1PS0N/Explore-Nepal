@@ -3321,13 +3321,15 @@ footer#contact{
 <p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Pick up where you left off.</p>
 <div class="field"><label for="loginEmail">Email</label><input id="loginEmail" placeholder="you@example.com"/></div>
 <div class="field"><label for="loginPass">Password</label><input id="loginPass" placeholder="Your password" type="password"/></div>
-<div class="login-modal-actions">
+<button type="button" class="btn btn-ghost" id="forgotPasswordBtn" style="width:100%;margin-bottom:12px;">Forgot Password?</button>
+  <div class="login-modal-actions">
 <button class="btn btn-primary" onclick="mockLogin()">Log in</button>
 <button class="btn btn-ghost" id="loginCreateAccount" type="button">Create account</button>
 </div>
 <p class="login-create-hint">New to Explore Nepal? Create your account to continue booking.</p>
 </div>
 </div>
+<div class="modal-overlay" id="resetPasswordModal"><div class="modal-box"><button aria-label="Close" class="modal-close" id="resetPasswordModalClose">&times;</button><div class="eyebrow">Account recovery</div><h2 style="font-size:24px;margin-bottom:8px">Reset your password</h2><p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Enter your registered email to recover your account.</p><div id="forgotPasswordStep"><div class="field"><label for="forgotEmail">Email</label><input id="forgotEmail" type="email" placeholder="you@example.com"/><span class="input-error" id="forgotEmailError"></span></div><button type="button" class="btn btn-primary" id="verifyEmailBtn" style="width:100%;justify-content:center;">Verify Email</button></div><div id="newPasswordStep" style="display:none;"><p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Email verified. Enter your new password below.</p><div class="field"><label for="newPassword">New Password</label><input id="newPassword" type="password" placeholder="Enter new password"/><span class="input-error" id="newPasswordError"></span></div><div class="field"><label for="confirmPassword">Confirm New Password</label><input id="confirmPassword" type="password" placeholder="Confirm new password"/><span class="input-error" id="confirmPasswordError"></span></div><button type="button" class="btn btn-primary" id="resetPasswordBtn" style="width:100%;justify-content:center;">Reset Password</button></div></div></div>
 <!-- MY JOURNEYS MODAL -->
 <div class="modal-overlay" id="journeysModal">
 <div class="modal-box journeys-modal-box">
@@ -4217,6 +4219,126 @@ async function mockRegister(){
     showToast('Unable to connect to the server.', 'error');
   }
 }
+
+// ---------- FORGOT / RESET PASSWORD (US3) ----------
+
+const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+const resetPasswordModal = document.getElementById('resetPasswordModal');
+const resetPasswordModalClose = document.getElementById('resetPasswordModalClose');
+const forgotEmail = document.getElementById('forgotEmail');
+const verifyEmailBtn = document.getElementById('verifyEmailBtn');
+const forgotEmailError = document.getElementById('forgotEmailError');
+const forgotPasswordStep = document.getElementById('forgotPasswordStep');
+const newPasswordStep = document.getElementById('newPasswordStep');
+const newPassword = document.getElementById('newPassword');
+const confirmPassword = document.getElementById('confirmPassword');
+const newPasswordError = document.getElementById('newPasswordError');
+const confirmPasswordError = document.getElementById('confirmPasswordError');
+const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+let resetEmail = '';
+
+forgotPasswordBtn?.addEventListener('click', () => {
+  loginM.shut();
+  resetPasswordModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  forgotPasswordStep.style.display = 'block';
+  newPasswordStep.style.display = 'none';
+  forgotEmail.value = '';
+  newPassword.value = '';
+  confirmPassword.value = '';
+  forgotEmailError.textContent = '';
+  newPasswordError.textContent = '';
+  confirmPasswordError.textContent = '';
+  forgotEmail.focus();
+});
+
+resetPasswordModalClose?.addEventListener('click', () => {
+  resetPasswordModal.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+resetPasswordModal?.addEventListener('click', (e) => {
+  if(e.target === resetPasswordModal){
+    resetPasswordModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+verifyEmailBtn?.addEventListener('click', async () => {
+  const email = forgotEmail.value.trim();
+  forgotEmailError.textContent = '';
+  if(!isValidEmail(email)){
+    forgotEmailError.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  const originalLabel = verifyEmailBtn.textContent;
+  verifyEmailBtn.disabled = true;
+  verifyEmailBtn.textContent = 'Checking...';
+
+  try {
+    const response = await fetch('/api/users/forgot-password', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email})
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.message || 'Unable to verify email.');
+    resetEmail = email;
+    forgotPasswordStep.style.display = 'none';
+    newPasswordStep.style.display = 'block';
+    newPassword.focus();
+    showToast('Email verified. Please enter your new password.', 'success');
+  } catch(error) {
+    forgotEmailError.textContent = error.message || 'Unable to verify email.';
+  } finally {
+    verifyEmailBtn.disabled = false;
+    verifyEmailBtn.textContent = originalLabel;
+  }
+});
+
+resetPasswordBtn?.addEventListener('click', async () => {
+  const password = newPassword.value;
+  const confirm = confirmPassword.value;
+  newPasswordError.textContent = '';
+  confirmPasswordError.textContent = '';
+  let hasError = false;
+
+  if(password.length < 6){
+    newPasswordError.textContent = 'Password must be at least 6 characters.';
+    hasError = true;
+  }
+  if(password !== confirm){
+    confirmPasswordError.textContent = 'Passwords do not match.';
+    hasError = true;
+  }
+  if(hasError) return;
+
+  const originalLabel = resetPasswordBtn.textContent;
+  resetPasswordBtn.disabled = true;
+  resetPasswordBtn.textContent = 'Resetting...';
+
+  try {
+    const response = await fetch('/api/users/reset-password', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: resetEmail, newPassword: password})
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.message || 'Password reset failed.');
+    showToast(data.message || 'Password reset successfully!', 'success');
+    resetPasswordModal.classList.remove('active');
+    document.body.style.overflow = '';
+    newPassword.value = '';
+    confirmPassword.value = '';
+    resetEmail = '';
+  } catch(error) {
+    showToast(error.message || 'Password reset failed.', 'error');
+  } finally {
+    resetPasswordBtn.disabled = false;
+    resetPasswordBtn.textContent = originalLabel;
+  }
+});
 
 // ---------- filter chips + show more (3 visible by default) ----------
 function setupGrid(gridId, chipRowId, cardSelector, btnId){
