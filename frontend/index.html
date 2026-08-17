@@ -4713,7 +4713,7 @@ function flashCard(selector, name){
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim().toLowerCase();
   if(!q){ searchResults.classList.remove('open'); searchResults.innerHTML=''; return; }
-  const matches = SEARCH_INDEX.filter(item => item.name.toLowerCase().includes(q) || item.loc.toLowerCase().includes(q)).slice(0,7);
+  const matches = SEARCH_INDEX.filter(item => item.name.toLowerCase().includes(q) || item.loc.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q)).slice(0,7);
   searchResults.innerHTML = matches.length === 0
     ? `<div class="sr-empty">No matches for "${searchInput.value}"</div>`
     : matches.map(m => `<div class="sr-item" data-type="${m.type}" data-name="${m.name}" data-cat="${m.cat}">
