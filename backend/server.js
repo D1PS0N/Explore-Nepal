@@ -33,7 +33,7 @@ app.use("/api/favorites", favoriteRoutes);
 app.use("/api/weather", weatherRoutes);
 
 app.get("/", (req, res) => {
-    res.send("Explore Nepal Backend is Running!");
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
