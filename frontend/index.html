@@ -3833,6 +3833,7 @@ const DESTINATION_DETAILS = {
   }
 };
 
+async function loadDestinationsFromAPI(){try{const r=await fetch("/api/destinations");if(!r.ok)return;const api=await r.json();api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=x.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
 function openDestination(name){
   const d = DESTINATION_DETAILS[name];
   if(!d) return;
@@ -3865,6 +3866,8 @@ document.querySelectorAll('#destGrid .dest-card').forEach(card => {
     if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDestination(card.dataset.destination); }
   });
 });
+
+loadDestinationsFromAPI();
 
 const TODAY_ISO = '2026-08-13';
 const GUIDE_STATUS_BY_NAME = {};
