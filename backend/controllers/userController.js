@@ -6,9 +6,11 @@ const {
   findUserByEmail,
   getUserById,
   updateUserProfile,
-  updatePassword
+  updatePassword,
+  getAllUsers: getAllUsersModel,
+  updateUserByAdmin: updateUserByAdminModel,
+  deleteUserByAdmin: deleteUserByAdminModel
 } = require("../models/userModel");
-
 
 // REGISTER USER
 const registerUser = async (req, res) => {
@@ -98,11 +100,13 @@ const loginUser = (req, res) => {
     }
 
 
-    const token = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-      },
+   const token = jwt.sign(
+  {
+    id: user.id,
+    email: user.email,
+    role: user.role,
+  },
+
       process.env.JWT_SECRET,
       {
         expiresIn: "1h",
@@ -114,11 +118,12 @@ const loginUser = (req, res) => {
       success: true,
       message: "Login successful",
       token: token,
-      user: {
-        id: user.id,
-        fullName: user.full_name,
-        email: user.email,
-      },
+user: {
+  id: user.id,
+  fullName: user.full_name,
+  email: user.email,
+  role: user.role,
+},
     });
 
   });
@@ -305,7 +310,233 @@ const resetPassword = async (req, res) => {
 
 };
 
+// US13 - GET ALL USERS / SEARCH USERS
+const getUsers = (req, res) => {
+  const search = req.query.search || "";
 
+  getAllUsers(search, (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch users"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      users: results
+    });
+  });
+};
+
+
+// US13 - UPDATE USER
+const updateUser = (req, res) => {
+  const userId = req.params.id;
+
+  const {
+    fullName,
+    email,
+    phone,
+    address,
+    role
+  } = req.body;
+
+  if (!fullName || !email) {
+    return res.status(400).json({
+      success: false,
+      message: "Full name and email are required"
+    });
+  }
+
+  const userRole = role || "user";
+
+  if (!["user", "admin"].includes(userRole)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid user role"
+    });
+  }
+
+  updateUserByAdmin(
+    userId,
+    fullName,
+    email,
+    phone || null,
+    address || null,
+    userRole,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        if (err.code === "ER_DUP_ENTRY") {
+          return res.status(409).json({
+            success: false,
+            message: "Email already exists"
+          });
+        }
+
+        return res.status(500).json({
+          success: false,
+          message: "Failed to update user"
+        });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "User updated successfully"
+      });
+    }
+  );
+};
+
+
+// US13 - DELETE USER
+const deleteUser = (req, res) => {
+  const userId = req.params.id;
+
+  // Prevent an admin from deleting their own account
+  if (Number(userId) === Number(req.user.id)) {
+    return res.status(400).json({
+      success: false,
+      message: "You cannot delete your own admin account"
+    });
+  }
+
+  deleteUserByAdmin(userId, (err, result) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to delete user"
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully"
+    });
+  });
+};
+
+// GET ALL USERS - ADMIN
+const getAllUsers = (req, res) => {
+  const search = req.query.search || "";
+
+  getAllUsersModel(search, (err, results) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch users",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      users: results,
+    });
+  });
+};
+
+
+// UPDATE USER - ADMIN
+const updateUserByAdmin = (req, res) => {
+  const userId = req.params.id;
+
+  const {
+    fullName,
+    email,
+    phone,
+    address,
+    role
+  } = req.body;
+
+  if (!fullName || !email || !role) {
+    return res.status(400).json({
+      success: false,
+      message: "Full name, email and role are required",
+    });
+  }
+
+  updateUserByAdminModel(
+    userId,
+    fullName,
+    email,
+    phone,
+    address,
+    role,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+
+        return res.status(500).json({
+          success: false,
+          message: "Failed to update user",
+        });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "User updated successfully",
+      });
+    }
+  );
+};
+
+
+// DELETE USER - ADMIN
+const deleteUserByAdmin = (req, res) => {
+  const userId = req.params.id;
+
+  deleteUserByAdminModel(userId, (err, result) => {
+    if (err) {
+      console.error(err);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to delete user",
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  });
+};
 
 module.exports = {
   registerUser,
@@ -314,4 +545,7 @@ module.exports = {
   updateProfile,
   forgotPassword,
   resetPassword,
+  getAllUsers,
+  updateUserByAdmin,
+  deleteUserByAdmin
 };

@@ -7,11 +7,14 @@ const {
   getProfile,
   updateProfile,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  getAllUsers,
+  updateUserByAdmin,
+  deleteUserByAdmin
 } = require("../controllers/userController");
 
 const authenticateUser = require("../middleware/authMiddleware");
-
+const authorizeAdmin = require("../middleware/adminMiddleware");
 
 // Register
 router.post("/register", registerUser);
@@ -36,5 +39,32 @@ router.post("/forgot-password", forgotPassword);
 // Reset password
 router.put("/reset-password", resetPassword);
 
+// ===============================
+// ADMIN USER MANAGEMENT - US13
+// ===============================
+
+// View/Search all users
+router.get(
+  "/admin/users",
+  authenticateUser,
+  authorizeAdmin,
+  getAllUsers
+);
+
+// Edit user
+router.put(
+  "/admin/users/:id",
+  authenticateUser,
+  authorizeAdmin,
+  updateUserByAdmin
+);
+
+// Delete user
+router.delete(
+  "/admin/users/:id",
+  authenticateUser,
+  authorizeAdmin,
+  deleteUserByAdmin
+);
 
 module.exports = router;
