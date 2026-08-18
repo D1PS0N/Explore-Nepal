@@ -1039,6 +1039,8 @@ p{ line-height:var(--lh-body); }
 
 /* Chitwan wildlife gallery video */
 #gallery .gallery-card video{ display:block; width:100%; height:100%; object-fit:cover; }
+
+/* ---------- favorites ---------- */ .favorite-btn{position:absolute;top:14px;right:14px;z-index:10;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.95);color:#B4232C;font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(20,23,28,.18);transition:transform .2s ease,background .2s ease,color .2s ease}.favorite-btn:hover{transform:scale(1.08);background:#fff}.favorite-btn.active{background:#B4232C;color:#fff}.dest-card{position:relative}
 </style>
 <style>
 /* Help Center typography refinement */
@@ -1060,9 +1062,11 @@ p{ line-height:var(--lh-body); }
   .footer-help-search-btn{font-size:13px;}
   .footer-help-popular{font-size:11px;}
 }
+
 </style>
 <style>
 .map-pin-note{margin:12px 0 10px;color:#66736c;font-size:13px;line-height:1.5}.map-destination-btn.active{outline:2px solid rgba(35,119,75,.22);background:#eaf5ee;color:#23774b;font-weight:700}
+
 </style>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <style>
@@ -1086,6 +1090,7 @@ p{ line-height:var(--lh-body); }
 .map-fullscreen-box{position:relative;width:min(1180px,96vw);height:min(820px,90vh);background:#fff;border-radius:20px;padding:14px;box-shadow:0 32px 80px rgba(0,0,0,.35)}
 #websiteMapLarge{width:100%;height:100%;border-radius:14px;background:#eef3ef}
 @media(max-width:700px){.cal-map-panel{height:auto}.cal-map-panel #websiteMap{height:320px!important;min-height:320px}.map-fullscreen{padding:10px}.map-fullscreen-box{width:100%;height:92vh;border-radius:16px;padding:9px}}
+
 </style>
 <style>
 /* Calendar follows the map size; the map keeps its original dimensions. */
@@ -1104,6 +1109,7 @@ p{ line-height:var(--lh-body); }
   #gallery .gallery-extra:nth-of-type(7){ grid-column:span 2; }
   #gallery .gallery-extra:nth-of-type(10){ grid-column:span 2; }
 }
+
 
 </style>
 <style>
@@ -1169,6 +1175,7 @@ p{ line-height:var(--lh-body); }
     column-gap: 16px;
   }
 }
+
 </style>
 <style>
 /* Compact account section, aligned to the same content width as the calendar section. */
@@ -1206,6 +1213,7 @@ p{ line-height:var(--lh-body); }
   #register .auth-shell{grid-template-columns:1fr;gap:22px;}
   #register .auth-box{justify-self:stretch;max-width:none;}
 }
+
 </style>
 <style>
 /* ---- Responsive hardening: desktop + tablet + mobile ---- */
@@ -1302,6 +1310,7 @@ img,video,iframe{max-width:100%}
   .about-card{padding:22px 18px!important;border-radius:20px!important}
   .about-copy p{font-size:15px!important}
 }
+
 </style>
 <style>
 .login-modal-actions{
@@ -1320,6 +1329,7 @@ img,video,iframe{max-width:100%}
   font-size:11.5px;
   line-height:1.45;
 }
+
 </style>
 <style>
 .register-modal-box{
@@ -1335,6 +1345,7 @@ img,video,iframe{max-width:100%}
 @media(max-width:600px){
   .register-modal-box{width:calc(100vw - 28px);padding:26px 20px 22px;}
 }
+
 </style>
 <style>
 /* Final gallery alignment override */
@@ -1367,6 +1378,7 @@ img,video,iframe{max-width:100%}
 .gallery-media-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.55);color:rgba(255,255,255,.86);font-size:11px;z-index:7;backdrop-filter:blur(8px);white-space:nowrap;}
 #gallery .gallery-card:has(video)::before{content:'▶  Tap to preview';position:absolute;top:16px;right:16px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.66);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(8px);pointer-events:none;}
 @media(max-width:700px){.gallery-lightbox{padding:12px}.gallery-lightbox-inner{width:96vw;height:88vh}.gallery-lightbox-stage{border-radius:14px}.gallery-lightbox img,.gallery-lightbox video{border-radius:14px;max-height:82vh}.gallery-lightbox-close{top:-4px;right:-2px;width:40px;height:40px;font-size:24px}.gallery-lightbox-nav{width:42px;height:42px;font-size:25px}.gallery-lightbox-prev{left:8px}.gallery-lightbox-next{right:8px}.gallery-lightbox-caption{font-size:13px;left:14px;right:14px;bottom:12px}.gallery-lightbox-counter{top:10px;left:10px}.gallery-media-hint{display:none}}
+
 </style>
 <style>
 /* Uniform Top Destination cards — match Pokhara / Solukhumbu */
@@ -1405,6 +1417,7 @@ img,video,iframe{max-width:100%}
     min-height:220px !important;
   }
 }
+
 </style>
 <style>
 /* Glimpse of the Journey — match Top Destinations card layout */
@@ -1472,6 +1485,7 @@ img,video,iframe{max-width:100%}
     min-height:220px !important;
   }
 }
+
 </style>
 <style>
 /* Align "A glimpse of the journey" exactly with the Top Destinations section */
@@ -1510,6 +1524,7 @@ img,video,iframe{max-width:100%}
     padding-right:5vw !important;
   }
 }
+
 </style>
 <style>
 /* Footer visibility fixes */
@@ -1521,6 +1536,7 @@ footer .f-col:last-child li,
 footer .f-col:last-child a{
   color:#fff !important;
 }
+
 </style>
 <style>
 /* Top Destinations: keep Known for visible, move long description into popup */
@@ -1541,12 +1557,14 @@ footer .f-col:last-child a{
   line-height:1.65;
   font-weight:500;
 }
+
 </style>
 <style>
 /* Top Destinations: show each destination name only once */
 #destGrid .dest-loc{
   display:none !important;
 }
+
 </style>
 <style>
 /* Header Create account text */
@@ -1554,11 +1572,25 @@ footer .f-col:last-child a{
 nav.nav-transparent #registerTrigger{
   color:#fff !important;
 }
+
 </style>
 <style>
 /* ---------- MY JOURNEYS + POST-TRIP GUIDE RATING ---------- */
 .nav-journeys-link{ display:none; }
 .nav-journeys-link.visible{ display:list-item; }
+
+.nav-avatar{ width:36px; height:36px; border-radius:50%; background:#4f46e5; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; cursor:pointer; text-transform:uppercase; margin-top:-2px; }
+
+.nav-avatar-wrap{ position:relative; }
+.nav-avatar-dropdown{ display:none; position:absolute; right:0; top:calc(100% + 8px); background:#fff; border-radius:var(--r-md,12px); box-shadow:0 8px 30px rgba(0,0,0,.15); min-width:220px; z-index:1000; overflow:hidden; }
+.nav-avatar-dropdown.open{ display:block; }
+.nav-avatar-dd-header{ display:flex; align-items:center; gap:10px; padding:16px; }
+.nav-avatar-dd-circle{ width:40px; height:40px; border-radius:50%; background:#4f46e5; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; text-transform:uppercase; flex-shrink:0; }
+.nav-avatar-dd-name{ font-weight:600; font-size:14px; color:#1a1a2e; }
+.nav-avatar-dd-email{ font-size:12px; color:#6b7280; margin-top:1px; word-break:break-all; }
+.nav-avatar-dd-divider{ margin:0; border:none; border-top:1px solid #e5e7eb; }
+.nav-avatar-dd-item{ display:flex; align-items:center; gap:8px; width:100%; padding:12px 16px; border:none; background:none; cursor:pointer; font-size:14px; color:#374151; text-align:left; }
+.nav-avatar-dd-item:hover{ background:#f3f4f6; }
 
 .journeys-modal-box{ width:min(760px,94vw); max-height:88vh; overflow:auto; }
 .journeys-head{ margin-bottom:20px; }
@@ -1615,6 +1647,7 @@ nav.nav-transparent #registerTrigger{
   .journey-action .btn{ width:100%; }
   .star-btn{ font-size:31px; }
 }
+
 </style>
 <style>
 /* Footer mountain artwork — only below Help Center */
@@ -1661,6 +1694,7 @@ footer#contact > .footer-help{
     background-position:center center;
   }
 }
+
 </style>
 <style>
 /* =========================================================
@@ -2154,6 +2188,7 @@ footer#contact{
   cursor: pointer;
 }
 
+
 </style>
 
 <style>
@@ -2165,6 +2200,7 @@ footer#contact{
 @media(max-width:700px){
   .pslider.video-active .p-slide.pos-0 .p-copy{ width:100%; margin-left:0; padding:34px 6% 42px; }
 }
+
 </style>
 
 
@@ -2193,12 +2229,14 @@ footer#contact{
     text-align:left;
   }
 }
+
 </style>
 
 <style>
 .hero-bg-stack.single-video .hero-bg-layer{opacity:1 !important; animation:none !important;}
 .hero-bg-stack.single-video .hero-bg-layer-single{position:absolute; inset:0;}
 .hero-bg-stack.single-video .hero-bg-layer video{width:100%; height:100%; object-fit:cover; display:block;}
+
 </style>
 
 <style>
@@ -2384,6 +2422,7 @@ footer#contact{
   .production-note{align-items:flex-start;flex-direction:column;}
   .production-modal-grid{grid-template-columns:1fr;gap:0;}
 }
+
 </style>
 
 
@@ -2487,6 +2526,7 @@ footer#contact{
     width:3px;
   }
 }
+
 </style>
 
 </head>
@@ -2510,9 +2550,10 @@ footer#contact{
 <li><a href="#help-center" id="helpCenterHeaderTrigger">Help center</a></li>
 <li class="divider"></li>
 
-<li class="nav-journeys-link" id="navJourneysItem"><a href="#" id="journeysTrigger">My journeys</a></li>
+<li class="nav-journeys-link" id="navJourneysItem"><a href="#" id="journeysTrigger">My journeys</a></li><li class="nav-journeys-link" id="navFavoritesItem"><a href="#" id="favoritesTrigger">My favorites</a></li>
 <li><a href="#" id="loginTrigger">Log in</a></li><li><a href="#" id="logoutTrigger" style="display:none;">Log out</a></li>
 <li><a class="btn btn-primary btn-sm" href="#" id="registerTrigger">Create account</a></li>
+<li id="navAvatarItem" style="display:none;"><div class="nav-avatar-wrap"><div class="nav-avatar" id="navAvatar" title=""></div><div class="nav-avatar-dropdown" id="navAvatarDropdown"><div class="nav-avatar-dd-header"><div class="nav-avatar-dd-circle" id="navAvatarDdCircle"></div><div><div class="nav-avatar-dd-name" id="navAvatarDdName"></div><div class="nav-avatar-dd-email" id="navAvatarDdEmail"></div></div></div><hr class="nav-avatar-dd-divider"><button class="nav-avatar-dd-item" id="navAvatarLogout"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</button></div></div></li>
 </ul>
 </nav>
 <header class="hero-full" id="heroFull">
@@ -3342,6 +3383,7 @@ footer#contact{
 <div class="journey-list" id="journeyList"></div>
 </div>
 </div>
+<!-- MY FAVORITES MODAL --><div class="modal-overlay" id="favoritesModal"><div class="modal-box journeys-modal-box"><button aria-label="Close" class="modal-close" id="favoritesClose">×</button><div class="journeys-head"><div class="eyebrow">Saved destinations</div><h2>My favorites</h2><p>Destinations you saved are kept here so you can easily revisit them later.</p></div><div class="journey-list" id="favoritesList"></div></div></div>
 <!-- RATE GUIDE MODAL -->
 <div class="modal-overlay" id="ratingModal">
 <div class="modal-box rating-modal-box">
@@ -3435,6 +3477,8 @@ footer#contact{
 </div>
 </footer>
 <script>
+const API_BASE = 'http://127.0.0.1:5000';
+
 // ---------- nav ----------
 const navEl = document.querySelector('nav');
 function updateNavStyle(){
@@ -3483,8 +3527,13 @@ const loginM = bindModal('loginModal','loginClose',[document.getElementById('log
 const bookM = bindModal('bookModal','bookClose',[]);
 const destinationM = bindModal('destinationModal','destinationClose',[]);
 const journeysM = bindModal('journeysModal','journeysClose',[]);
+const favoritesM = bindModal('favoritesModal','favoritesClose',[]);
 const ratingM = bindModal('ratingModal','ratingClose',[]);
 const productionM = bindModal('productionModal','productionClose',[]);
+
+document.getElementById('favoritesTrigger')?.addEventListener('click', async e => { e.preventDefault(); if(!isLoggedIn){ loginM.open(); return; } await renderFavorites(); favoritesM.open(); });
+
+async function renderFavorites(){ const list = document.getElementById('favoritesList'); if(!list) return; const token = getAuthToken(); if(!token){ list.innerHTML = '<div class="journey-empty">Please log in to view your favorites.</div>'; return; } try { const response = await fetch(`${API_BASE}/api/favorites`, { headers: { 'Authorization': 'Bearer ' + token } }); const data = await response.json(); if(!response.ok) throw new Error(data.message || 'Unable to load favorites.'); const favorites = Array.isArray(data.favorites) ? data.favorites : []; if(!favorites.length){ list.innerHTML = '<div class="journey-empty"><strong>No favorites yet.</strong><br>Save a destination using the heart button and it will appear here.</div>'; return; } list.innerHTML = favorites.map(f => { const name = f.name || f.destination_name || 'Destination'; return `<article class="journey-card"><div class="journey-main"><h3>${escapeJourneyHTML(name)}</h3><div class="journey-meta">Saved destination</div></div><div class="journey-action"><button class="btn btn-ghost" type="button" data-remove-favorite="${f.destination_id}">Remove</button></div></article>`; }).join(''); list.querySelectorAll('[data-remove-favorite]').forEach(btn => { btn.addEventListener('click', async () => { const destinationId = btn.dataset.removeFavorite; const response = await fetch(`${API_BASE}/api/favorites/${destinationId}`, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } }); if(response.ok){ favoriteDestinationIds.delete(Number(destinationId)); await renderFavorites(); document.querySelectorAll(`.favorite-btn[data-destination-id="${destinationId}"]`).forEach(b => updateFavoriteButton(b, false)); showToast('Favorite removed.', 'success'); } }); }); } catch(error){ console.error('Favorites error:', error); list.innerHTML = '<div class="journey-empty">Unable to load favorites.</div>'; } }
 
 function openProductionInquiry(packageName){
   const select = document.getElementById('productionPackage');
@@ -3521,7 +3570,24 @@ document.getElementById('productionSubmit')?.addEventListener('click', () => {
   const dateEl = document.getElementById('productionDate'); if(dateEl) dateEl.value = '';
 });
 
-document.getElementById('logoutTrigger')?.addEventListener('click', e => { e.preventDefault(); localStorage.removeItem('exploreNepalToken'); localStorage.removeItem('exploreNepalUser'); localStorage.removeItem(LOGIN_STORAGE_KEY); isLoggedIn=false; updateAccountUI(); showToast('Logged out successfully.','success'); });
+document.getElementById('logoutTrigger')?.addEventListener('click', e => { e.preventDefault(); localStorage.removeItem('exploreNepalToken'); localStorage.removeItem('exploreNepalUser'); localStorage.removeItem('exploreNepalEmail'); localStorage.removeItem(LOGIN_STORAGE_KEY); isLoggedIn=false; updateAccountUI(); showToast('Logged out successfully.','success'); });
+
+document.getElementById('navAvatar')?.addEventListener('click', e => {
+  e.stopPropagation();
+  const dd = document.getElementById('navAvatarDropdown');
+  if(dd) dd.classList.toggle('open');
+});
+document.addEventListener('click', () => { const dd=document.getElementById('navAvatarDropdown'); if(dd) dd.classList.remove('open'); });
+document.getElementById('navAvatarLogout')?.addEventListener('click', e => {
+  e.preventDefault();
+  localStorage.removeItem('exploreNepalToken');
+  localStorage.removeItem('exploreNepalUser');
+  localStorage.removeItem('exploreNepalEmail');
+  localStorage.removeItem(LOGIN_STORAGE_KEY);
+  isLoggedIn = false;
+  updateAccountUI();
+  showToast('Logged out successfully.','success');
+});
 
 // Open account creation directly from the login popup.
 document.getElementById('loginCreateAccount')?.addEventListener('click', () => {
@@ -3833,7 +3899,7 @@ const DESTINATION_DETAILS = {
   }
 };
 
-async function loadDestinationsFromAPI(){try{const r=await fetch("/api/destinations");if(!r.ok)return;const api=await r.json();api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=x.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
+async function loadDestinationsFromAPI(){try{const r=await fetch(`${API_BASE}/api/destinations`);if(!r.ok)return;const api=await r.json();api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=x.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
 function openDestination(name){
   const d = DESTINATION_DETAILS[name];
   if(!d) return;
@@ -3860,12 +3926,181 @@ function openDestination(name){
   destinationM.open();
 }
 
+// ---------- favorites ----------
+const DESTINATION_IDS = {
+  "Pokhara": 1,
+  "Janakpur": 2,
+  "Chitwan": 3,
+  "Ghandruk": 4,
+  "Solukhumbu": 5,
+  "Bandipur": 6,
+  "Kathmandu": 7,
+  "Bhaktapur": 8,
+  "Lalitpur": 9,
+  "Mustang": 10,
+  "Lumbini": 11,
+  "Rara Lake": 12,
+  "Manang": 13
+};
+
+let favoriteDestinationIds = new Set();
+
+function getAuthToken(){
+  return localStorage.getItem('exploreNepalToken');
+}
+
+function createFavoriteButton(card){
+  if(card.querySelector('.favorite-btn')) return;
+
+  const name = card.dataset.destination;
+  const destinationId = DESTINATION_IDS[name];
+
+  if(!destinationId) return;
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'favorite-btn';
+  button.dataset.destinationId = destinationId;
+  button.setAttribute('aria-label', `Add ${name} to favorites`);
+  button.innerHTML = '♡';
+
+  button.addEventListener('click', async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const token = getAuthToken();
+
+    if(!token){
+      showToast('Please log in to save favorites.', 'error');
+      loginM.open();
+      return;
+    }
+
+    const isFavorite = favoriteDestinationIds.has(destinationId);
+
+    try {
+      if(isFavorite){
+        const response = await fetch(`${API_BASE}/api/favorites/${destinationId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          showToast(data.message || 'Unable to remove favorite.', 'error');
+          return;
+        }
+
+        favoriteDestinationIds.delete(destinationId);
+        updateFavoriteButton(button, false);
+        showToast(`${name} removed from favorites.`, 'success');
+
+      } else {
+        const response = await fetch(`${API_BASE}/api/favorites`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            destination_id: destinationId
+          })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          showToast(data.message || 'Unable to save favorite.', 'error');
+          return;
+        }
+
+        favoriteDestinationIds.add(destinationId);
+        updateFavoriteButton(button, true);
+        showToast(`${name} added to favorites.`, 'success');
+      }
+
+    } catch(error){
+      console.error('Favorite error:', error);
+      showToast('Unable to connect to the server.', 'error');
+    }
+  });
+
+  card.appendChild(button);
+  updateFavoriteButton(button, favoriteDestinationIds.has(destinationId));
+}
+
+function updateFavoriteButton(button, active){
+  button.classList.toggle('active', active);
+  button.innerHTML = active ? '♥' : '♡';
+
+  const name = button.closest('.dest-card')?.dataset.destination || 'destination';
+  button.setAttribute(
+    'aria-label',
+    active ? `Remove ${name} from favorites` : `Add ${name} to favorites`
+  );
+}
+
+async function loadFavorites(){
+  const token = getAuthToken();
+
+  favoriteDestinationIds = new Set();
+
+  if(!token){
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+      updateFavoriteButton(button, false);
+    });
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/api/favorites`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    if(!response.ok) return;
+
+    const data = await response.json();
+
+    if(Array.isArray(data.favorites)){
+      data.favorites.forEach(favorite => {
+        favoriteDestinationIds.add(Number(favorite.destination_id));
+      });
+    }
+
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+      updateFavoriteButton(
+        button,
+        favoriteDestinationIds.has(Number(button.dataset.destinationId))
+      );
+    });
+
+  } catch(error){
+    console.error('Error loading favorites:', error);
+  }
+}
+
 document.querySelectorAll('#destGrid .dest-card').forEach(card => {
-  card.addEventListener('click', () => openDestination(card.dataset.destination));
+  createFavoriteButton(card);
+
+  card.addEventListener('click', () => {
+    openDestination(card.dataset.destination);
+  });
+
   card.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDestination(card.dataset.destination); }
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openDestination(card.dataset.destination);
+    }
   });
 });
+
+loadDestinationsFromAPI();
+loadFavorites();
 
 loadDestinationsFromAPI();
 
@@ -3934,7 +4169,7 @@ function showBookingModal(name, loc, guideId, destinationId){
 async function openBooking(name, loc, guideId, destinationId){
   if(!guideId || !destinationId){
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/guides');
+      const response = await fetch(`${API_BASE}/api/guides`);
       const guides = await response.json();
       const found = guides.find(g => String(g.name).trim() === String(name).trim());
 
@@ -3990,7 +4225,32 @@ function prettyDate(iso){
 }
 function updateAccountUI(){
   const navItem = document.getElementById('navJourneysItem');
-  if(navItem) navItem.classList.toggle('visible', isLoggedIn); const loginItem=document.getElementById('loginTrigger'); const logoutItem=document.getElementById('logoutTrigger'); if(loginItem) loginItem.parentElement.style.display=isLoggedIn?'none':''; if(logoutItem) logoutItem.style.display=isLoggedIn?'':'none';
+  if(navItem) navItem.classList.toggle('visible', isLoggedIn);
+  const navFav = document.getElementById('navFavoritesItem');
+  if(navFav) navFav.classList.toggle('visible', isLoggedIn);
+  const loginItem = document.getElementById('loginTrigger');
+  const logoutItem = document.getElementById('logoutTrigger');
+  const registerItem = document.getElementById('registerTrigger');
+  const avatarItem = document.getElementById('navAvatarItem');
+  const avatarEl = document.getElementById('navAvatar');
+  if(loginItem) loginItem.parentElement.style.display = isLoggedIn ? 'none' : '';
+  if(logoutItem) logoutItem.style.display = isLoggedIn ? 'none' : '';
+  if(registerItem) registerItem.parentElement.style.display = isLoggedIn ? 'none' : '';
+  if(avatarItem) avatarItem.style.display = isLoggedIn ? '' : 'none';
+  if(isLoggedIn && avatarEl){
+    let email = '', name = '';
+    try { const u = JSON.parse(localStorage.getItem('exploreNepalUser')); if(u){ email = u.email || ''; name = u.fullName || u.name || ''; } } catch(e){}
+    if(!email) try { email = localStorage.getItem('exploreNepalEmail') || ''; } catch(e){}
+    const initial = email ? email.charAt(0).toUpperCase() : '?';
+    avatarEl.textContent = initial;
+    avatarEl.title = email || 'Account';
+    const ddCircle = document.getElementById('navAvatarDdCircle');
+    const ddName = document.getElementById('navAvatarDdName');
+    const ddEmail = document.getElementById('navAvatarDdEmail');
+    if(ddCircle) ddCircle.textContent = initial;
+    if(ddName) ddName.textContent = name || email || 'Account';
+    if(ddEmail) ddEmail.textContent = email;
+  }
 }
 function openJourneys(){
   if(!isLoggedIn){
@@ -4106,7 +4366,7 @@ async function mockBook(){
   try{
     const bookingNotes = 'Group size: ' + groupSize + (note ? ' | ' + note : '');
 
-    const response = await fetch('/api/bookings', {
+    const response = await fetch(`${API_BASE}/api/bookings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -4168,7 +4428,7 @@ async function mockLogin(){
   }
 
   try {
-    const response = await fetch('/api/users/login', {
+    const response = await fetch(`${API_BASE}/api/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -4188,6 +4448,7 @@ async function mockLogin(){
 
     localStorage.setItem('exploreNepalToken', data.token);
     localStorage.setItem('exploreNepalUser', JSON.stringify(data.user));
+    localStorage.setItem('exploreNepalEmail', email);
     localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
 
     isLoggedIn = true;
@@ -4265,7 +4526,7 @@ async function mockRegister(){
   if(bad) return;
 
   try {
-    const response = await fetch('/api/users/register', {
+    const response = await fetch(`${API_BASE}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -4284,8 +4545,6 @@ async function mockRegister(){
       return;
     }
 
-    showToast('Account created successfully. Please log in.', 'success');
-
     document.getElementById('regName').value = '';
     document.getElementById('regEmail').value = '';
     document.getElementById('regPass').value = '';
@@ -4294,7 +4553,29 @@ async function mockRegister(){
       registerM.shut();
     }
 
-    setTimeout(() => loginM.open(), 150);
+    try {
+      const loginRes = await fetch(`${API_BASE}/api/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const loginData = await loginRes.json();
+      if(loginRes.ok && loginData.token){
+        localStorage.setItem('exploreNepalToken', loginData.token);
+        localStorage.setItem('exploreNepalUser', JSON.stringify(loginData.user));
+        localStorage.setItem('exploreNepalEmail', email);
+        localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
+        isLoggedIn = true;
+        updateAccountUI();
+        showToast('Account created successfully.', 'success');
+      } else {
+        showToast('Account created. Please log in.', 'success');
+        setTimeout(() => loginM.open(), 150);
+      }
+    } catch(e){
+      showToast('Account created. Please log in.', 'success');
+      setTimeout(() => loginM.open(), 150);
+    }
 
   } catch(error) {
     console.error('Registration error:', error);
@@ -4359,7 +4640,7 @@ verifyEmailBtn?.addEventListener('click', async () => {
   verifyEmailBtn.textContent = 'Checking...';
 
   try {
-    const response = await fetch('/api/users/forgot-password', {
+    const response = await fetch(`${API_BASE}/api/users/forgot-password`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({email})
@@ -4401,7 +4682,7 @@ resetPasswordBtn?.addEventListener('click', async () => {
   resetPasswordBtn.textContent = 'Resetting...';
 
   try {
-    const response = await fetch('/api/users/reset-password', {
+    const response = await fetch(`${API_BASE}/api/users/reset-password`, {
       method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({email: resetEmail, newPassword: password})
@@ -5534,3 +5815,19 @@ loadGuides("all");
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
