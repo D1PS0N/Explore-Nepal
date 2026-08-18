@@ -2529,7 +2529,25 @@ footer#contact{
 
 </style>
 
-<style>/* ---------- US12 destination reviews ---------- */.destination-reviews{margin-top:28px;}.destination-reviews-list{display:grid;gap:12px;margin-top:12px;}.destination-review-form{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:8px;}.destination-review-form label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}.destination-review-form select,.destination-review-form textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;padding:12px 14px;}.destination-review-form select{min-height:46px;cursor:pointer;}.destination-review-form textarea{min-height:100px;resize:vertical;line-height:1.5;}.destination-review-form select:focus,.destination-review-form textarea:focus{outline:3px solid rgba(38,116,136,.12);border-color:var(--blue);}.destination-review-form .btn{margin-top:4px;justify-self:start;}#destinationReviewMessage{font-size:12px;color:var(--ink-soft);}</style></head>
+<style>/* ---------- US12 destination reviews ---------- */.destination-reviews{margin-top:28px;}.destination-reviews-list{display:grid;gap:12px;margin-top:12px;}.destination-review-form{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:8px;}.destination-review-form label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}.destination-review-form select,.destination-review-form textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;padding:12px 14px;}.destination-review-form select{min-height:46px;cursor:pointer;}.destination-review-form textarea{min-height:100px;resize:vertical;line-height:1.5;}.destination-review-form select:focus,.destination-review-form textarea:focus{outline:3px solid rgba(38,116,136,.12);border-color:var(--blue);}.destination-review-form .btn{margin-top:4px;justify-self:start;}#destinationReviewMessage{font-size:12px;color:var(--ink-soft);}</style>
+
+<style>
+/* ---------- US14: Interest selector + recommended grid ---------- */
+.interest-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:18px 0 24px; padding:16px 20px; background:var(--paper-raise); border:1px solid var(--line); border-radius:var(--r-lg); }
+.interest-bar-label{ font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-right:4px; white-space:nowrap; }
+.interest-chip{ display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; font-size:13px; font-weight:600; color:var(--ink); transition:background .15s, border-color .15s, color .15s; user-select:none; }
+.interest-chip:hover{ background:#f0f4f3; border-color:var(--blue); }
+.interest-chip input{ position:absolute; opacity:0; width:1px; height:1px; }
+.interest-chip.checked{ background:var(--blue); border-color:var(--blue); color:#fff; }
+.interest-chip.checked::before{ content:""; width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.7); }
+.rec-subhead{ font-size:15px; font-weight:700; color:var(--ink-soft); margin:28px 0 14px; padding-bottom:8px; border-bottom:1px dashed var(--line); }
+.rec-empty{ font-size:14px; color:var(--ink-soft); padding:20px 0; text-align:center; }
+#recommendGrid .dest-card{ min-height:180px; }
+@media(max-width:1100px){ #recommendGrid .dest-card{ grid-column:span 3; } }
+@media(max-width:600px){ #recommendGrid .dest-card{ grid-column:span 6; min-height:160px; } }
+</style>
+
+</head>
 <body>
 <nav>
 <div class="brand">
@@ -2635,6 +2653,20 @@ footer#contact{
 </div>
 </div>
 </div>
+<div class="interest-bar" id="interestBar">
+<span class="interest-bar-label">Your interests</span>
+<label class="interest-chip" data-interest="Trekking"><input type="checkbox" value="Trekking">Trekking</label>
+<label class="interest-chip" data-interest="Nature"><input type="checkbox" value="Nature">Nature</label>
+<label class="interest-chip" data-interest="Culture"><input type="checkbox" value="Culture">Culture</label>
+<label class="interest-chip" data-interest="Adventure"><input type="checkbox" value="Adventure">Adventure</label>
+<label class="interest-chip" data-interest="Mountains"><input type="checkbox" value="Mountains">Mountains</label>
+<label class="interest-chip" data-interest="Wildlife"><input type="checkbox" value="Wildlife">Wildlife</label>
+<label class="interest-chip" data-interest="Heritage"><input type="checkbox" value="Heritage">Heritage</label>
+<label class="interest-chip" data-interest="Pilgrimage"><input type="checkbox" value="Pilgrimage">Pilgrimage</label>
+<button type="button" id="getRecBtn" class="btn btn-primary btn-sm" style="margin-left:4px;">Get Recommendations</button>
+</div>
+<div class="rec-subhead" id="recSubhead" style="display:none;">Recommended for you</div>
+<div class="bento" id="recommendGrid" style="display:none;"></div>
 <div class="bento" id="destGrid">
 <div aria-label="View Kathmandu destination details" class="dest-card big has-photo" data-cat="heritage" data-destination="Kathmandu" role="button" tabindex="0">
 <img alt="Kathmandu cultural festival at a historic temple square" class="dest-card-photo" src="assets/image_04.png"/>
@@ -5815,9 +5847,20 @@ guideShowMore.addEventListener("click", function () {
 });
 
 loadGuides("all");
-</script>
+
+// ================================
+// US14 - Recommended Destinations
+// ================================
+
+async function loadRecommendations(interests){const grid=document.getElementById("recommendGrid"),sub=document.getElementById("recSubhead"),dest=document.getElementById("destGrid");if(!grid||!dest||!sub)return;if(!interests||!interests.length){grid.style.display="none";sub.style.display="none";dest.style.display="grid";return;}dest.style.display="none";grid.style.display="grid";sub.style.display="";try{const r=await fetch(`${API_BASE}/api/destinations/recommendations?interests=${encodeURIComponent(interests.join(","))}`);const data=await r.json();if(!r.ok)throw new Error(data.message||"Failed to load recommendations");const imgs={Pokhara:"assets/image_01.jpg",Chitwan:"assets/image_03.jpg",Ghandruk:"assets/image_07.jpg",Solukhumbu:"assets/image_02.jpg",Bandipur:"assets/image_08.jpg",Kathmandu:"assets/image_04.png",Bhaktapur:"assets/image_05.png",Lalitpur:"assets/image_04.jpg",Mustang:"assets/image_05.jpg","Rara Lake":"assets/image_01.webp",Manang:"assets/image_06.jpg",Lumbini:"assets/image_06.png",Janakpur:"assets/image_09.jpg"};grid.innerHTML=data.map(function(d){const image=imgs[d.name]||"";return `<div class="dest-card has-photo" data-destination="${d.name||""}" role="button" tabindex="0"><img class="dest-card-photo" src="${image}" alt="${d.name||""}" onerror="this.style.display='none'"><div class="dest-inner"><div class="dest-loc">${d.location||""}</div><h3>${d.name||""}</h3><div class="dest-known"><span>Known for</span>${d.attractions||""}</div><span class="dest-open">Explore places</span></div></div>`}).join("");}catch(e){console.error("Recommendation error:",e);grid.innerHTML="<p>Unable to load recommendations right now.</p>";}}document.querySelectorAll(".interest-chip input").forEach(function(cb){cb.addEventListener("change",function(){cb.closest(".interest-chip").classList.toggle("checked",cb.checked);});});document.getElementById("getRecBtn").addEventListener("click",function(){const selected=Array.from(document.querySelectorAll(".interest-chip input:checked")).map(function(x){return x.value;});loadRecommendations(selected);});</script>
 <script>let activeReviewDestinationId=null;async function loadDestinationReviews(destinationId){const list=document.getElementById("destinationReviews");if(!list)return;list.innerHTML="<div class='journey-empty'>Loading reviews...</div>";try{const response=await fetch(`${API_BASE}/api/reviews/${destinationId}`);const reviews=await response.json();if(!response.ok)throw new Error("Unable to load reviews.");if(!reviews.length){list.innerHTML="<div class='journey-empty'>No reviews yet. Be the first to review this destination.</div>";return;}list.innerHTML=reviews.map(r=>`<div class="journey-card"><div class="journey-main"><strong>${escapeJourneyHTML(r.user_name||"Tourist")}</strong><div class="journey-meta">${"&#9733;".repeat(r.rating)}${"&#9734;".repeat(5-r.rating)}</div>${r.review?`<p>${escapeJourneyHTML(r.review)}</p>`:""}</div></div>`).join("");}catch(error){console.error("Destination reviews error:",error);list.innerHTML="<div class='journey-empty'>Unable to load reviews.</div>";}}async function submitDestinationReview(){const token=getAuthToken(),rating=document.getElementById("destinationReviewRating").value,review=document.getElementById("destinationReviewText").value.trim(),message=document.getElementById("destinationReviewMessage");if(!token){message.textContent="Please log in to submit a review.";return;}if(!activeReviewDestinationId||!rating){message.textContent="Please choose a rating.";return;}try{const response=await fetch(`${API_BASE}/api/reviews`,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({destination_id:activeReviewDestinationId,rating:Number(rating),review})});const data=await response.json();if(!response.ok)throw new Error(data.message||"Failed to submit review.");message.textContent="Review submitted successfully.";document.getElementById("destinationReviewRating").value="";document.getElementById("destinationReviewText").value="";await loadDestinationReviews(activeReviewDestinationId);}catch(error){console.error("Review submission error:",error);message.textContent=error.message;}}document.getElementById("destinationReviewSubmit")?.addEventListener("click",submitDestinationReview);</script></body>
 </html>
+
+
+
+
+
+
 
 
 
