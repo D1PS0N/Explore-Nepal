@@ -2529,7 +2529,7 @@ footer#contact{
 
 </style>
 
-</head>
+<style>/* ---------- US12 destination reviews ---------- */.destination-reviews{margin-top:28px;}.destination-reviews-list{display:grid;gap:12px;margin-top:12px;}.destination-review-form{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:8px;}.destination-review-form label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}.destination-review-form select,.destination-review-form textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;padding:12px 14px;}.destination-review-form select{min-height:46px;cursor:pointer;}.destination-review-form textarea{min-height:100px;resize:vertical;line-height:1.5;}.destination-review-form select:focus,.destination-review-form textarea:focus{outline:3px solid rgba(38,116,136,.12);border-color:var(--blue);}.destination-review-form .btn{margin-top:4px;justify-self:start;}#destinationReviewMessage{font-size:12px;color:var(--ink-soft);}</style></head>
 <body>
 <nav>
 <div class="brand">
@@ -3326,6 +3326,7 @@ footer#contact{
 <div class="dest-place-title">Places to visit</div>
 <div class="dest-place-list" id="destinationPlaces"></div>
 <p class="dest-tip" id="destinationTip"></p>
+<div class="destination-reviews"><div class="dest-place-title">Reviews</div><div id="destinationReviews" class="destination-reviews-list"></div><div class="destination-review-form"><label for="destinationReviewRating">Your rating</label><select id="destinationReviewRating"><option value="">Choose rating</option><option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5</option><option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; 4</option><option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; 3</option><option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; 2</option><option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; 1</option></select><textarea id="destinationReviewText" maxlength="500" placeholder="Share your experience..."></textarea><button class="btn btn-primary" id="destinationReviewSubmit" type="button">Submit review</button><div id="destinationReviewMessage"></div></div></div>
 </div>
 </div>
 <!-- HELP CENTER MODAL -->
@@ -3923,6 +3924,8 @@ function openDestination(name){
     `<div class="dest-place-item"><strong>${place}</strong><span>${desc}</span></div>`
   ).join('');
   document.getElementById('destinationTip').innerHTML = `<strong>Good to know:</strong> ${d.tip}`;
+  activeReviewDestinationId = DESTINATION_IDS[name];
+  loadDestinationReviews(activeReviewDestinationId);
   destinationM.open();
 }
 
@@ -5813,9 +5816,8 @@ guideShowMore.addEventListener("click", function () {
 
 loadGuides("all");
 </script>
-</body>
+<script>let activeReviewDestinationId=null;async function loadDestinationReviews(destinationId){const list=document.getElementById("destinationReviews");if(!list)return;list.innerHTML="<div class='journey-empty'>Loading reviews...</div>";try{const response=await fetch(`${API_BASE}/api/reviews/${destinationId}`);const reviews=await response.json();if(!response.ok)throw new Error("Unable to load reviews.");if(!reviews.length){list.innerHTML="<div class='journey-empty'>No reviews yet. Be the first to review this destination.</div>";return;}list.innerHTML=reviews.map(r=>`<div class="journey-card"><div class="journey-main"><strong>${escapeJourneyHTML(r.user_name||"Tourist")}</strong><div class="journey-meta">${"?".repeat(r.rating)}${"?".repeat(5-r.rating)}</div>${r.review?`<p>${escapeJourneyHTML(r.review)}</p>`:""}</div></div>`).join("");}catch(error){console.error("Destination reviews error:",error);list.innerHTML="<div class='journey-empty'>Unable to load reviews.</div>";}}async function submitDestinationReview(){const token=getAuthToken(),rating=document.getElementById("destinationReviewRating").value,review=document.getElementById("destinationReviewText").value.trim(),message=document.getElementById("destinationReviewMessage");if(!token){message.textContent="Please log in to submit a review.";return;}if(!activeReviewDestinationId||!rating){message.textContent="Please choose a rating.";return;}try{const response=await fetch(`${API_BASE}/api/reviews`,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({destination_id:activeReviewDestinationId,rating:Number(rating),review})});const data=await response.json();if(!response.ok)throw new Error(data.message||"Failed to submit review.");message.textContent="Review submitted successfully.";document.getElementById("destinationReviewRating").value="";document.getElementById("destinationReviewText").value="";await loadDestinationReviews(activeReviewDestinationId);}catch(error){console.error("Review submission error:",error);message.textContent=error.message;}}document.getElementById("destinationReviewSubmit")?.addEventListener("click",submitDestinationReview);</script></body>
 </html>
-
 
 
 
