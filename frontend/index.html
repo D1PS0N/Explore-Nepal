@@ -115,20 +115,23 @@ nav.nav-transparent .btn-primary:hover{ background:var(--marigold-deep); }
   content:"⌕"; position:absolute; left:13px; top:50%; transform:translateY(-50%); font-size:14px; color:var(--ink-mute); pointer-events:none;
 }
 .search-results{
-  display:none; position:absolute; top:calc(100% + 8px); left:0; right:0; background:var(--paper-raise);
-  border:1px solid var(--line); border-radius:var(--r-md); box-shadow:0 20px 40px -20px rgba(20,23,28,.4);
-  overflow-y:auto; max-height:340px; z-index:1200;
+  display:none; position:absolute; top:calc(100% + 8px); left:0; right:0;
+  background:rgba(20,20,20,0.96); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.08); border-radius:10px; box-shadow:0 12px 36px rgba(0,0,0,0.5);
+  overflow-y:auto; max-height:340px; z-index:1200; padding:6px;
 }
 .search-results.open{ display:block; }
-.sr-item{ display:flex; align-items:center; gap:10px; padding:11px 14px; cursor:pointer; border-bottom:1px solid var(--line); }
-.sr-item:last-child{ border-bottom:none; }
-.sr-item:hover{ background:var(--paper); }
+.sr-item{
+  display:flex; align-items:center; gap:12px; padding:8px 12px; margin:2px 0;
+  border-radius:6px; cursor:pointer; transition:background 0.15s, color 0.15s;
+}
+.sr-item:hover{ background:rgba(255,255,255,0.08); }
 .sr-tag{ font-family:var(--mono); font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:4px 8px; border-radius:var(--r-pill); flex-shrink:0; }
-.sr-tag.d{ background:rgba(20,23,28,.08); color:var(--crimson-deep); }
-.sr-tag.g{ background:rgba(28,76,120,.1); color:var(--blue); }
-.sr-name{ font-weight:700; font-size:13.5px; }
-.sr-loc{ font-size:11.5px; color:var(--ink-mute); }
-.sr-empty{ padding:16px; font-size:13px; color:var(--ink-mute); text-align:center; }
+.sr-tag.d{ background:rgba(240,166,63,0.15); color:#F0A63F; }
+.sr-tag.g{ background:rgba(28,76,120,0.25); color:#9abfdc; }
+.sr-name{ font-weight:600; font-size:13.5px; color:#ffffff; }
+.sr-loc{ font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:1px; }
+.sr-empty{ padding:16px; font-size:13px; color:rgba(255,255,255,0.6); text-align:center; }
 
 @keyframes flashPulse{ 0%{ box-shadow:0 0 0 0 rgba(240,166,63,.55);} 70%{ box-shadow:0 0 0 16px rgba(240,166,63,0);} 100%{ box-shadow:0 0 0 0 rgba(240,166,63,0);} }
 .flash{ animation:flashPulse 1.4s ease-out; border-color:var(--marigold) !important; }
@@ -370,7 +373,7 @@ header.hero{
   background:transparent; cursor:pointer; color:var(--ink-soft); transition:.2s;
 }
 .chip.active, .chip:hover{ background:var(--ink); border-color:var(--ink); color:#fff; }
-.see-more-wrap{ display:flex; justify-content:center; margin-top:6px; }
+.see-more-wrap{ display:flex; justify-content:center; margin-top:26px; }
 
 /* activity tags */
 .activity-strip{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:38px; }
@@ -1039,6 +1042,8 @@ p{ line-height:var(--lh-body); }
 
 /* Chitwan wildlife gallery video */
 #gallery .gallery-card video{ display:block; width:100%; height:100%; object-fit:cover; }
+
+/* ---------- favorites ---------- */ .favorite-btn{position:absolute;top:14px;right:14px;z-index:10;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.95);color:#B4232C;font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(20,23,28,.18);transition:transform .2s ease,background .2s ease,color .2s ease}.favorite-btn:hover{transform:scale(1.08);background:#fff}.favorite-btn.active{background:#B4232C;color:#fff}.dest-card{position:relative}
 </style>
 <style>
 /* Help Center typography refinement */
@@ -1060,9 +1065,11 @@ p{ line-height:var(--lh-body); }
   .footer-help-search-btn{font-size:13px;}
   .footer-help-popular{font-size:11px;}
 }
+
 </style>
 <style>
 .map-pin-note{margin:12px 0 10px;color:#66736c;font-size:13px;line-height:1.5}.map-destination-btn.active{outline:2px solid rgba(35,119,75,.22);background:#eaf5ee;color:#23774b;font-weight:700}
+
 </style>
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <style>
@@ -1086,6 +1093,7 @@ p{ line-height:var(--lh-body); }
 .map-fullscreen-box{position:relative;width:min(1180px,96vw);height:min(820px,90vh);background:#fff;border-radius:20px;padding:14px;box-shadow:0 32px 80px rgba(0,0,0,.35)}
 #websiteMapLarge{width:100%;height:100%;border-radius:14px;background:#eef3ef}
 @media(max-width:700px){.cal-map-panel{height:auto}.cal-map-panel #websiteMap{height:320px!important;min-height:320px}.map-fullscreen{padding:10px}.map-fullscreen-box{width:100%;height:92vh;border-radius:16px;padding:9px}}
+
 </style>
 <style>
 /* Calendar follows the map size; the map keeps its original dimensions. */
@@ -1104,6 +1112,7 @@ p{ line-height:var(--lh-body); }
   #gallery .gallery-extra:nth-of-type(7){ grid-column:span 2; }
   #gallery .gallery-extra:nth-of-type(10){ grid-column:span 2; }
 }
+
 
 </style>
 <style>
@@ -1169,6 +1178,7 @@ p{ line-height:var(--lh-body); }
     column-gap: 16px;
   }
 }
+
 </style>
 <style>
 /* Compact account section, aligned to the same content width as the calendar section. */
@@ -1206,6 +1216,7 @@ p{ line-height:var(--lh-body); }
   #register .auth-shell{grid-template-columns:1fr;gap:22px;}
   #register .auth-box{justify-self:stretch;max-width:none;}
 }
+
 </style>
 <style>
 /* ---- Responsive hardening: desktop + tablet + mobile ---- */
@@ -1302,6 +1313,7 @@ img,video,iframe{max-width:100%}
   .about-card{padding:22px 18px!important;border-radius:20px!important}
   .about-copy p{font-size:15px!important}
 }
+
 </style>
 <style>
 .login-modal-actions{
@@ -1320,6 +1332,7 @@ img,video,iframe{max-width:100%}
   font-size:11.5px;
   line-height:1.45;
 }
+
 </style>
 <style>
 .register-modal-box{
@@ -1335,6 +1348,7 @@ img,video,iframe{max-width:100%}
 @media(max-width:600px){
   .register-modal-box{width:calc(100vw - 28px);padding:26px 20px 22px;}
 }
+
 </style>
 <style>
 /* Final gallery alignment override */
@@ -1367,6 +1381,7 @@ img,video,iframe{max-width:100%}
 .gallery-media-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.55);color:rgba(255,255,255,.86);font-size:11px;z-index:7;backdrop-filter:blur(8px);white-space:nowrap;}
 #gallery .gallery-card:has(video)::before{content:'▶  Tap to preview';position:absolute;top:16px;right:16px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.66);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(8px);pointer-events:none;}
 @media(max-width:700px){.gallery-lightbox{padding:12px}.gallery-lightbox-inner{width:96vw;height:88vh}.gallery-lightbox-stage{border-radius:14px}.gallery-lightbox img,.gallery-lightbox video{border-radius:14px;max-height:82vh}.gallery-lightbox-close{top:-4px;right:-2px;width:40px;height:40px;font-size:24px}.gallery-lightbox-nav{width:42px;height:42px;font-size:25px}.gallery-lightbox-prev{left:8px}.gallery-lightbox-next{right:8px}.gallery-lightbox-caption{font-size:13px;left:14px;right:14px;bottom:12px}.gallery-lightbox-counter{top:10px;left:10px}.gallery-media-hint{display:none}}
+
 </style>
 <style>
 /* Uniform Top Destination cards — match Pokhara / Solukhumbu */
@@ -1405,6 +1420,7 @@ img,video,iframe{max-width:100%}
     min-height:220px !important;
   }
 }
+
 </style>
 <style>
 /* Glimpse of the Journey — match Top Destinations card layout */
@@ -1472,6 +1488,7 @@ img,video,iframe{max-width:100%}
     min-height:220px !important;
   }
 }
+
 </style>
 <style>
 /* Align "A glimpse of the journey" exactly with the Top Destinations section */
@@ -1510,6 +1527,7 @@ img,video,iframe{max-width:100%}
     padding-right:5vw !important;
   }
 }
+
 </style>
 <style>
 /* Footer visibility fixes */
@@ -1521,6 +1539,7 @@ footer .f-col:last-child li,
 footer .f-col:last-child a{
   color:#fff !important;
 }
+
 </style>
 <style>
 /* Top Destinations: keep Known for visible, move long description into popup */
@@ -1541,12 +1560,14 @@ footer .f-col:last-child a{
   line-height:1.65;
   font-weight:500;
 }
+
 </style>
 <style>
 /* Top Destinations: show each destination name only once */
 #destGrid .dest-loc{
   display:none !important;
 }
+
 </style>
 <style>
 /* Header Create account text */
@@ -1554,11 +1575,39 @@ footer .f-col:last-child a{
 nav.nav-transparent #registerTrigger{
   color:#fff !important;
 }
+
 </style>
 <style>
 /* ---------- MY JOURNEYS + POST-TRIP GUIDE RATING ---------- */
 .nav-journeys-link{ display:none; }
 .nav-journeys-link.visible{ display:list-item; }
+
+.nav-avatar{ width:36px; height:36px; border-radius:50%; background:#4f46e5; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; cursor:pointer; text-transform:uppercase; margin-top:-2px; }
+
+.nav-avatar-wrap{ position:relative; }
+.nav-avatar-dropdown{
+  display:none; position:absolute; right:0; top:calc(100% + 8px);
+  background:rgba(20,20,20,0.96); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-radius:10px; border:1px solid rgba(255,255,255,0.08); box-shadow:0 12px 36px rgba(0,0,0,0.5);
+  min-width:240px; z-index:1000; padding:6px;
+}
+.nav-avatar-dropdown.open{ display:block; }
+.nav-avatar-dd-header{ display:flex; align-items:center; gap:12px; padding:12px 14px 10px 14px; }
+.nav-avatar-dd-circle{
+  width:36px; height:36px; border-radius:50%; background:var(--blue, #1C4C78); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;
+  text-transform:uppercase; flex-shrink:0;
+}
+.nav-avatar-dd-name{ font-weight:600; font-size:13.5px; color:#ffffff; }
+.nav-avatar-dd-email{ font-size:11.5px; color:rgba(255,255,255,0.6); margin-top:1px; word-break:break-all; }
+.nav-avatar-dd-divider{ margin:6px 6px; border:none; border-top:1px solid rgba(255,255,255,0.08); }
+.nav-avatar-dd-item{
+  display:flex; align-items:center; gap:10px; width:calc(100% - 12px); margin:2px 6px;
+  padding:8px 10px; border:none; border-radius:6px; background:none; cursor:pointer;
+  font-size:13px; color:rgba(255,255,255,0.85); text-align:left; transition:background 0.15s, color 0.15s;
+}
+.nav-avatar-dd-item:hover{ background:rgba(255,255,255,0.08); color:#ffffff; }
+.nav-avatar-dd-item svg{ opacity:0.8; flex-shrink:0; }
 
 .journeys-modal-box{ width:min(760px,94vw); max-height:88vh; overflow:auto; }
 .journeys-head{ margin-bottom:20px; }
@@ -1615,6 +1664,7 @@ nav.nav-transparent #registerTrigger{
   .journey-action .btn{ width:100%; }
   .star-btn{ font-size:31px; }
 }
+
 </style>
 <style>
 /* Footer mountain artwork — only below Help Center */
@@ -1661,6 +1711,7 @@ footer#contact > .footer-help{
     background-position:center center;
   }
 }
+
 </style>
 <style>
 /* =========================================================
@@ -2154,6 +2205,7 @@ footer#contact{
   cursor: pointer;
 }
 
+
 </style>
 
 <style>
@@ -2165,6 +2217,7 @@ footer#contact{
 @media(max-width:700px){
   .pslider.video-active .p-slide.pos-0 .p-copy{ width:100%; margin-left:0; padding:34px 6% 42px; }
 }
+
 </style>
 
 
@@ -2193,12 +2246,14 @@ footer#contact{
     text-align:left;
   }
 }
+
 </style>
 
 <style>
 .hero-bg-stack.single-video .hero-bg-layer{opacity:1 !important; animation:none !important;}
 .hero-bg-stack.single-video .hero-bg-layer-single{position:absolute; inset:0;}
 .hero-bg-stack.single-video .hero-bg-layer video{width:100%; height:100%; object-fit:cover; display:block;}
+
 </style>
 
 <style>
@@ -2384,6 +2439,7 @@ footer#contact{
   .production-note{align-items:flex-start;flex-direction:column;}
   .production-modal-grid{grid-template-columns:1fr;gap:0;}
 }
+
 </style>
 
 
@@ -2487,6 +2543,25 @@ footer#contact{
     width:3px;
   }
 }
+
+</style>
+
+<style>/* ---------- US12 destination reviews ---------- */.destination-reviews{margin-top:28px;}.destination-reviews-list{display:grid;gap:12px;margin-top:12px;}.destination-review-form{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:8px;}.destination-review-form label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);font-weight:600;}.destination-review-form select,.destination-review-form textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;padding:12px 14px;}.destination-review-form select{min-height:46px;cursor:pointer;}.destination-review-form textarea{min-height:100px;resize:vertical;line-height:1.5;}.destination-review-form select:focus,.destination-review-form textarea:focus{outline:3px solid rgba(38,116,136,.12);border-color:var(--blue);}.destination-review-form .btn{margin-top:4px;justify-self:start;}#destinationReviewMessage{font-size:12px;color:var(--ink-soft);}</style>
+
+<style>
+/* ---------- US14: Interest selector + recommended grid ---------- */
+.interest-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:18px 0 24px; padding:16px 20px; background:var(--paper-raise); border:1px solid var(--line); border-radius:var(--r-lg); }
+.interest-bar-label{ font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-right:4px; white-space:nowrap; }
+.interest-chip{ display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; font-size:13px; font-weight:600; color:var(--ink); transition:background .15s, border-color .15s, color .15s; user-select:none; }
+.interest-chip:hover{ background:#f0f4f3; border-color:var(--blue); }
+.interest-chip input{ position:absolute; opacity:0; width:1px; height:1px; }
+.interest-chip.checked{ background:var(--blue); border-color:var(--blue); color:#fff; }
+.interest-chip.checked::before{ content:""; width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.7); }
+.rec-subhead{ font-size:15px; font-weight:700; color:var(--ink-soft); margin:28px 0 14px; padding-bottom:8px; border-bottom:1px dashed var(--line); }
+.rec-empty{ font-size:14px; color:var(--ink-soft); padding:20px 0; text-align:center; }
+#recommendGrid .dest-card{ min-height:180px; }
+@media(max-width:1100px){ #recommendGrid .dest-card{ grid-column:span 3; } }
+@media(max-width:600px){ #recommendGrid .dest-card{ grid-column:span 6; min-height:160px; } }
 </style>
 
 </head>
@@ -2509,15 +2584,17 @@ footer#contact{
 <li><a href="#about">About Us</a></li>
 <li><a href="#help-center" id="helpCenterHeaderTrigger">Help center</a></li>
 <li class="divider"></li>
-<li class="nav-journeys-link" id="navJourneysItem"><a href="#" id="journeysTrigger">My journeys</a></li>
-<li><a href="#" id="loginTrigger">Log in</a></li>
+
+<li class="nav-journeys-link" id="navJourneysItem"><a href="#" id="journeysTrigger">My journeys</a></li><li class="nav-journeys-link" id="navFavoritesItem"><a href="#" id="favoritesTrigger">My favorites</a></li>
+<li><a href="#" id="loginTrigger">Log in</a></li><li><a href="#" id="logoutTrigger" style="display:none;">Log out</a></li>
 <li><a class="btn btn-primary btn-sm" href="#" id="registerTrigger">Create account</a></li>
+<li id="navAvatarItem" style="display:none;"><div class="nav-avatar-wrap"><div class="nav-avatar" id="navAvatar" title=""></div><div class="nav-avatar-dropdown" id="navAvatarDropdown"><div class="nav-avatar-dd-header"><div class="nav-avatar-dd-circle" id="navAvatarDdCircle"></div><div><div class="nav-avatar-dd-name" id="navAvatarDdName"></div><div class="nav-avatar-dd-email" id="navAvatarDdEmail"></div></div></div><hr class="nav-avatar-dd-divider"><button class="nav-avatar-dd-item" id="navAvatarJourneys"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg> My journeys</button><button class="nav-avatar-dd-item" id="navAvatarFavorites"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg> My favorites</button><hr class="nav-avatar-dd-divider"><button class="nav-avatar-dd-item" id="navAvatarLogout"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</button></div></div></li>
 </ul>
 </nav>
 <header class="hero-full" id="heroFull">
 <div class="hero-bg-stack single-video">
 <div class="hero-bg-layer hero-bg-layer-single">
-<video autoplay="" loop="" muted="" playsinline="" preload="auto">
+<video autoplay="" loop="" muted="" playsinline="" preload="metadata">
 <source src="assets/front_hero.mp4" type="video/mp4"/>
 </video>
 </div>
@@ -2537,12 +2614,12 @@ footer#contact{
 </header>
 <section class="pslider" id="placesSlider">
 <div aria-hidden="true" class="himalaya-feature-video" id="himalayaFeatureVideo">
-<video autoplay="" id="himalayaFeatureVideoEl" loop="" muted="" playsinline="" preload="auto">
+<video autoplay="" id="himalayaFeatureVideoEl" loop="" muted="" playsinline="" preload="metadata">
 <source src="assets/video_04.mp4" type="video/mp4"/>
 </video>
 </div>
 <div aria-hidden="true" class="chitwan-feature-video" id="chitwanFeatureVideo">
-<video autoplay="" id="chitwanFeatureVideoEl" loop="" muted="" playsinline="" preload="auto">
+<video autoplay="" id="chitwanFeatureVideoEl" loop="" muted="" playsinline="" preload="metadata">
 <source src="assets/video_03.mp4" type="video/mp4"/>
 </video>
 </div>
@@ -2593,6 +2670,20 @@ footer#contact{
 </div>
 </div>
 </div>
+<div class="interest-bar" id="interestBar">
+<span class="interest-bar-label">Your interests</span>
+<label class="interest-chip" data-interest="Trekking"><input type="checkbox" value="Trekking">Trekking</label>
+<label class="interest-chip" data-interest="Nature"><input type="checkbox" value="Nature">Nature</label>
+<label class="interest-chip" data-interest="Culture"><input type="checkbox" value="Culture">Culture</label>
+<label class="interest-chip" data-interest="Adventure"><input type="checkbox" value="Adventure">Adventure</label>
+<label class="interest-chip" data-interest="Mountains"><input type="checkbox" value="Mountains">Mountains</label>
+<label class="interest-chip" data-interest="Wildlife"><input type="checkbox" value="Wildlife">Wildlife</label>
+<label class="interest-chip" data-interest="Heritage"><input type="checkbox" value="Heritage">Heritage</label>
+<label class="interest-chip" data-interest="Pilgrimage"><input type="checkbox" value="Pilgrimage">Pilgrimage</label>
+<button type="button" id="getRecBtn" class="btn btn-primary btn-sm" style="margin-left:4px;">Get Recommendations</button>
+</div>
+<div class="rec-subhead" id="recSubhead" style="display:none;">Recommended for you</div>
+<div class="bento" id="recommendGrid" style="display:none;"></div>
 <div class="bento" id="destGrid">
 <div aria-label="View Kathmandu destination details" class="dest-card big has-photo" data-cat="heritage" data-destination="Kathmandu" role="button" tabindex="0">
 <img alt="Kathmandu cultural festival at a historic temple square" class="dest-card-photo" src="assets/image_04.png"/>
@@ -3284,6 +3375,7 @@ footer#contact{
 <div class="dest-place-title">Places to visit</div>
 <div class="dest-place-list" id="destinationPlaces"></div>
 <p class="dest-tip" id="destinationTip"></p>
+<div class="destination-reviews"><div class="dest-place-title">Reviews</div><div id="destinationReviews" class="destination-reviews-list"></div><div class="destination-review-form"><label for="destinationReviewRating">Your rating</label><select id="destinationReviewRating"><option value="">Choose rating</option><option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; 5</option><option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; 4</option><option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; 3</option><option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; 2</option><option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; 1</option></select><textarea id="destinationReviewText" maxlength="500" placeholder="Share your experience..."></textarea><button class="btn btn-primary" id="destinationReviewSubmit" type="button">Submit review</button><div id="destinationReviewMessage"></div></div></div>
 </div>
 </div>
 <!-- HELP CENTER MODAL -->
@@ -3320,13 +3412,15 @@ footer#contact{
 <p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Pick up where you left off.</p>
 <div class="field"><label for="loginEmail">Email</label><input id="loginEmail" placeholder="you@example.com"/></div>
 <div class="field"><label for="loginPass">Password</label><input id="loginPass" placeholder="Your password" type="password"/></div>
-<div class="login-modal-actions">
+<button type="button" class="btn btn-ghost" id="forgotPasswordBtn" style="width:100%;margin-bottom:12px;">Forgot Password?</button>
+  <div class="login-modal-actions">
 <button class="btn btn-primary" onclick="mockLogin()">Log in</button>
 <button class="btn btn-ghost" id="loginCreateAccount" type="button">Create account</button>
 </div>
 <p class="login-create-hint">New to Explore Nepal? Create your account to continue booking.</p>
 </div>
 </div>
+<div class="modal-overlay" id="resetPasswordModal"><div class="modal-box"><button aria-label="Close" class="modal-close" id="resetPasswordModalClose">&times;</button><div class="eyebrow">Account recovery</div><h2 style="font-size:24px;margin-bottom:8px">Reset your password</h2><p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Enter your registered email to recover your account.</p><div id="forgotPasswordStep"><div class="field"><label for="forgotEmail">Email</label><input id="forgotEmail" type="email" placeholder="you@example.com"/><span class="input-error" id="forgotEmailError"></span></div><button type="button" class="btn btn-primary" id="verifyEmailBtn" style="width:100%;justify-content:center;">Verify Email</button></div><div id="newPasswordStep" style="display:none;"><p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">Email verified. Enter your new password below.</p><div class="field"><label for="newPassword">New Password</label><input id="newPassword" type="password" placeholder="Enter new password"/><span class="input-error" id="newPasswordError"></span></div><div class="field"><label for="confirmPassword">Confirm New Password</label><input id="confirmPassword" type="password" placeholder="Confirm new password"/><span class="input-error" id="confirmPasswordError"></span></div><button type="button" class="btn btn-primary" id="resetPasswordBtn" style="width:100%;justify-content:center;">Reset Password</button></div></div></div>
 <!-- MY JOURNEYS MODAL -->
 <div class="modal-overlay" id="journeysModal">
 <div class="modal-box journeys-modal-box">
@@ -3339,6 +3433,7 @@ footer#contact{
 <div class="journey-list" id="journeyList"></div>
 </div>
 </div>
+<!-- MY FAVORITES MODAL --><div class="modal-overlay" id="favoritesModal"><div class="modal-box journeys-modal-box"><button aria-label="Close" class="modal-close" id="favoritesClose">×</button><div class="journeys-head"><div class="eyebrow">Saved destinations</div><h2>My favorites</h2><p>Destinations you saved are kept here so you can easily revisit them later.</p></div><div class="journey-list" id="favoritesList"></div></div></div>
 <!-- RATE GUIDE MODAL -->
 <div class="modal-overlay" id="ratingModal">
 <div class="modal-box rating-modal-box">
@@ -3432,6 +3527,8 @@ footer#contact{
 </div>
 </footer>
 <script>
+const API_BASE = 'http://127.0.0.1:5000';
+
 // ---------- nav ----------
 const navEl = document.querySelector('nav');
 function updateNavStyle(){
@@ -3480,8 +3577,13 @@ const loginM = bindModal('loginModal','loginClose',[document.getElementById('log
 const bookM = bindModal('bookModal','bookClose',[]);
 const destinationM = bindModal('destinationModal','destinationClose',[]);
 const journeysM = bindModal('journeysModal','journeysClose',[]);
+const favoritesM = bindModal('favoritesModal','favoritesClose',[]);
 const ratingM = bindModal('ratingModal','ratingClose',[]);
 const productionM = bindModal('productionModal','productionClose',[]);
+
+document.getElementById('favoritesTrigger')?.addEventListener('click', async e => { e.preventDefault(); if(!isLoggedIn){ loginM.open(); return; } await renderFavorites(); favoritesM.open(); });
+
+async function renderFavorites(){ const list = document.getElementById('favoritesList'); if(!list) return; const token = getAuthToken(); if(!token){ list.innerHTML = '<div class="journey-empty">Please log in to view your favorites.</div>'; return; } try { const response = await fetch(`${API_BASE}/api/favorites`, { headers: { 'Authorization': 'Bearer ' + token } }); const data = await response.json(); if(!response.ok) throw new Error(data.message || 'Unable to load favorites.'); const favorites = Array.isArray(data.favorites) ? data.favorites : []; if(!favorites.length){ list.innerHTML = '<div class="journey-empty"><strong>No favorites yet.</strong><br>Save a destination using the heart button and it will appear here.</div>'; return; } list.innerHTML = favorites.map(f => { const name = f.name || f.destination_name || 'Destination'; return `<article class="journey-card"><div class="journey-main"><h3>${escapeJourneyHTML(name)}</h3><div class="journey-meta">Saved destination</div></div><div class="journey-action"><button class="btn btn-ghost" type="button" data-remove-favorite="${f.destination_id}">Remove</button></div></article>`; }).join(''); list.querySelectorAll('[data-remove-favorite]').forEach(btn => { btn.addEventListener('click', async () => { const destinationId = btn.dataset.removeFavorite; const response = await fetch(`${API_BASE}/api/favorites/${destinationId}`, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } }); if(response.ok){ favoriteDestinationIds.delete(Number(destinationId)); await renderFavorites(); document.querySelectorAll(`.favorite-btn[data-destination-id="${destinationId}"]`).forEach(b => updateFavoriteButton(b, false)); showToast('Favorite removed.', 'success'); } }); }); } catch(error){ console.error('Favorites error:', error); list.innerHTML = '<div class="journey-empty">Unable to load favorites.</div>'; } }
 
 function openProductionInquiry(packageName){
   const select = document.getElementById('productionPackage');
@@ -3497,11 +3599,13 @@ document.querySelectorAll('.production-request-btn').forEach(btn => {
 });
 document.getElementById('customProductionBtn')?.addEventListener('click', () => openProductionInquiry('Custom Production'));
 
-document.getElementById('productionSubmit')?.addEventListener('click', () => {
+document.getElementById('productionSubmit')?.addEventListener('click', async () => {
   const name = document.getElementById('productionName').value.trim();
   const email = document.getElementById('productionEmail').value.trim();
   const destination = document.getElementById('productionDestination').value.trim();
   const pkg = document.getElementById('productionPackage').value;
+  const travelDate = document.getElementById('productionDate').value;
+  const brief = document.getElementById('productionBrief').value.trim();
   if(!name || !email || !destination){
     showToast('Add your name, email, and destination before sending.', 'error');
     return;
@@ -3510,12 +3614,51 @@ document.getElementById('productionSubmit')?.addEventListener('click', () => {
     showToast('Enter a valid email address.', 'error');
     return;
   }
-  productionM.shut();
-  showToast(`${pkg} inquiry saved for ${destination}. We’ll use these details to plan the shoot.`);
-  ['productionName','productionEmail','productionDestination','productionBrief'].forEach(id => {
-    const el = document.getElementById(id); if(el) el.value = '';
-  });
-  const dateEl = document.getElementById('productionDate'); if(dateEl) dateEl.value = '';
+  try {
+    const response = await fetch(`${API_BASE}/api/production-inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ package: pkg, name, email, destination, travel_date: travelDate || null, brief })
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.message || 'Failed to submit inquiry.');
+    productionM.shut();
+    showToast(`${pkg} inquiry sent for ${destination}. We'll use these details to plan the shoot.`);
+    ['productionName','productionEmail','productionDestination','productionBrief'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.value = '';
+    });
+    const dateEl = document.getElementById('productionDate'); if(dateEl) dateEl.value = '';
+  } catch(err) {
+    showToast(err.message || 'Something went wrong. Please try again.', 'error');
+  }
+});
+document.getElementById('logoutTrigger')?.addEventListener('click', e => { e.preventDefault(); localStorage.removeItem('exploreNepalToken'); localStorage.removeItem('exploreNepalUser'); localStorage.removeItem('exploreNepalEmail'); localStorage.removeItem(LOGIN_STORAGE_KEY); isLoggedIn=false; updateAccountUI(); showToast('Logged out successfully.','success'); });
+
+document.getElementById('navAvatar')?.addEventListener('click', e => {
+  e.stopPropagation();
+  const dd = document.getElementById('navAvatarDropdown');
+  if(dd) dd.classList.toggle('open');
+});
+document.addEventListener('click', () => { const dd=document.getElementById('navAvatarDropdown'); if(dd) dd.classList.remove('open'); });
+document.getElementById('navAvatarJourneys')?.addEventListener('click', e => {
+  e.preventDefault();
+  openJourneys();
+});
+document.getElementById('navAvatarFavorites')?.addEventListener('click', async e => {
+  e.preventDefault();
+  if(!isLoggedIn){ loginM.open(); return; }
+  await renderFavorites();
+  favoritesM.open();
+});
+document.getElementById('navAvatarLogout')?.addEventListener('click', e => {
+  e.preventDefault();
+  localStorage.removeItem('exploreNepalToken');
+  localStorage.removeItem('exploreNepalUser');
+  localStorage.removeItem('exploreNepalEmail');
+  localStorage.removeItem(LOGIN_STORAGE_KEY);
+  isLoggedIn = false;
+  updateAccountUI();
+  showToast('Logged out successfully.','success');
 });
 
 // Open account creation directly from the login popup.
@@ -3828,6 +3971,7 @@ const DESTINATION_DETAILS = {
   }
 };
 
+async function loadDestinationsFromAPI(){try{const r=await fetch(`${API_BASE}/api/destinations`);if(!r.ok)return;const api=await r.json();api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=x.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
 function openDestination(name){
   const d = DESTINATION_DETAILS[name];
   if(!d) return;
@@ -3851,15 +3995,188 @@ function openDestination(name){
     `<div class="dest-place-item"><strong>${place}</strong><span>${desc}</span></div>`
   ).join('');
   document.getElementById('destinationTip').innerHTML = `<strong>Good to know:</strong> ${d.tip}`;
+  activeReviewDestinationId = DESTINATION_IDS[name];
+  loadDestinationReviews(activeReviewDestinationId);
   destinationM.open();
 }
 
+// ---------- favorites ----------
+const DESTINATION_IDS = {
+  "Pokhara": 1,
+  "Janakpur": 2,
+  "Chitwan": 3,
+  "Ghandruk": 4,
+  "Solukhumbu": 5,
+  "Bandipur": 6,
+  "Kathmandu": 7,
+  "Bhaktapur": 8,
+  "Lalitpur": 9,
+  "Mustang": 10,
+  "Lumbini": 11,
+  "Rara Lake": 12,
+  "Manang": 13
+};
+
+let favoriteDestinationIds = new Set();
+
+function getAuthToken(){
+  return localStorage.getItem('exploreNepalToken');
+}
+
+function createFavoriteButton(card){
+  if(card.querySelector('.favorite-btn')) return;
+
+  const name = card.dataset.destination;
+  const destinationId = DESTINATION_IDS[name];
+
+  if(!destinationId) return;
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'favorite-btn';
+  button.dataset.destinationId = destinationId;
+  button.setAttribute('aria-label', `Add ${name} to favorites`);
+  button.innerHTML = '♡';
+
+  button.addEventListener('click', async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const token = getAuthToken();
+
+    if(!token){
+      showToast('Please log in to save favorites.', 'error');
+      loginM.open();
+      return;
+    }
+
+    const isFavorite = favoriteDestinationIds.has(destinationId);
+
+    try {
+      if(isFavorite){
+        const response = await fetch(`${API_BASE}/api/favorites/${destinationId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          showToast(data.message || 'Unable to remove favorite.', 'error');
+          return;
+        }
+
+        favoriteDestinationIds.delete(destinationId);
+        updateFavoriteButton(button, false);
+        showToast(`${name} removed from favorites.`, 'success');
+
+      } else {
+        const response = await fetch(`${API_BASE}/api/favorites`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            destination_id: destinationId
+          })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          showToast(data.message || 'Unable to save favorite.', 'error');
+          return;
+        }
+
+        favoriteDestinationIds.add(destinationId);
+        updateFavoriteButton(button, true);
+        showToast(`${name} added to favorites.`, 'success');
+      }
+
+    } catch(error){
+      console.error('Favorite error:', error);
+      showToast('Unable to connect to the server.', 'error');
+    }
+  });
+
+  card.appendChild(button);
+  updateFavoriteButton(button, favoriteDestinationIds.has(destinationId));
+}
+
+function updateFavoriteButton(button, active){
+  button.classList.toggle('active', active);
+  button.innerHTML = active ? '♥' : '♡';
+
+  const name = button.closest('.dest-card')?.dataset.destination || 'destination';
+  button.setAttribute(
+    'aria-label',
+    active ? `Remove ${name} from favorites` : `Add ${name} to favorites`
+  );
+}
+
+async function loadFavorites(){
+  const token = getAuthToken();
+
+  favoriteDestinationIds = new Set();
+
+  if(!token){
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+      updateFavoriteButton(button, false);
+    });
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/api/favorites`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+
+    if(!response.ok) return;
+
+    const data = await response.json();
+
+    if(Array.isArray(data.favorites)){
+      data.favorites.forEach(favorite => {
+        favoriteDestinationIds.add(Number(favorite.destination_id));
+      });
+    }
+
+    document.querySelectorAll('.favorite-btn').forEach(button => {
+      updateFavoriteButton(
+        button,
+        favoriteDestinationIds.has(Number(button.dataset.destinationId))
+      );
+    });
+
+  } catch(error){
+    console.error('Error loading favorites:', error);
+  }
+}
+
 document.querySelectorAll('#destGrid .dest-card').forEach(card => {
-  card.addEventListener('click', () => openDestination(card.dataset.destination));
+  createFavoriteButton(card);
+
+  card.addEventListener('click', () => {
+    openDestination(card.dataset.destination);
+  });
+
   card.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDestination(card.dataset.destination); }
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openDestination(card.dataset.destination);
+    }
   });
 });
+
+loadDestinationsFromAPI();
+loadFavorites();
+
+loadDestinationsFromAPI();
 
 const TODAY_ISO = '2026-08-13';
 const GUIDE_STATUS_BY_NAME = {};
@@ -3893,9 +4210,11 @@ Object.assign(GUIDE_STATUS_BY_NAME, {
 let isLoggedIn = false;
 let pendingBooking = null;
 
-function showBookingModal(name, loc){
+function showBookingModal(name, loc, guideId, destinationId){
   document.getElementById('bookGuideName').textContent = name;
   document.getElementById('bookGuideLoc').textContent = loc;
+  window.activeBookingGuideId = guideId || null;
+  window.activeBookingDestinationId = destinationId || null;
 
   const dateInput = document.getElementById('bookDate');
   const note = document.getElementById('bookDateNote');
@@ -3921,13 +4240,34 @@ function showBookingModal(name, loc){
   bookM.open();
 }
 
-function openBooking(name, loc){
+async function openBooking(name, loc, guideId, destinationId){
+  if(!guideId || !destinationId){
+    try {
+      const response = await fetch(`${API_BASE}/api/guides`);
+      const guides = await response.json();
+      const found = guides.find(g => String(g.name).trim() === String(name).trim());
+
+      if(found){
+        guideId = found.id;
+        destinationId = found.destination_id;
+      }
+    } catch(error) {
+      console.error('Guide lookup failed:', error);
+    }
+  }
+
+  if(!guideId || !destinationId){
+    showToast('Unable to identify this guide for booking.', 'error');
+    return;
+  }
+
   if(!isLoggedIn){
-    pendingBooking = { name, loc };
+    pendingBooking = { name, loc, guideId, destinationId };
     loginM.open();
     return;
   }
-  showBookingModal(name, loc);
+
+  showBookingModal(name, loc, guideId, destinationId);
 }
 const JOURNEYS_STORAGE_KEY = 'exploreNepalJourneysV1';
 const LOGIN_STORAGE_KEY = 'exploreNepalLoggedInV1';
@@ -3960,6 +4300,31 @@ function prettyDate(iso){
 function updateAccountUI(){
   const navItem = document.getElementById('navJourneysItem');
   if(navItem) navItem.classList.toggle('visible', isLoggedIn);
+  const navFav = document.getElementById('navFavoritesItem');
+  if(navFav) navFav.classList.toggle('visible', isLoggedIn);
+  const loginItem = document.getElementById('loginTrigger');
+  const logoutItem = document.getElementById('logoutTrigger');
+  const registerItem = document.getElementById('registerTrigger');
+  const avatarItem = document.getElementById('navAvatarItem');
+  const avatarEl = document.getElementById('navAvatar');
+  if(loginItem) loginItem.parentElement.style.display = isLoggedIn ? 'none' : '';
+  if(logoutItem) logoutItem.style.display = isLoggedIn ? 'none' : '';
+  if(registerItem) registerItem.parentElement.style.display = isLoggedIn ? 'none' : '';
+  if(avatarItem) avatarItem.style.display = isLoggedIn ? '' : 'none';
+  if(isLoggedIn && avatarEl){
+    let email = '', name = '';
+    try { const u = JSON.parse(localStorage.getItem('exploreNepalUser')); if(u){ email = u.email || ''; name = u.fullName || u.name || ''; } } catch(e){}
+    if(!email) try { email = localStorage.getItem('exploreNepalEmail') || ''; } catch(e){}
+    const initial = email ? email.charAt(0).toUpperCase() : '?';
+    avatarEl.textContent = initial;
+    avatarEl.title = email || 'Account';
+    const ddCircle = document.getElementById('navAvatarDdCircle');
+    const ddName = document.getElementById('navAvatarDdName');
+    const ddEmail = document.getElementById('navAvatarDdEmail');
+    if(ddCircle) ddCircle.textContent = initial;
+    if(ddName) ddName.textContent = name || email || 'Account';
+    if(ddEmail) ddEmail.textContent = email;
+  }
 }
 function openJourneys(){
   if(!isLoggedIn){
@@ -4051,40 +4416,136 @@ function submitGuideRating(){
   renderJourneys();
   setTimeout(() => journeysM.open(), 120);
 }
-function mockBook(){
+async function mockBook(){
   const guideName = document.getElementById('bookGuideName').textContent.trim();
   const location = document.getElementById('bookGuideLoc').textContent.trim();
   const startDate = document.getElementById('bookDate').value;
   const groupSize = document.getElementById('bookGroup').value || '1';
   const note = document.getElementById('bookNote').value.trim();
+
   if(!startDate){
     showToast('Choose a start date before sending your request.', 'error');
     return;
   }
-  const journeys = loadJourneys();
-  journeys.push({
-    id: 'journey-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
-    guideName, location, startDate, groupSize, note,
-    createdAt: new Date().toISOString(),
-    rating: null, review: ''
-  });
-  saveJourneys(journeys);
-  bookM.shut();
-  showToast(`Request sent — ${guideName} will confirm shortly. Your journey is now in My journeys.`, 'success');
+
+  const token = localStorage.getItem('exploreNepalToken');
+  const guideId = window.activeBookingGuideId;
+  const destinationId = window.activeBookingDestinationId;
+
+  if(!token || !guideId || !destinationId){
+    showToast('Please log in and select a valid guide before booking.', 'error');
+    return;
+  }
+
+  try{
+    const bookingNotes = 'Group size: ' + groupSize + (note ? ' | ' + note : '');
+
+    const response = await fetch(`${API_BASE}/api/bookings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        destinationId: destinationId,
+        guideId: guideId,
+        tourDate: startDate,
+        notes: bookingNotes
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.message || 'Failed to create booking');
+    }
+
+    const journeys = loadJourneys();
+
+    journeys.push({
+      id: 'journey-' + Date.now() + '-' + Math.random().toString(36).slice(2,7),
+      bookingId: data.bookingId,
+      guideId: guideId,
+      destinationId: destinationId,
+      guideName: guideName,
+      location: location,
+      startDate: startDate,
+      groupSize: groupSize,
+      note: note,
+      createdAt: new Date().toISOString(),
+      rating: null,
+      review: ''
+    });
+
+    saveJourneys(journeys);
+    bookM.shut();
+
+    showToast(
+      (data.message || 'Booking request submitted successfully!') +
+      ' Booking #' + data.bookingId + ' is now in My journeys.',
+      'success'
+    );
+
+  } catch(error) {
+    console.error('Booking error:', error);
+    showToast(error.message || 'Unable to submit booking.', 'error');
+  }
 }
-function mockLogin(){
-  isLoggedIn = true;
-  localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
-  updateAccountUI();
-  loginM.shut();
-  showToast('Logged in.', 'success');
-  if(pendingBooking){
-    const booking = pendingBooking;
-    pendingBooking = null;
-    setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
-  } else if(pendingOpenJourneys){
-    pendingOpenJourneys = false;
-    setTimeout(openJourneys, 120);
+
+async function mockLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPass').value;
+
+  if(!email || !password){
+    showToast('Please enter your email and password.', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/api/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      showToast(data.message || 'Login failed.', 'error');
+      return;
+    }
+
+    localStorage.setItem('exploreNepalToken', data.token);
+    localStorage.setItem('exploreNepalUser', JSON.stringify(data.user));
+    localStorage.setItem('exploreNepalEmail', email);
+    localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
+
+    isLoggedIn = true;
+    updateAccountUI();
+
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPass').value = '';
+
+    loginM.shut();
+    showToast('Logged in successfully.', 'success');
+
+    if(pendingBooking){
+      const booking = pendingBooking;
+      pendingBooking = null;
+      setTimeout(() => showBookingModal(booking.name, booking.loc, booking.guideId, booking.destinationId), 120);
+    } else if(pendingOpenJourneys){
+      pendingOpenJourneys = false;
+      setTimeout(openJourneys, 120);
+    }
+
+  } catch(error) {
+    console.error('Login error:', error);
+    showToast('Unable to connect to the server.', 'error');
   }
 }
 
@@ -4107,32 +4568,214 @@ function setErr(inputId, errId, msg){
   if(msg){ input.classList.add('invalid'); err.textContent = msg; err.style.display='block'; }
   else { input.classList.remove('invalid'); err.style.display='none'; }
 }
-function mockRegister(){
+
+async function mockRegister(){
   const name = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value;
-  let bad = false;
-  if(!name){ setErr('regName','regNameErr','Enter your full name.'); bad = true; } else setErr('regName','regNameErr','');
-  if(!isValidEmail(email)){ setErr('regEmail','regEmailErr','Enter a valid email.'); bad = true; } else setErr('regEmail','regEmailErr','');
-  if(pass.length < 6){ setErr('regPass','regPassErr','At least 6 characters.'); bad = true; } else setErr('regPass','regPassErr','');
-  if(bad) return;
-  showToast('Account created   welcome, ' + name.split(' ')[0] + '.', 'success');
-  isLoggedIn = true;
-  localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
-  updateAccountUI();
-  document.getElementById('regName').value=''; document.getElementById('regEmail').value=''; document.getElementById('regPass').value='';
-  if(typeof registerM !== 'undefined') registerM.shut();
+  const password = document.getElementById('regPass').value;
 
-  // If signup began from Book Now or My journeys, continue that action automatically.
-  if(pendingBooking){
-    const booking = pendingBooking;
-    pendingBooking = null;
-    setTimeout(() => showBookingModal(booking.name, booking.loc), 120);
-  } else if(pendingOpenJourneys){
-    pendingOpenJourneys = false;
-    setTimeout(openJourneys, 120);
+  let bad = false;
+
+  if(!name){
+    setErr('regName','regNameErr','Enter your full name.');
+    bad = true;
+  } else {
+    setErr('regName','regNameErr','');
+  }
+
+  if(!isValidEmail(email)){
+    setErr('regEmail','regEmailErr','Enter a valid email.');
+    bad = true;
+  } else {
+    setErr('regEmail','regEmailErr','');
+  }
+
+  if(password.length < 6){
+    setErr('regPass','regPassErr','At least 6 characters.');
+    bad = true;
+  } else {
+    setErr('regPass','regPassErr','');
+  }
+
+  if(bad) return;
+
+  try {
+    const response = await fetch(`${API_BASE}/api/users/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fullName: name,
+        email: email,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if(!response.ok){
+      showToast(data.message || 'Registration failed.', 'error');
+      return;
+    }
+
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regPass').value = '';
+
+    if(typeof registerM !== 'undefined'){
+      registerM.shut();
+    }
+
+    try {
+      const loginRes = await fetch(`${API_BASE}/api/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const loginData = await loginRes.json();
+      if(loginRes.ok && loginData.token){
+        localStorage.setItem('exploreNepalToken', loginData.token);
+        localStorage.setItem('exploreNepalUser', JSON.stringify(loginData.user));
+        localStorage.setItem('exploreNepalEmail', email);
+        localStorage.setItem(LOGIN_STORAGE_KEY, 'true');
+        isLoggedIn = true;
+        updateAccountUI();
+        showToast('Account created successfully.', 'success');
+      } else {
+        showToast('Account created. Please log in.', 'success');
+        setTimeout(() => loginM.open(), 150);
+      }
+    } catch(e){
+      showToast('Account created. Please log in.', 'success');
+      setTimeout(() => loginM.open(), 150);
+    }
+
+  } catch(error) {
+    console.error('Registration error:', error);
+    showToast('Unable to connect to the server.', 'error');
   }
 }
+
+// ---------- FORGOT / RESET PASSWORD (US3) ----------
+
+const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+const resetPasswordModal = document.getElementById('resetPasswordModal');
+const resetPasswordModalClose = document.getElementById('resetPasswordModalClose');
+const forgotEmail = document.getElementById('forgotEmail');
+const verifyEmailBtn = document.getElementById('verifyEmailBtn');
+const forgotEmailError = document.getElementById('forgotEmailError');
+const forgotPasswordStep = document.getElementById('forgotPasswordStep');
+const newPasswordStep = document.getElementById('newPasswordStep');
+const newPassword = document.getElementById('newPassword');
+const confirmPassword = document.getElementById('confirmPassword');
+const newPasswordError = document.getElementById('newPasswordError');
+const confirmPasswordError = document.getElementById('confirmPasswordError');
+const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+let resetEmail = '';
+
+forgotPasswordBtn?.addEventListener('click', () => {
+  loginM.shut();
+  resetPasswordModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  forgotPasswordStep.style.display = 'block';
+  newPasswordStep.style.display = 'none';
+  forgotEmail.value = '';
+  newPassword.value = '';
+  confirmPassword.value = '';
+  forgotEmailError.textContent = '';
+  newPasswordError.textContent = '';
+  confirmPasswordError.textContent = '';
+  forgotEmail.focus();
+});
+
+resetPasswordModalClose?.addEventListener('click', () => {
+  resetPasswordModal.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+resetPasswordModal?.addEventListener('click', (e) => {
+  if(e.target === resetPasswordModal){
+    resetPasswordModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+verifyEmailBtn?.addEventListener('click', async () => {
+  const email = forgotEmail.value.trim();
+  forgotEmailError.textContent = '';
+  if(!isValidEmail(email)){
+    forgotEmailError.textContent = 'Please enter a valid email address.';
+    return;
+  }
+
+  const originalLabel = verifyEmailBtn.textContent;
+  verifyEmailBtn.disabled = true;
+  verifyEmailBtn.textContent = 'Checking...';
+
+  try {
+    const response = await fetch(`${API_BASE}/api/users/forgot-password`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email})
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.message || 'Unable to verify email.');
+    resetEmail = email;
+    forgotPasswordStep.style.display = 'none';
+    newPasswordStep.style.display = 'block';
+    newPassword.focus();
+    showToast('Email verified. Please enter your new password.', 'success');
+  } catch(error) {
+    forgotEmailError.textContent = error.message || 'Unable to verify email.';
+  } finally {
+    verifyEmailBtn.disabled = false;
+    verifyEmailBtn.textContent = originalLabel;
+  }
+});
+
+resetPasswordBtn?.addEventListener('click', async () => {
+  const password = newPassword.value;
+  const confirm = confirmPassword.value;
+  newPasswordError.textContent = '';
+  confirmPasswordError.textContent = '';
+  let hasError = false;
+
+  if(password.length < 6){
+    newPasswordError.textContent = 'Password must be at least 6 characters.';
+    hasError = true;
+  }
+  if(password !== confirm){
+    confirmPasswordError.textContent = 'Passwords do not match.';
+    hasError = true;
+  }
+  if(hasError) return;
+
+  const originalLabel = resetPasswordBtn.textContent;
+  resetPasswordBtn.disabled = true;
+  resetPasswordBtn.textContent = 'Resetting...';
+
+  try {
+    const response = await fetch(`${API_BASE}/api/users/reset-password`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: resetEmail, newPassword: password})
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.message || 'Password reset failed.');
+    showToast(data.message || 'Password reset successfully!', 'success');
+    resetPasswordModal.classList.remove('active');
+    document.body.style.overflow = '';
+    newPassword.value = '';
+    confirmPassword.value = '';
+    resetEmail = '';
+  } catch(error) {
+    showToast(error.message || 'Password reset failed.', 'error');
+  } finally {
+    resetPasswordBtn.disabled = false;
+    resetPasswordBtn.textContent = originalLabel;
+  }
+});
 
 // ---------- filter chips + show more (3 visible by default) ----------
 function setupGrid(gridId, chipRowId, cardSelector, btnId){
@@ -4388,7 +5031,7 @@ function renderSlider(){
     const p = PLACES[i];
     const posClass = off===0 ? 'pos-0' : (off===-1 ? 'pos--1' : 'pos-1');
     const bgMarkup = (p.videoSrc && off===0)
-      ? `<div class="p-bg has-video"><video autoplay muted loop playsinline preload="auto"><source src="${p.videoSrc}" type="video/mp4"/></video></div>`
+      ? `<div class="p-bg has-video"><video autoplay muted loop playsinline preload="metadata"><source src="${p.videoSrc}" type="video/mp4"/></video></div>`
       : `<div class="p-bg" style="background:${p.grad}"></div>`;
     return `<div class="p-slide ${posClass}">
       ${bgMarkup}
@@ -4502,7 +5145,7 @@ function flashCard(selector, name){
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim().toLowerCase();
   if(!q){ searchResults.classList.remove('open'); searchResults.innerHTML=''; return; }
-  const matches = SEARCH_INDEX.filter(item => item.name.toLowerCase().includes(q) || item.loc.toLowerCase().includes(q)).slice(0,7);
+  const matches = SEARCH_INDEX.filter(item => item.name.toLowerCase().includes(q) || item.loc.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q)).slice(0,7);
   searchResults.innerHTML = matches.length === 0
     ? `<div class="sr-empty">No matches for "${searchInput.value}"</div>`
     : matches.map(m => `<div class="sr-item" data-type="${m.type}" data-name="${m.name}" data-cat="${m.cat}">
@@ -4830,7 +5473,7 @@ document.addEventListener('click', (e) => {
   const btn = document.getElementById('destShowMore');
   if(!grid || !btn) return;
 
-  const INITIAL_DEST_VISIBLE = 6;
+  const INITIAL_DEST_VISIBLE = 3;
   let expanded = false;
 
   function allCards(){
@@ -5137,9 +5780,9 @@ function renderGuides() {
                 class="btn btn-primary g-book"
                 onclick="openBooking(
                     '${displayName}',
-                    '${destinationNames[guide.destination_id] ||
-                    guide.destination_id ||
-                    "Nepal"}'
+                    '${destinationNames[guide.destination_id] || guide.destination_id || "Nepal"}',
+                    ${guide.id},
+                    ${guide.destination_id}
                 )">
                 Book guide
             </button>
@@ -5243,6 +5886,32 @@ guideShowMore.addEventListener("click", function () {
 });
 
 loadGuides("all");
-</script>
-</body>
+
+// ================================
+// US14 - Recommended Destinations
+// ================================
+
+async function loadRecommendations(interests){const grid=document.getElementById("recommendGrid"),sub=document.getElementById("recSubhead"),dest=document.getElementById("destGrid");if(!grid||!dest||!sub)return;if(!interests||!interests.length){grid.style.display="none";sub.style.display="none";dest.style.display="grid";return;}dest.style.display="none";grid.style.display="grid";sub.style.display="";try{const r=await fetch(`${API_BASE}/api/destinations/recommendations?interests=${encodeURIComponent(interests.join(","))}`);const data=await r.json();if(!r.ok)throw new Error(data.message||"Failed to load recommendations");const imgs={Pokhara:"assets/image_01.jpg",Chitwan:"assets/image_03.jpg",Ghandruk:"assets/image_07.jpg",Solukhumbu:"assets/image_02.jpg",Bandipur:"assets/image_08.jpg",Kathmandu:"assets/image_04.png",Bhaktapur:"assets/image_05.png",Lalitpur:"assets/image_04.jpg",Mustang:"assets/image_05.jpg","Rara Lake":"assets/image_01.webp",Manang:"assets/image_06.jpg",Lumbini:"assets/image_06.png",Janakpur:"assets/image_09.jpg"};grid.innerHTML=data.map(function(d){const image=imgs[d.name]||"";return `<div class="dest-card has-photo" data-destination="${d.name||""}" role="button" tabindex="0"><img class="dest-card-photo" src="${image}" alt="${d.name||""}" onerror="this.style.display='none'"><div class="dest-inner"><div class="dest-loc">${d.location||""}</div><h3>${d.name||""}</h3><div class="dest-known"><span>Known for</span>${d.attractions||""}</div><span class="dest-open">Explore places</span></div></div>`}).join("");}catch(e){console.error("Recommendation error:",e);grid.innerHTML="<p>Unable to load recommendations right now.</p>";}}document.querySelectorAll(".interest-chip input").forEach(function(cb){cb.addEventListener("change",function(){cb.closest(".interest-chip").classList.toggle("checked",cb.checked);});});document.getElementById("getRecBtn").addEventListener("click",function(){const selected=Array.from(document.querySelectorAll(".interest-chip input:checked")).map(function(x){return x.value;});loadRecommendations(selected);});</script>
+<script>let activeReviewDestinationId=null;async function loadDestinationReviews(destinationId){const list=document.getElementById("destinationReviews");if(!list)return;list.innerHTML="<div class='journey-empty'>Loading reviews...</div>";try{const response=await fetch(`${API_BASE}/api/reviews/${destinationId}`);const reviews=await response.json();if(!response.ok)throw new Error("Unable to load reviews.");if(!reviews.length){list.innerHTML="<div class='journey-empty'>No reviews yet. Be the first to review this destination.</div>";return;}list.innerHTML=reviews.map(r=>`<div class="journey-card"><div class="journey-main"><strong>${escapeJourneyHTML(r.user_name||"Tourist")}</strong><div class="journey-meta">${"&#9733;".repeat(r.rating)}${"&#9734;".repeat(5-r.rating)}</div>${r.review?`<p>${escapeJourneyHTML(r.review)}</p>`:""}</div></div>`).join("");}catch(error){console.error("Destination reviews error:",error);list.innerHTML="<div class='journey-empty'>Unable to load reviews.</div>";}}async function submitDestinationReview(){const token=getAuthToken(),rating=document.getElementById("destinationReviewRating").value,review=document.getElementById("destinationReviewText").value.trim(),message=document.getElementById("destinationReviewMessage");if(!token){message.textContent="Please log in to submit a review.";return;}if(!activeReviewDestinationId||!rating){message.textContent="Please choose a rating.";return;}try{const response=await fetch(`${API_BASE}/api/reviews`,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({destination_id:activeReviewDestinationId,rating:Number(rating),review})});const data=await response.json();if(!response.ok)throw new Error(data.message||"Failed to submit review.");message.textContent="Review submitted successfully.";document.getElementById("destinationReviewRating").value="";document.getElementById("destinationReviewText").value="";await loadDestinationReviews(activeReviewDestinationId);}catch(error){console.error("Review submission error:",error);message.textContent=error.message;}}document.getElementById("destinationReviewSubmit")?.addEventListener("click",submitDestinationReview);</script></body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

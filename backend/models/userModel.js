@@ -44,6 +44,65 @@ const updatePassword = (email, hashedPassword, callback) => {
   db.query(sql, [hashedPassword, email], callback);
 };
 
+// Get all users for admin
+const getAllUsers = (search, callback) => {
+  let sql = `
+    SELECT id, full_name, email, phone, address, created_at, role
+    FROM users
+  `;
+
+  const params = [];
+
+  if (search) {
+    sql += `
+      WHERE full_name LIKE ?
+      OR email LIKE ?
+    `;
+
+    const searchValue = `%${search}%`;
+    params.push(searchValue, searchValue);
+  }
+
+  sql += " ORDER BY id ASC";
+
+  db.query(sql, params, callback);
+};
+
+
+// Update user account by admin
+const updateUserByAdmin = (
+  id,
+  fullName,
+  email,
+  phone,
+  address,
+  role,
+  callback
+) => {
+  const sql = `
+    UPDATE users
+    SET full_name = ?,
+        email = ?,
+        phone = ?,
+        address = ?,
+        role = ?
+    WHERE id = ?
+  `;
+
+  db.query(
+    sql,
+    [fullName, email, phone, address, role, id],
+    callback
+  );
+};
+
+
+// Delete user account by admin
+const deleteUserByAdmin = (id, callback) => {
+  const sql = "DELETE FROM users WHERE id = ?";
+
+  db.query(sql, [id], callback);
+};
 
 module.exports = {
   createUser,
@@ -51,4 +110,7 @@ module.exports = {
   getUserById,
   updateUserProfile,
   updatePassword,
+  getAllUsers,
+  updateUserByAdmin,
+  deleteUserByAdmin,
 };
