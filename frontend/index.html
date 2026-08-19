@@ -60,7 +60,7 @@ button{ font-family:inherit; }
   color:var(--crimson-deep);
   margin-bottom:14px;
 }
-.eyebrow::before{ content:"·"; color:var(--marigold-deep); font-size:20px; line-height:0; }
+.eyebrow::before{ content:""; color:var(--marigold-deep); font-size:20px; line-height:0; }
 
 h1,h2,h3{ font-family:var(--disp); font-weight:700; letter-spacing:-0.01em; }
 
@@ -643,7 +643,7 @@ header.hero{
 .map-open-overlay{ position:absolute; inset:0; z-index:3; cursor:zoom-in; background:transparent; border:0; }
 .map-open-overlay:focus-visible{ outline:3px solid rgba(28,76,120,.28); outline-offset:-4px; }
 .map-open-badge{ position:absolute; right:12px; top:12px; z-index:4; pointer-events:none; display:flex; align-items:center; gap:6px; padding:7px 10px; border-radius:999px; background:rgba(255,255,255,.94); color:var(--ink); font:600 10px/1 var(--sans); box-shadow:0 5px 18px rgba(20,23,28,.14); }
-.map-destination-btn::before{ content:'•'; color:var(--crimson); font-size:18px; line-height:0; margin-right:5px; vertical-align:-2px; }
+.map-destination-btn::before{ content:''; color:var(--crimson); font-size:18px; line-height:0; margin-right:5px; vertical-align:-2px; }
 .map-destination-btn.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
 .map-destination-btn.active::before{ color:#fff; }
 .map-fullscreen{ position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; background:rgba(8,12,16,.78); backdrop-filter:blur(8px); padding:24px; }
@@ -1411,7 +1411,7 @@ img,video,iframe{max-width:100%}
 .gallery-lightbox-caption{position:absolute;left:24px;right:24px;bottom:18px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.8);font-weight:700;font-size:16px;z-index:6;pointer-events:none;}
 .gallery-lightbox-counter{position:absolute;top:18px;left:20px;padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.68);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.08em;z-index:7;backdrop-filter:blur(8px);}
 .gallery-media-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.55);color:rgba(255,255,255,.86);font-size:11px;z-index:7;backdrop-filter:blur(8px);white-space:nowrap;}
-#gallery .gallery-card:has(video)::before{content:'▶  Tap to preview';position:absolute;top:16px;right:16px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.66);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(8px);pointer-events:none;}
+#gallery .gallery-card:has(video)::before{content:\x22\\25B6  Tap to preview';position:absolute;top:16px;right:16px;z-index:4;padding:7px 11px;border-radius:999px;background:rgba(12,16,22,.66);color:#fff;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(8px);pointer-events:none;}
 @media(max-width:700px){.gallery-lightbox{padding:12px}.gallery-lightbox-inner{width:96vw;height:88vh}.gallery-lightbox-stage{border-radius:14px}.gallery-lightbox img,.gallery-lightbox video{border-radius:14px;max-height:82vh}.gallery-lightbox-close{top:-4px;right:-2px;width:40px;height:40px;font-size:24px}.gallery-lightbox-nav{width:42px;height:42px;font-size:25px}.gallery-lightbox-prev{left:8px}.gallery-lightbox-next{right:8px}.gallery-lightbox-caption{font-size:13px;left:14px;right:14px;bottom:12px}.gallery-lightbox-counter{top:10px;left:10px}.gallery-media-hint{display:none}}
 
 </style>
@@ -2722,7 +2722,7 @@ footer#contact{
 </div>
 <button aria-expanded="false" aria-label="Toggle menu" class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 <div class="nav-search">
-<input autocomplete="off" id="siteSearch" placeholder="Search places or guides…" type="text"/>
+<input autocomplete="off" id="siteSearch" placeholder="Search places or guides..."xt"/>
 <div class="search-results" id="searchResults"></div>
 </div>
 <ul class="nav-links" id="navLinks">
@@ -2758,7 +2758,7 @@ footer#contact{
 <div class="trust-row trust-row-light">
 <span><b>39</b> licensed guides</span><span class="dot"></span>
 <span><b>13</b> regions covered</span><span class="dot"></span>
-<span><b>4.7★</b> avg. rating</span>
+<span><b>4.7</b> avg. rating</span>
 </div>
 </div>
 </header>
@@ -3006,7 +3006,7 @@ footer#contact{
 
     <div class="production-levels">
       <article class="production-level">
-        <div class="production-level-number">01 · SIGNATURE</div>
+        <div class="production-level-number">01  SIGNATURE</div>
         <div class="production-level-main">
           <h3>Cinematic Expedition</h3>
           <p>For once-in-a-lifetime journeys that deserve a complete visual story, filmed across multiple days with a dedicated production crew.</p>
@@ -3018,7 +3018,7 @@ footer#contact{
       </article>
 
       <article class="production-level">
-        <div class="production-level-number">02 · STORY</div>
+        <div class="production-level-number">02  STORY</div>
         <div class="production-level-main">
           <h3>Journey Film</h3>
           <p>A dedicated filmmaker follows the best parts of your route and turns them into a polished cinematic highlight of your Nepal journey.</p>
@@ -3030,7 +3030,7 @@ footer#contact{
       </article>
 
       <article class="production-level">
-        <div class="production-level-number">03 · SOCIAL</div>
+        <div class="production-level-number">03  SOCIAL</div>
         <div class="production-level-main">
           <h3>Social Capture</h3>
           <p>Lightweight coverage for travelers who want beautiful, natural moments ready for Reels, TikTok, Stories, and personal keepsakes.</p>
@@ -3058,7 +3058,7 @@ footer#contact{
 <p>Every profile is government-licensed and reviewed by past travelers, not us.</p>
 </div>
 <div class="stat-bar">
-<span><b>39</b> active guides</span><span><b>4.7★</b> average rating</span><span><b>1,900+</b> trips led</span><span><b>13</b> regions</span>
+<span><b>39</b> active guides</span><span><b>4.7</b> average rating</span><span><b>1,900+</b> trips led</span><span><b>13</b> regions</span>
 </div>
 <div class="guide-destination-filter">
 <label for="guideDestination">Choose destination:</label>
@@ -3091,91 +3091,91 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">SG</div><div><div class="g-name">Sunita Gurung</div><div class="g-loc">Kathmandu</div></div></div>
 <span class="g-role">Heritage &amp; culture</span>
 <p class="g-desc">Specializes in Swayambhunath, Pashupatinath, Boudhanath, and Durbar Square history.</p>
-<div class="g-meta"><span class="g-price">$28<span> /day</span></span><span class="g-rating">4.8 ★ (96)</span></div>
+<div class="g-meta"><span class="g-price">$28<span> /day</span></span><span class="g-rating">4.8  (96)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Sunita Gurung','Kathmandu')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="wild">
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">KC</div><div><div class="g-name">Kiran Chaudhary</div><div class="g-loc">Chitwan</div></div></div>
 <span class="g-role">Wildlife &amp; safari</span>
 <p class="g-desc">Leads jungle safaris, canoeing, and bird-watching through Chitwan National Park.</p>
-<div class="g-meta"><span class="g-price">$32<span> /day</span></span><span class="g-rating">4.9 ★ (74)</span></div>
+<div class="g-meta"><span class="g-price">$32<span> /day</span></span><span class="g-rating">4.9  (74)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Kiran Chaudhary','Chitwan')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="pilgrim">
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">RT</div><div><div class="g-name">Ram Bahadur Thapa</div><div class="g-loc">Lumbini</div></div></div>
 <span class="g-role">Buddhist heritage &amp; pilgrimage</span>
 <p class="g-desc">Guides visits to Maya Devi Temple, the Sacred Garden, and the Peace Pagoda.</p>
-<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.8 ★ (52)</span></div>
+<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.8  (52)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Ram Bahadur Thapa','Lumbini')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="trek">
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">PS</div><div><div class="g-name">Pasang Sherpa</div><div class="g-loc">Solukhumbu</div></div></div>
 <span class="g-role">Everest region trekking</span>
 <p class="g-desc">Leads EBC and Namche Bazaar treks, with deep expertise in high-altitude acclimatization.</p>
-<div class="g-meta"><span class="g-price">$45<span> /day</span></span><span class="g-rating">4.9 ★ (128)</span></div>
+<div class="g-meta"><span class="g-price">$45<span> /day</span></span><span class="g-rating">4.9  (128)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Pasang Sherpa','Solukhumbu')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="wild">
 <div class="g-top"><div class="g-avatar" style="background:#14171C">BA</div><div><div class="g-name">Bikash Adhikari</div><div class="g-loc">Pokhara</div></div></div>
 <span class="g-role">Adventure &amp; lake</span>
 <p class="g-desc">Coordinates boating on Phewa Lake, paragliding, and hikes to Sarangkot.</p>
-<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9 ★ (154)</span></div>
+<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9  (154)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Bikash Adhikari','Pokhara')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="heritage">
 <div class="g-top"><div class="g-avatar" style="background:#14171C">AS</div><div><div class="g-name">Anita Shrestha</div><div class="g-loc">Lalitpur</div></div></div>
 <span class="g-role">Art &amp; heritage</span>
 <p class="g-desc">Expert on Patan Durbar Square, the Golden Temple, and Newari art and architecture.</p>
-<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.7 ★ (38)</span></div>
+<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.7  (38)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Anita Shrestha','Lalitpur')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="pilgrim">
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">SY</div><div><div class="g-name">Sabita Yadav</div><div class="g-loc">Janakpur</div></div></div>
 <span class="g-role">Religious &amp; cultural tours</span>
 <p class="g-desc">Specializes in Janaki Temple, Ram Mandir, and Dhanush Sagar cultural tours.</p>
-<div class="g-meta"><span class="g-price">$24<span> /day</span></span><span class="g-rating">4.8 ★ (45)</span></div>
+<div class="g-meta"><span class="g-price">$24<span> /day</span></span><span class="g-rating">4.8  (45)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Sabita Yadav','Janakpur')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="trek">
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">TG</div><div><div class="g-name">Tenzin Gurung</div><div class="g-loc">Mustang</div></div></div>
 <span class="g-role">High-altitude desert</span>
 <p class="g-desc">Leads expeditions to Lo Manthang, Muktinath Temple, and the Kali Gandaki Gorge.</p>
-<div class="g-meta"><span class="g-price">$50<span> /day</span></span><span class="g-rating">4.7 ★ (41)</span></div>
+<div class="g-meta"><span class="g-price">$50<span> /day</span></span><span class="g-rating">4.7  (41)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Tenzin Gurung','Mustang')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="heritage">
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">SM</div><div><div class="g-name">Suresh Maharjan</div><div class="g-loc">Bhaktapur</div></div></div>
 <span class="g-role">Heritage &amp; architecture</span>
 <p class="g-desc">Guides tours of Bhaktapur Durbar Square, Nyatapola Temple, and the old pottery quarters.</p>
-<div class="g-meta"><span class="g-price">$26<span> /day</span></span><span class="g-rating">4.8 ★ (61)</span></div>
+<div class="g-meta"><span class="g-price">$26<span> /day</span></span><span class="g-rating">4.8  (61)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Suresh Maharjan','Bhaktapur')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="wild">
 <div class="g-top"><div class="g-avatar" style="background:#14171C">DL</div><div><div class="g-name">Dorje Lama</div><div class="g-loc">Rara Lake</div></div></div>
 <span class="g-role">Remote trekking</span>
 <p class="g-desc">Leads boating, hiking, and camping trips around Rara National Park and Murma Top.</p>
-<div class="g-meta"><span class="g-price">$55<span> /day</span></span><span class="g-rating">4.6 ★ (19)</span></div>
+<div class="g-meta"><span class="g-price">$55<span> /day</span></span><span class="g-rating">4.6  (19)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Dorje Lama','Rara Lake')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="trek">
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">MS</div><div><div class="g-name">Mingma Sherpa</div><div class="g-loc">Manang</div></div></div>
 <span class="g-role">Annapurna circuit</span>
 <p class="g-desc">Specializes in Gangapurna Lake, Ice Lake, and Braga Monastery routes.</p>
-<div class="g-meta"><span class="g-price">$42<span> /day</span></span><span class="g-rating">4.8 ★ (63)</span></div>
+<div class="g-meta"><span class="g-price">$42<span> /day</span></span><span class="g-rating">4.8  (63)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Mingma Sherpa','Manang')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="heritage">
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">KT</div><div><div class="g-name">Kamala Tamang</div><div class="g-loc">Bandipur</div></div></div>
 <span class="g-role">Hill town culture</span>
 <p class="g-desc">Guides walks through Bandipur Bazaar, Tundikhel, and Siddha Cave.</p>
-<div class="g-meta"><span class="g-price">$23<span> /day</span></span><span class="g-rating">4.9 ★ (70)</span></div>
+<div class="g-meta"><span class="g-price">$23<span> /day</span></span><span class="g-rating">4.9  (70)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Kamala Tamang','Bandipur')">Book guide</button>
 </div>
 <div class="guide-card" data-cat="trek">
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">DG</div><div><div class="g-name">Dawa Gurung</div><div class="g-loc">Ghandruk</div></div></div>
 <span class="g-role">Village trekking</span>
 <p class="g-desc">Leads visits to the Gurung Museum and the Annapurna viewpoints above the village.</p>
-<div class="g-meta"><span class="g-price">$38<span> /day</span></span><span class="g-rating">4.8 ★ (47)</span></div>
+<div class="g-meta"><span class="g-price">$38<span> /day</span></span><span class="g-rating">4.8  (47)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Dawa Gurung','Ghandruk')">Book guide</button>
 </div>
 
@@ -3184,7 +3184,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">PS</div><div><div class="g-name">Prakash Shrestha</div><div class="g-loc">Kathmandu</div></div></div>
 <span class="g-role">Old city &amp; heritage walks</span>
 <p class="g-desc">Leads cultural walks through Ason, Indra Chowk, Kathmandu Durbar Square, and traditional inner-city courtyards.</p>
-<div class="g-meta"><span class="g-price">$31<span> /day</span></span><span class="g-rating">4.9 ★ (84)</span></div>
+<div class="g-meta"><span class="g-price">$31<span> /day</span></span><span class="g-rating">4.9  (84)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Prakash Shrestha','Kathmandu')">Book guide</button>
 </div>
 
@@ -3192,7 +3192,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">MC</div><div><div class="g-name">Maya Chaudhary</div><div class="g-loc">Chitwan</div></div></div>
 <span class="g-role">Jungle &amp; wildlife specialist</span>
 <p class="g-desc">Guides jeep safaris, riverside wildlife walks, birding trips, and Tharu village experiences around Chitwan.</p>
-<div class="g-meta"><span class="g-price">$34<span> /day</span></span><span class="g-rating">4.9 ★ (69)</span></div>
+<div class="g-meta"><span class="g-price">$34<span> /day</span></span><span class="g-rating">4.9  (69)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Maya Chaudhary','Chitwan')">Book guide</button>
 </div>
 
@@ -3200,7 +3200,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">TL</div><div><div class="g-name">Tashi Lama</div><div class="g-loc">Lumbini</div></div></div>
 <span class="g-role">Buddhist sites &amp; monasteries</span>
 <p class="g-desc">Focuses on Maya Devi Temple, the monastic zone, Ashoka Pillar, meditation sites, and Buddhist history.</p>
-<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.8 ★ (57)</span></div>
+<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.8  (57)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Tashi Lama','Lumbini')">Book guide</button>
 </div>
 
@@ -3208,7 +3208,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">NS</div><div><div class="g-name">Nima Sherpa</div><div class="g-loc">Solukhumbu</div></div></div>
 <span class="g-role">Everest trails &amp; acclimatization</span>
 <p class="g-desc">Guides high-altitude routes through Namche, Tengboche, Dingboche, Everest Base Camp, and nearby viewpoints.</p>
-<div class="g-meta"><span class="g-price">$48<span> /day</span></span><span class="g-rating">4.9 ★ (112)</span></div>
+<div class="g-meta"><span class="g-price">$48<span> /day</span></span><span class="g-rating">4.9  (112)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Nima Sherpa','Solukhumbu')">Book guide</button>
 </div>
 
@@ -3216,7 +3216,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">SG</div><div><div class="g-name">Suman Gurung</div><div class="g-loc">Pokhara</div></div></div>
 <span class="g-role">Lakeside &amp; outdoor experiences</span>
 <p class="g-desc">Plans Phewa Lake outings, Sarangkot sunrise trips, short hikes, viewpoints, caves, and relaxed Pokhara day tours.</p>
-<div class="g-meta"><span class="g-price">$29<span> /day</span></span><span class="g-rating">4.8 ★ (88)</span></div>
+<div class="g-meta"><span class="g-price">$29<span> /day</span></span><span class="g-rating">4.8  (88)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Suman Gurung','Pokhara')">Book guide</button>
 </div>
 
@@ -3224,7 +3224,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">RM</div><div><div class="g-name">Rojina Maharjan</div><div class="g-loc">Lalitpur</div></div></div>
 <span class="g-role">Newari art &amp; courtyards</span>
 <p class="g-desc">Leads walks through Patan Durbar Square, traditional bahals, artisan neighborhoods, temples, and local craft workshops.</p>
-<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9 ★ (66)</span></div>
+<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9  (66)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Rojina Maharjan','Lalitpur')">Book guide</button>
 </div>
 
@@ -3232,7 +3232,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">AJ</div><div><div class="g-name">Anil Jha</div><div class="g-loc">Janakpur</div></div></div>
 <span class="g-role">Mithila culture &amp; pilgrimage</span>
 <p class="g-desc">Guides visits to Janaki Mandir, sacred ponds, Ram Mandir, local markets, and Mithila art and cultural sites.</p>
-<div class="g-meta"><span class="g-price">$26<span> /day</span></span><span class="g-rating">4.8 ★ (51)</span></div>
+<div class="g-meta"><span class="g-price">$26<span> /day</span></span><span class="g-rating">4.8  (51)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Anil Jha','Janakpur')">Book guide</button>
 </div>
 
@@ -3240,7 +3240,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">KG</div><div><div class="g-name">Karma Gurung</div><div class="g-loc">Mustang</div></div></div>
 <span class="g-role">Mustang trails &amp; culture</span>
 <p class="g-desc">Leads routes through Kagbeni, Jomsom, Muktinath, traditional villages, and the dramatic landscapes of Mustang.</p>
-<div class="g-meta"><span class="g-price">$49<span> /day</span></span><span class="g-rating">4.8 ★ (76)</span></div>
+<div class="g-meta"><span class="g-price">$49<span> /day</span></span><span class="g-rating">4.8  (76)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Karma Gurung','Mustang')">Book guide</button>
 </div>
 
@@ -3248,7 +3248,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">NP</div><div><div class="g-name">Nisha Prajapati</div><div class="g-loc">Bhaktapur</div></div></div>
 <span class="g-role">Temples, pottery &amp; local life</span>
 <p class="g-desc">Specializes in Bhaktapur Durbar Square, Taumadhi, pottery neighborhoods, woodcarving, and traditional Newari streets.</p>
-<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.9 ★ (73)</span></div>
+<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.9  (73)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Nisha Prajapati','Bhaktapur')">Book guide</button>
 </div>
 
@@ -3256,7 +3256,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">NR</div><div><div class="g-name">Nabin Rokaya</div><div class="g-loc">Rara Lake</div></div></div>
 <span class="g-role">Rara trails &amp; nature</span>
 <p class="g-desc">Guides lakeside walks, Murma Top hikes, village visits, camping routes, and nature-focused trips around Rara.</p>
-<div class="g-meta"><span class="g-price">$52<span> /day</span></span><span class="g-rating">4.8 ★ (32)</span></div>
+<div class="g-meta"><span class="g-price">$52<span> /day</span></span><span class="g-rating">4.8  (32)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Nabin Rokaya','Rara Lake')">Book guide</button>
 </div>
 
@@ -3264,7 +3264,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">PL</div><div><div class="g-name">Pemba Lama</div><div class="g-loc">Manang</div></div></div>
 <span class="g-role">High-altitude Annapurna routes</span>
 <p class="g-desc">Guides acclimatization hikes, Braga Monastery, Gangapurna Lake, Ice Lake, and sections of the Annapurna Circuit.</p>
-<div class="g-meta"><span class="g-price">$44<span> /day</span></span><span class="g-rating">4.9 ★ (59)</span></div>
+<div class="g-meta"><span class="g-price">$44<span> /day</span></span><span class="g-rating">4.9  (59)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Pemba Lama','Manang')">Book guide</button>
 </div>
 
@@ -3272,7 +3272,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">RT</div><div><div class="g-name">Ramesh Thapa</div><div class="g-loc">Bandipur</div></div></div>
 <span class="g-role">Hill town walks &amp; viewpoints</span>
 <p class="g-desc">Guides heritage walks through Bandipur Bazaar, nearby viewpoints, village trails, and cultural stops around the hill town.</p>
-<div class="g-meta"><span class="g-price">$24<span> /day</span></span><span class="g-rating">4.8 ★ (54)</span></div>
+<div class="g-meta"><span class="g-price">$24<span> /day</span></span><span class="g-rating">4.8  (54)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Ramesh Thapa','Bandipur')">Book guide</button>
 </div>
 
@@ -3280,7 +3280,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">SG</div><div><div class="g-name">Sita Gurung</div><div class="g-loc">Ghandruk</div></div></div>
 <span class="g-role">Village walks &amp; Annapurna views</span>
 <p class="g-desc">Leads village walks, Gurung cultural visits, short hikes, homestay experiences, and Annapurna viewpoint routes.</p>
-<div class="g-meta"><span class="g-price">$36<span> /day</span></span><span class="g-rating">4.9 ★ (62)</span></div>
+<div class="g-meta"><span class="g-price">$36<span> /day</span></span><span class="g-rating">4.9  (62)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Sita Gurung','Ghandruk')">Book guide</button>
 </div>
 
@@ -3290,7 +3290,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">AR</div><div><div class="g-name">Asha Rai</div><div class="g-loc">Kathmandu</div></div></div>
 <span class="g-role">Temples &amp; cultural neighborhoods</span>
 <p class="g-desc">Leads heritage walks through Boudhanath, Pashupatinath, Swayambhunath, local markets, and Kathmandu's historic neighborhoods.</p>
-<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9 ★ (77)</span></div>
+<div class="g-meta"><span class="g-price">$30<span> /day</span></span><span class="g-rating">4.9  (77)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Asha Rai','Kathmandu')">Book guide</button>
 </div>
 
@@ -3298,7 +3298,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">RB</div><div><div class="g-name">Roshan Bhandari</div><div class="g-loc">Pokhara</div></div></div>
 <span class="g-role">Nature &amp; adventure guide</span>
 <p class="g-desc">Guides lakeside experiences, Sarangkot viewpoints, caves, waterfalls, short hikes, and outdoor activities around Pokhara.</p>
-<div class="g-meta"><span class="g-price">$32<span> /day</span></span><span class="g-rating">4.8 ★ (71)</span></div>
+<div class="g-meta"><span class="g-price">$32<span> /day</span></span><span class="g-rating">4.8  (71)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Roshan Bhandari','Pokhara')">Book guide</button>
 </div>
 
@@ -3306,7 +3306,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">ST</div><div><div class="g-name">Sanjay Tharu</div><div class="g-loc">Chitwan</div></div></div>
 <span class="g-role">Safari &amp; Tharu culture</span>
 <p class="g-desc">Leads jungle safaris, canoe trips, birdwatching, riverside walks, and cultural visits in communities around Chitwan National Park.</p>
-<div class="g-meta"><span class="g-price">$35<span> /day</span></span><span class="g-rating">4.9 ★ (81)</span></div>
+<div class="g-meta"><span class="g-price">$35<span> /day</span></span><span class="g-rating">4.9  (81)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Sanjay Tharu','Chitwan')">Book guide</button>
 </div>
 
@@ -3314,7 +3314,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">BG</div><div><div class="g-name">Bina Gurung</div><div class="g-loc">Ghandruk</div></div></div>
 <span class="g-role">Gurung culture &amp; village trails</span>
 <p class="g-desc">Guides village walks, cultural visits, homestay experiences, and short routes with views toward Annapurna South and Machhapuchhre.</p>
-<div class="g-meta"><span class="g-price">$37<span> /day</span></span><span class="g-rating">4.9 ★ (68)</span></div>
+<div class="g-meta"><span class="g-price">$37<span> /day</span></span><span class="g-rating">4.9  (68)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Bina Gurung','Ghandruk')">Book guide</button>
 </div>
 
@@ -3322,7 +3322,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">LS</div><div><div class="g-name">Lhakpa Sherpa</div><div class="g-loc">Solukhumbu</div></div></div>
 <span class="g-role">Everest region specialist</span>
 <p class="g-desc">Leads trekking routes through Namche Bazaar, Tengboche, Dingboche, Everest Base Camp, and high Himalayan viewpoints.</p>
-<div class="g-meta"><span class="g-price">$51<span> /day</span></span><span class="g-rating">4.9 ★ (105)</span></div>
+<div class="g-meta"><span class="g-price">$51<span> /day</span></span><span class="g-rating">4.9  (105)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Lhakpa Sherpa','Solukhumbu')">Book guide</button>
 </div>
 
@@ -3330,7 +3330,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">BT</div><div><div class="g-name">Bimala Thapa</div><div class="g-loc">Bandipur</div></div></div>
 <span class="g-role">Heritage streets &amp; village walks</span>
 <p class="g-desc">Guides Bandipur Bazaar, Tundikhel viewpoints, nearby village trails, cultural neighborhoods, and local heritage sites.</p>
-<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.8 ★ (49)</span></div>
+<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.8  (49)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Bimala Thapa','Bandipur')">Book guide</button>
 </div>
 
@@ -3338,7 +3338,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">RK</div><div><div class="g-name">Raj Kumar Prajapati</div><div class="g-loc">Bhaktapur</div></div></div>
 <span class="g-role">Newari heritage &amp; craft</span>
 <p class="g-desc">Leads walks through Durbar Square, Taumadhi, pottery areas, traditional courtyards, temples, and artisan neighborhoods.</p>
-<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.9 ★ (64)</span></div>
+<div class="g-meta"><span class="g-price">$27<span> /day</span></span><span class="g-rating">4.9  (64)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Raj Kumar Prajapati','Bhaktapur')">Book guide</button>
 </div>
 
@@ -3346,7 +3346,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">SS</div><div><div class="g-name">Sneha Shakya</div><div class="g-loc">Lalitpur</div></div></div>
 <span class="g-role">Patan heritage &amp; traditional arts</span>
 <p class="g-desc">Guides Patan Durbar Square, Buddhist courtyards, metal craft neighborhoods, temples, and traditional Newari art spaces.</p>
-<div class="g-meta"><span class="g-price">$29<span> /day</span></span><span class="g-rating">4.9 ★ (72)</span></div>
+<div class="g-meta"><span class="g-price">$29<span> /day</span></span><span class="g-rating">4.9  (72)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Sneha Shakya','Lalitpur')">Book guide</button>
 </div>
 
@@ -3354,7 +3354,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">DT</div><div><div class="g-name">Dorje Tamang</div><div class="g-loc">Mustang</div></div></div>
 <span class="g-role">High-altitude culture &amp; trekking</span>
 <p class="g-desc">Guides routes through Jomsom, Kagbeni, Muktinath, traditional settlements, monasteries, and Mustang's arid mountain landscapes.</p>
-<div class="g-meta"><span class="g-price">$48<span> /day</span></span><span class="g-rating">4.8 ★ (61)</span></div>
+<div class="g-meta"><span class="g-price">$48<span> /day</span></span><span class="g-rating">4.8  (61)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Dorje Tamang','Mustang')">Book guide</button>
 </div>
 
@@ -3362,7 +3362,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#3E8F6C">NG</div><div><div class="g-name">Norbu Gurung</div><div class="g-loc">Manang</div></div></div>
 <span class="g-role">Annapurna &amp; alpine lakes</span>
 <p class="g-desc">Guides acclimatization hikes, Gangapurna Lake, Braga Monastery, Ice Lake, and high-altitude sections of the Annapurna Circuit.</p>
-<div class="g-meta"><span class="g-price">$45<span> /day</span></span><span class="g-rating">4.9 ★ (70)</span></div>
+<div class="g-meta"><span class="g-price">$45<span> /day</span></span><span class="g-rating">4.9  (70)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Norbu Gurung','Manang')">Book guide</button>
 </div>
 
@@ -3370,7 +3370,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#14171C">AK</div><div><div class="g-name">Ananda Kumar</div><div class="g-loc">Lumbini</div></div></div>
 <span class="g-role">Pilgrimage &amp; Buddhist history</span>
 <p class="g-desc">Guides Maya Devi Temple, Ashoka Pillar, the Sacred Garden, international monasteries, and peaceful pilgrimage routes around Lumbini.</p>
-<div class="g-meta"><span class="g-price">$28<span> /day</span></span><span class="g-rating">4.9 ★ (63)</span></div>
+<div class="g-meta"><span class="g-price">$28<span> /day</span></span><span class="g-rating">4.9  (63)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Ananda Kumar','Lumbini')">Book guide</button>
 </div>
 
@@ -3378,7 +3378,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#F0A63F">KB</div><div><div class="g-name">Kamal Budha</div><div class="g-loc">Rara Lake</div></div></div>
 <span class="g-role">Remote lake &amp; mountain trails</span>
 <p class="g-desc">Guides lakeside walks, Murma Top, forest trails, nearby villages, camping routes, and nature-focused trips around Rara National Park.</p>
-<div class="g-meta"><span class="g-price">$53<span> /day</span></span><span class="g-rating">4.8 ★ (37)</span></div>
+<div class="g-meta"><span class="g-price">$53<span> /day</span></span><span class="g-rating">4.8  (37)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Kamal Budha','Rara Lake')">Book guide</button>
 </div>
 
@@ -3386,7 +3386,7 @@ footer#contact{
 <div class="g-top"><div class="g-avatar" style="background:#1C4C78">MK</div><div><div class="g-name">Meena Karn</div><div class="g-loc">Janakpur</div></div></div>
 <span class="g-role">Mithila heritage &amp; sacred sites</span>
 <p class="g-desc">Guides Janaki Mandir, Ram Mandir, sacred ponds, Mithila art centers, markets, and cultural neighborhoods across Janakpur.</p>
-<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.9 ★ (58)</span></div>
+<div class="g-meta"><span class="g-price">$25<span> /day</span></span><span class="g-rating">4.9  (58)</span></div>
 <button class="btn btn-primary g-book" onclick="openBooking('Meena Karn','Janakpur')">Book guide</button>
 </div>
 
@@ -3479,9 +3479,9 @@ footer#contact{
     <div class="field">
       <label for="productionPackage">Coverage level</label>
       <select id="productionPackage">
-        <option value="Cinematic Expedition">Cinematic Expedition · Signature</option>
-        <option value="Journey Film">Journey Film · Story</option>
-        <option value="Social Capture">Social Capture · Social</option>
+        <option value="Cinematic Expedition">Cinematic Expedition  Signature</option>
+        <option value="Journey Film">Journey Film  Story</option>
+        <option value="Social Capture">Social Capture  Social</option>
         <option value="Custom Production">Custom Production</option>
       </select>
     </div>
@@ -3593,11 +3593,11 @@ footer#contact{
 <p class="rating-trip-meta" id="ratingTripMeta"></p>
 <label class="rating-label">Your rating</label>
 <div aria-label="Rate guide from 1 to 5 stars" class="star-rating" id="starRating" role="radiogroup">
-<button aria-label="1 star" class="star-btn" data-rating="1" type="button">★</button>
-<button aria-label="2 stars" class="star-btn" data-rating="2" type="button">★</button>
-<button aria-label="3 stars" class="star-btn" data-rating="3" type="button">★</button>
-<button aria-label="4 stars" class="star-btn" data-rating="4" type="button">★</button>
-<button aria-label="5 stars" class="star-btn" data-rating="5" type="button">★</button>
+<button aria-label="1 star" class="star-btn" data-rating="1" type="button"></button>
+<button aria-label="2 stars" class="star-btn" data-rating="2" type="button"></button>
+<button aria-label="3 stars" class="star-btn" data-rating="3" type="button"></button>
+<button aria-label="4 stars" class="star-btn" data-rating="4" type="button"></button>
+<button aria-label="5 stars" class="star-btn" data-rating="5" type="button"></button>
 </div>
 <label class="rating-label" for="ratingReview">Share a few words <span style="font-weight:500;color:var(--ink-mute)">(optional)</span></label>
 <textarea class="rating-review" id="ratingReview" maxlength="500" placeholder="What was your experience like with this guide?"></textarea>
@@ -4263,7 +4263,7 @@ function createFavoriteButton(card){
   button.className = 'favorite-btn';
   button.dataset.destinationId = destinationId;
   button.setAttribute('aria-label', `Add ${name} to favorites`);
-  button.innerHTML = '♡';
+  button.innerHTML = '&#9825;';
 
   button.addEventListener('click', async e => {
     e.preventDefault();
@@ -4335,7 +4335,7 @@ function createFavoriteButton(card){
 
 function updateFavoriteButton(button, active){
   button.classList.toggle('active', active);
-  button.innerHTML = active ? '♥' : '♡';
+  button.innerHTML = active ? '&#9829;' : '&#9825;';
 
   const name = button.closest('.dest-card')?.dataset.destination || 'destination';
   button.setAttribute(
@@ -4479,7 +4479,7 @@ if(selected.value === 'eSewa'){
     Please enter your transaction/reference number below.
   `;
 }
-
+}
 document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
   input.addEventListener('change', updatePaymentInstructions);
 });
@@ -4638,7 +4638,7 @@ function renderJourneys(){
       <div class="journey-main">
         <span class="journey-status ${statusClass}">${statusText}</span>
         <h3>${escapeJourneyHTML(j.guideName)}</h3>
-        <div class="journey-meta">${escapeJourneyHTML(j.location)} · ${prettyDate(j.startDate)} · ${j.groupSize} traveler${Number(j.groupSize)===1?'':'s'}</div>
+        <div class="journey-meta">${escapeJourneyHTML(j.location)}  ${prettyDate(j.startDate)}  ${j.groupSize} traveler${Number(j.groupSize)===1?'':'s'}</div>
         ${ratingSummary}
       </div>
       <div class="journey-action">${action}</div>
@@ -4658,7 +4658,7 @@ function openRating(journeyId){
   activeRatingJourneyId = journeyId;
   selectedGuideRating = 0;
   document.getElementById('ratingGuideName').textContent = `Rate ${journey.guideName}`;
-  document.getElementById('ratingTripMeta').textContent = `${journey.location} · Journey on ${prettyDate(journey.startDate)}`;
+  document.getElementById('ratingTripMeta').textContent = `${journey.location}  Journey on ${prettyDate(journey.startDate)}`;
   document.getElementById('ratingReview').value = '';
   document.getElementById('ratingError').style.display = 'none';
   document.querySelectorAll('#starRating .star-btn').forEach(star => star.classList.remove('active'));
@@ -5248,7 +5248,7 @@ function renderSide(day){
   }
   entries.forEach(e => {
     const row = document.createElement('div'); row.className = 'evt';
-    row.innerHTML = `<span class="evt-dot" style="background:${e.c}"></span><div><div class="evt-name">${e.n}</div><div class="evt-date">${e.date} · ${e.wl}</div><div class="evt-desc">${e.d}</div></div>`;
+    row.innerHTML = `<span class="evt-dot" style="background:${e.c}"></span><div><div class="evt-name">${e.n}</div><div class="evt-date">${e.date}  ${e.wl}</div><div class="evt-desc">${e.d}</div></div>`;
     list.appendChild(row);
   });
   const note = document.querySelector('.cal-note');
@@ -5286,14 +5286,14 @@ document.getElementById('calNext').addEventListener('click', () => {
 
 // ---------- featured places slider ----------
 const PLACES = [
-  {tag:'HERITAGE', title:'Patan From Above   Temples Inside the Living City', sub:'Old courtyards and temple roofs woven into the rhythm of Patan.', glyph:'🛕', grad:'linear-gradient(150deg,#8a4a2a,#40200f)', cat:'heritage', videoSrc:'assets/video_05.mp4'},
-  {tag:'LAKESIDE NEPAL', title:'A Quiet Lake   Folded Between Green Hills', sub:'Still water, forested ridges, and clouds drifting through the valley.', glyph:'🏞️', grad:'linear-gradient(150deg,#2c6a4f,#123020)', cat:'wild', videoSrc:'assets/video_17.mp4'},
-  {tag:'SACRED NEPAL', title:'Boudhanath   Beneath Prayer Flags and Watchful Eyes', sub:'Pilgrims circle the stupa as everyday Kathmandu moves around it.', glyph:'🪷', grad:'linear-gradient(150deg,#a8586c,#4a2530)', cat:'pilgrim', videoSrc:'assets/video_07.mp4'},
-  {tag:'HIMALAYA', title:'Snow Peaks   Breaking Through the Clouds', sub:'High Himalayan summits rising above glaciers, valleys, and moving mist.', glyph:'🏔️', grad:'linear-gradient(150deg,#1C4C78,#0d2740)', cat:'trek', videoSrc:'assets/video_04.mp4'},
+  {tag:'HERITAGE', title:'Patan From Above   Temples Inside the Living City', sub:'Old courtyards and temple roofs woven into the rhythm of Patan.', glyph:'ðŸ›•', grad:'linear-gradient(150deg,#8a4a2a,#40200f)', cat:'heritage', videoSrc:'assets/video_05.mp4'},
+  {tag:'LAKESIDE NEPAL', title:'A Quiet Lake   Folded Between Green Hills', sub:'Still water, forested ridges, and clouds drifting through the valley.', glyph:'ðŸžï¸', grad:'linear-gradient(150deg,#2c6a4f,#123020)', cat:'wild', videoSrc:'assets/video_17.mp4'},
+  {tag:'SACRED NEPAL', title:'Boudhanath   Beneath Prayer Flags and Watchful Eyes', sub:'Pilgrims circle the stupa as everyday Kathmandu moves around it.', glyph:'ðŸª·', grad:'linear-gradient(150deg,#a8586c,#4a2530)', cat:'pilgrim', videoSrc:'assets/video_07.mp4'},
+  {tag:'HIMALAYA', title:'Snow Peaks   Breaking Through the Clouds', sub:'High Himalayan summits rising above glaciers, valleys, and moving mist.', glyph:'ðŸ”ï¸', grad:'linear-gradient(150deg,#1C4C78,#0d2740)', cat:'trek', videoSrc:'assets/video_04.mp4'},
   {tag:'WILDLIFE', title:'Into the Jungle   Where the Wild Still Roams', sub:'Elephants, forest trails, and safari moments deep inside Nepal’s lowlands.', glyph:'🐘', grad:'linear-gradient(150deg,#3E8F6C,#163a2b)', cat:'wild', videoSrc:'assets/video_03.mp4'},
-  {tag:'MOUNTAIN VALLEY', title:'Green Villages   Beneath Monsoon Clouds', sub:'Terraced fields and quiet settlements tucked between forested hills.', glyph:'🛕', grad:'linear-gradient(150deg,#b4802a,#4d3510)', cat:'trek', videoSrc:'assets/video_18.mp4'},
-  {tag:'VILLAGE LIFE', title:'Everyday Nepal   Along a Himalayan Village Lane', sub:'Children, stone homes, and the small moments that make mountain life feel alive.', glyph:'🏜️', grad:'linear-gradient(150deg,#8a6a3a,#3d2e18)', cat:'trek', videoSrc:'assets/video_10.mp4'},
-  {tag:'HIGHLAND LAKE', title:'Lakeside Settlements   Wrapped in Green Hills', sub:'Homes, water, and mountain ridges seen from high above the valley.', glyph:'💧', grad:'linear-gradient(150deg,#1c5f78,#0d2c38)', cat:'wild', videoSrc:'assets/video_19.mp4'}
+  {tag:'MOUNTAIN VALLEY', title:'Green Villages   Beneath Monsoon Clouds', sub:'Terraced fields and quiet settlements tucked between forested hills.', glyph:'ðŸ›•', grad:'linear-gradient(150deg,#b4802a,#4d3510)', cat:'trek', videoSrc:'assets/video_18.mp4'},
+  {tag:'VILLAGE LIFE', title:'Everyday Nepal   Along a Himalayan Village Lane', sub:'Children, stone homes, and the small moments that make mountain life feel alive.', glyph:'ðŸœï¸', grad:'linear-gradient(150deg,#8a6a3a,#3d2e18)', cat:'trek', videoSrc:'assets/video_10.mp4'},
+  {tag:'HIGHLAND LAKE', title:'Lakeside Settlements   Wrapped in Green Hills', sub:'Homes, water, and mountain ridges seen from high above the valley.', glyph:'ðŸ’§', grad:'linear-gradient(150deg,#1c5f78,#0d2c38)', cat:'wild', videoSrc:'assets/video_19.mp4'}
 ];
 let pIdx = 0;
 function renderSlider(){
@@ -6049,7 +6049,7 @@ function renderGuides() {
                 </span>
 
                 <span class="g-rating">
-                    ${guide.rating || "0.0"} ★ (${extra.reviews})
+                    ${guide.rating || "0.0"}  (${extra.reviews})
                 </span>
 
             </div>
@@ -6200,24 +6200,3 @@ document.getElementById("contactInquiryForm")?.addEventListener("submit",async f
 });
 </script></body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
