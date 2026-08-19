@@ -279,7 +279,7 @@ button {
 }
 
 #destinationForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}#destinationForm input,#destinationForm textarea{width:100%;padding:11px 14px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper);color:var(--ink);font:inherit;font-size:13px;outline:none}#destinationForm textarea{min-height:92px;resize:vertical;grid-column:1/-1}#destinationForm input:focus,#destinationForm textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,76,120,.1)}#destinationForm label{grid-column:1/-1;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:-7px}#destinationImagePreview{grid-column:1/-1;max-width:240px}#destinationForm button{justify-self:start}@media(max-width:700px){#destinationForm{grid-template-columns:1fr}}
-#guideAdminForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}#guideAdminForm input,#guideAdminForm textarea,#guideAdminForm select{width:100%;padding:11px 14px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper);color:var(--ink);font:inherit;font-size:13px;outline:none;box-sizing:border-box}#guideAdminForm textarea{min-height:92px;resize:vertical;grid-column:1/-1}#guideAdminForm input:focus,#guideAdminForm textarea:focus,#guideAdminForm select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,76,120,.1)}#guideAdminForm button{justify-self:start}@media(max-width:700px){#guideAdminForm{grid-template-columns:1fr}}
+#guideAdminForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}#guideAdminForm input,#guideAdminForm textarea,#guideAdminForm select{width:100%;padding:11px 14px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper);color:var(--ink);font:inherit;font-size:13px;outline:none;box-sizing:border-box}#guideAdminForm textarea{min-height:92px;resize:vertical;grid-column:1/-1}#guideAdminForm input:focus,#guideAdminForm textarea:focus,#guideAdminForm select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,76,120,.1)}#guideAdminForm button{justify-self:start}@media(max-width:700px){#guideAdminForm{grid-template-columns:1fr}}#cinematicForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:24px}#cinematicForm input,#cinematicForm textarea,#cinematicForm select{width:100%;padding:11px 14px;border:1px solid var(--line-strong);border-radius:var(--r-md);background:var(--paper);color:var(--ink);font:inherit;font-size:13px;outline:none;box-sizing:border-box}#cinematicForm textarea{min-height:92px;resize:vertical;grid-column:1/-1}#cinematicForm input:focus,#cinematicForm textarea:focus,#cinematicForm select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,76,120,.1)}#cinematicForm label{grid-column:1/-1;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:-7px}#cinematicImagePreview{grid-column:1/-1;max-width:240px}#cinematicForm button{justify-self:start}@media(max-width:700px){#cinematicForm{grid-template-columns:1fr}}
 /* TABLE */
 
 .table-wrap {
@@ -351,6 +351,38 @@ td:first-child {
 .role-user {
     background: rgba(62,143,108,.12);
     color: var(--green);
+}
+
+.status-badge {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: var(--r-pill);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-new {
+    background: rgba(28,76,120,.14);
+    color: var(--blue);
+}
+
+.status-contacted {
+    background: rgba(240,166,63,.18);
+    color: var(--marigold-deep);
+}
+
+.status-closed {
+    background: rgba(62,143,108,.12);
+    color: var(--green);
+}
+
+.td-brief {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ACTION BUTTONS */
@@ -513,7 +545,7 @@ td:first-child {
 
     </div>
 
-<div class="dashboard-card" id="destinationManagement"><div class="top-bar"><h2>Destination Management</h2><button class="refresh-btn" onclick="loadDestinations()">Refresh</button></div><div id="destinationMessage" class="message"></div><form id="destinationForm"><input type="hidden" id="destinationId"><input id="destinationName" placeholder="Destination name" required><input id="destinationLocation" placeholder="Location"><textarea id="destinationDescription" placeholder="Description"></textarea><label for="destinationImage">Image</label><input id="destinationImage" placeholder="Image path e.g. images/pokhara.jpg"><img id="destinationImagePreview" style="display:none;width:180px;height:110px;object-fit:cover;border-radius:10px;margin:8px 0 14px;"><input id="destinationAttractions" placeholder="Attractions, comma separated"><button class="search-btn" type="submit">Save Destination</button><button class="refresh-btn" type="button" onclick="resetDestinationForm()">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Location</th><th>Image</th><th>Actions</th></tr></thead><tbody id="destinationsTable"><tr><td colspan="5">Loading destinations...</td></tr></tbody></table></div></div><div class="dashboard-card" id="guideManagement"><div class="top-bar"><h2>Guide Management</h2><button class="refresh-btn" type="button">Refresh</button></div><div id="guideAdminMessage" class="message"></div><form id="guideAdminForm"><input type="hidden" id="guideAdminId"><input id="guideAdminName" placeholder="Guide name" required><input id="guideAdminDestination" type="number" min="1" placeholder="Destination ID" required><input id="guideAdminRole" placeholder="Role"><input id="guideAdminExpertise" placeholder="Expertise"><input id="guideAdminLanguages" placeholder="Languages"><input id="guideAdminSpecialties" placeholder="Specialties"><input id="guideAdminContact" placeholder="Contact information"><input id="guideAdminImage" placeholder="Profile image path e.g. images/guide.jpg"><textarea id="guideAdminBio" placeholder="Bio"></textarea><button class="search-btn" type="submit">Save Guide Profile</button><button class="refresh-btn" type="button">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Destination</th><th>Role</th><th>Languages</th><th>Specialties</th><th>Actions</th></tr></thead><tbody id="guidesAdminTable"><tr><td colspan="7">Loading guides...</td></tr></tbody></table></div></div></main>
+<div class="dashboard-card" id="destinationManagement"><div class="top-bar"><h2>Destination Management</h2><button class="refresh-btn" onclick="loadDestinations()">Refresh</button></div><div id="destinationMessage" class="message"></div><form id="destinationForm"><input type="hidden" id="destinationId"><input id="destinationName" placeholder="Destination name" required><input id="destinationLocation" placeholder="Location"><textarea id="destinationDescription" placeholder="Description"></textarea><label for="destinationImage">Image</label><input id="destinationImage" placeholder="Image path e.g. images/pokhara.jpg"><img id="destinationImagePreview" style="display:none;width:180px;height:110px;object-fit:cover;border-radius:10px;margin:8px 0 14px;"><input id="destinationAttractions" placeholder="Attractions, comma separated"><button class="search-btn" type="submit">Save Destination</button><button class="refresh-btn" type="button" onclick="resetDestinationForm()">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Location</th><th>Image</th><th>Actions</th></tr></thead><tbody id="destinationsTable"><tr><td colspan="5">Loading destinations...</td></tr></tbody></table></div></div><div class="dashboard-card" id="guideManagement"><div class="top-bar"><h2>Guide Management</h2><button class="refresh-btn" type="button">Refresh</button></div><div id="guideAdminMessage" class="message"></div><form id="guideAdminForm"><input type="hidden" id="guideAdminId"><input id="guideAdminName" placeholder="Guide name" required><input id="guideAdminDestination" type="number" min="1" placeholder="Destination ID" required><input id="guideAdminRole" placeholder="Role"><input id="guideAdminExpertise" placeholder="Expertise"><input id="guideAdminLanguages" placeholder="Languages"><input id="guideAdminSpecialties" placeholder="Specialties"><input id="guideAdminContact" placeholder="Contact information"><input id="guideAdminImage" placeholder="Profile image path e.g. images/guide.jpg"><textarea id="guideAdminBio" placeholder="Bio"></textarea><button class="search-btn" type="submit">Save Guide Profile</button><button class="refresh-btn" type="button">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Destination</th><th>Role</th><th>Languages</th><th>Specialties</th><th>Actions</th></tr></thead><tbody id="guidesAdminTable"><tr><td colspan="7">Loading guides...</td></tr></tbody></table></div></div><div class="dashboard-card" id="cinematicManagement"><div class="top-bar"><h2>Cinematic Expedition Management</h2><button class="refresh-btn" type="button" onclick="loadExpeditions()">Refresh</button></div><div id="cinematicMessage" class="message"></div><form id="cinematicForm"><input type="hidden" id="cinematicId"><input id="cinematicTitle" placeholder="Title" required><select id="cinematicCategory" required><option value="">Select category</option><option value="cinematic_expedition">Cinematic Expedition</option><option value="journey_film">Journey Film</option><option value="social_capture">Social Capture</option></select><input id="cinematicTagline" placeholder="Tagline"><textarea id="cinematicDescription" placeholder="Description"></textarea><input id="cinematicFeatures" placeholder="Features, comma separated"><label for="cinematicImage">Image</label><input id="cinematicImage" placeholder="Image path e.g. images/cinematic.jpg"><img id="cinematicImagePreview" style="display:none;width:180px;height:110px;object-fit:cover;border-radius:10px;margin:8px 0 14px;"><input id="cinematicPrice" placeholder="Price range"><select id="cinematicStatus"><option value="active">Active</option><option value="inactive">Inactive</option></select><button class="search-btn" type="submit">Save Expedition</button><button class="refresh-btn" type="button" onclick="resetCinematicForm()">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Tagline</th><th>Features</th><th>Status</th><th>Actions</th></tr></thead><tbody id="expeditionsTable"><tr><td colspan="7">Loading expeditions...</td></tr></tbody></table></div></div><div class="dashboard-card" id="inquiriesManagement"><div class="top-bar"><h2>Production Inquiries</h2><button class="refresh-btn" type="button" onclick="loadInquiries()">Refresh</button></div><div id="inquiriesMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Package</th><th>Name</th><th>Email</th><th>Destination</th><th>Travel Date</th><th>Brief</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inquiriesTable"><tr><td colspan="9">Loading inquiries...</td></tr></tbody></table></div></div></main>
 
 <script>if(!localStorage.getItem("adminToken")){window.location.href="/admin/login.html";}</script><script>
 
@@ -561,6 +593,9 @@ async function loadUsers() {
 
         document.getElementById("message").textContent =
             error.message;
+
+        document.getElementById("usersTable").innerHTML =
+            `<tr><td colspan="7">Failed to load users.</td></tr>`;
     }
 }
 
@@ -753,8 +788,182 @@ function resetDestinationForm(){document.getElementById("destinationForm").reset
 window.editDestination=function(id){const x=(window.adminDestinations||[]).find(v=>v.id==id);if(!x)return;document.getElementById("destinationId").value=x.id;document.getElementById("destinationName").value=x.name;document.getElementById("destinationLocation").value=x.location||"";document.getElementById("destinationDescription").value=x.description||"";document.getElementById("destinationImage").value=x.image||"";document.getElementById("destinationAttractions").value=x.attractions||""}
 async function deleteDestination(id){if(!confirm("Delete this destination?"))return;await fetch(`${API_URL}/destinations/${id}`,{method:"DELETE",headers:{Authorization:`Bearer ${token}`}});loadDestinations()}
 document.getElementById("destinationForm").addEventListener("submit",async e=>{e.preventDefault();const id=destinationId.value;const body={name:destinationName.value,location:destinationLocation.value,description:destinationDescription.value,image:destinationImage.value,attractions:destinationAttractions.value};await fetch(`${API_URL}/destinations${id?"/"+id:""}`,{method:id?"PUT":"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(body)});resetDestinationForm();loadDestinations()});
-document.getElementById("destinationsTable").addEventListener("click",e=>{const b=e.target.closest(".search-btn");if(b)window.editDestination(Number(b.dataset.id))});document.getElementById("destinationsTable").onclick=function(e){const b=e.target.closest("button");if(!b)return;const id=Number(b.dataset.id);if(b.textContent.trim()==="Edit")window.editDestination(id);if(b.textContent.trim()==="Delete")window.deleteDestination(id)};document.getElementById("destinationImage").addEventListener("input",e=>{const p=document.getElementById("destinationImagePreview");p.src=e.target.value.startsWith("images/")?"/"+e.target.value:e.target.value;p.style.display=e.target.value?"block":"none"});loadDestinations();async function loadAdminGuides(){const table=document.getElementById("guidesAdminTable"),msg=document.getElementById("guideAdminMessage");try{const r=await fetch(`${API_URL}/guides`,{headers:{Authorization:`Bearer ${token}`}});const d=await r.json();if(!r.ok)throw new Error(d.message||"Failed to load guides");window.adminGuides=d;table.innerHTML=d.map(g=>`<tr><td>${g.id}</td><td>${g.name||""}</td><td>${g.destination_id||""}</td><td>${g.role||""}</td><td>${g.languages||""}</td><td>${g.specialties||""}</td><td><button class="search-btn" type="button" onclick="editAdminGuide(${g.id})">Edit</button> <button class="refresh-btn" type="button" onclick="deleteAdminGuide(${g.id})">Delete</button></td></tr>`).join("")||`<tr><td colspan="7">No guides found.</td></tr>`}catch(e){msg.textContent=e.message}};function resetGuideAdminForm(){document.getElementById("guideAdminForm").reset();document.getElementById("guideAdminId").value=""}function editAdminGuide(id){const g=(window.adminGuides||[]).find(x=>x.id==id);if(!g)return;guideAdminId.value=g.id;guideAdminName.value=g.name||"";guideAdminDestination.value=g.destination_id||"";guideAdminRole.value=g.role||"";guideAdminExpertise.value=g.expertise||"";guideAdminLanguages.value=g.languages||"";guideAdminSpecialties.value=g.specialties||"";guideAdminContact.value=g.contact||"";guideAdminImage.value=g.profile_image||"";guideAdminBio.value=g.bio||"";document.getElementById("guideAdminForm").scrollIntoView({behavior:"smooth",block:"center"})}async function deleteAdminGuide(id){if(!confirm("Delete this guide profile?"))return;try{const r=await fetch(`${API_URL}/guides/${id}`,{method:"DELETE",headers:{Authorization:`Bearer ${token}`}});const d=await r.json();if(!r.ok)throw new Error(d.message||"Delete failed");document.getElementById("guideAdminMessage").textContent=d.message||"Guide deleted";resetGuideAdminForm();loadAdminGuides()}catch(e){document.getElementById("guideAdminMessage").textContent=e.message}}document.getElementById("guideAdminForm").addEventListener("submit",async e=>{e.preventDefault();const id=guideAdminId.value;const body={name:guideAdminName.value.trim(),destination_id:guideAdminDestination.value,role:guideAdminRole.value.trim(),expertise:guideAdminExpertise.value.trim(),languages:guideAdminLanguages.value.trim(),specialties:guideAdminSpecialties.value.trim(),contact:guideAdminContact.value.trim(),profile_image:guideAdminImage.value.trim(),bio:guideAdminBio.value.trim()};try{const r=await fetch(`${API_URL}/guides${id?"/"+id:""}`,{method:id?"PUT":"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.message||"Save failed");document.getElementById("guideAdminMessage").textContent=d.message||"Guide saved";resetGuideAdminForm();loadAdminGuides()}catch(e){document.getElementById("guideAdminMessage").textContent=e.message}});loadAdminGuides();</script>
+document.getElementById("destinationsTable").addEventListener("click",e=>{const b=e.target.closest(".search-btn");if(b)window.editDestination(Number(b.dataset.id))});document.getElementById("destinationsTable").onclick=function(e){const b=e.target.closest("button");if(!b)return;const id=Number(b.dataset.id);if(b.textContent.trim()==="Edit")window.editDestination(id);if(b.textContent.trim()==="Delete")window.deleteDestination(id)};document.getElementById("destinationImage").addEventListener("input",e=>{const p=document.getElementById("destinationImagePreview");p.src=e.target.value.startsWith("images/")?"/"+e.target.value:e.target.value;p.style.display=e.target.value?"block":"none"});loadDestinations();async function loadAdminGuides(){const table=document.getElementById("guidesAdminTable"),msg=document.getElementById("guideAdminMessage");try{const r=await fetch(`${API_URL}/guides`,{headers:{Authorization:`Bearer ${token}`}});const d=await r.json();if(!r.ok)throw new Error(d.message||"Failed to load guides");window.adminGuides=d;table.innerHTML=d.map(g=>`<tr><td>${g.id}</td><td>${g.name||""}</td><td>${g.destination_id||""}</td><td>${g.role||""}</td><td>${g.languages||""}</td><td>${g.specialties||""}</td><td><button class="search-btn" type="button" onclick="editAdminGuide(${g.id})">Edit</button> <button class="refresh-btn" type="button" onclick="deleteAdminGuide(${g.id})">Delete</button></td></tr>`).join("")||`<tr><td colspan="7">No guides found.</td></tr>`}catch(e){msg.textContent=e.message}};function resetGuideAdminForm(){document.getElementById("guideAdminForm").reset();document.getElementById("guideAdminId").value=""}function editAdminGuide(id){const g=(window.adminGuides||[]).find(x=>x.id==id);if(!g)return;guideAdminId.value=g.id;guideAdminName.value=g.name||"";guideAdminDestination.value=g.destination_id||"";guideAdminRole.value=g.role||"";guideAdminExpertise.value=g.expertise||"";guideAdminLanguages.value=g.languages||"";guideAdminSpecialties.value=g.specialties||"";guideAdminContact.value=g.contact||"";guideAdminImage.value=g.profile_image||"";guideAdminBio.value=g.bio||"";document.getElementById("guideAdminForm").scrollIntoView({behavior:"smooth",block:"center"})}async function deleteAdminGuide(id){if(!confirm("Delete this guide profile?"))return;try{const r=await fetch(`${API_URL}/guides/${id}`,{method:"DELETE",headers:{Authorization:`Bearer ${token}`}});const d=await r.json();if(!r.ok)throw new Error(d.message||"Delete failed");document.getElementById("guideAdminMessage").textContent=d.message||"Guide deleted";resetGuideAdminForm();loadAdminGuides()}catch(e){document.getElementById("guideAdminMessage").textContent=e.message}}document.getElementById("guideAdminForm").addEventListener("submit",async e=>{e.preventDefault();const id=guideAdminId.value;const body={name:guideAdminName.value.trim(),destination_id:guideAdminDestination.value,role:guideAdminRole.value.trim(),expertise:guideAdminExpertise.value.trim(),languages:guideAdminLanguages.value.trim(),specialties:guideAdminSpecialties.value.trim(),contact:guideAdminContact.value.trim(),profile_image:guideAdminImage.value.trim(),bio:guideAdminBio.value.trim()};try{const r=await fetch(`${API_URL}/guides${id?"/"+id:""}`,{method:id?"PUT":"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.message||"Save failed");document.getElementById("guideAdminMessage").textContent=d.message||"Guide saved";resetGuideAdminForm();loadAdminGuides()}catch(e){document.getElementById("guideAdminMessage").textContent=e.message}});loadAdminGuides();
+// ============================
+// CINEMATIC EXPEDITION MANAGEMENT JS
+// ============================
+
+async function loadExpeditions(){
+    const table=document.getElementById("expeditionsTable");
+    const msg=document.getElementById("cinematicMessage");
+    try{
+        const r=await fetch(`${API_URL}/cinematic`,{headers:{Authorization:`Bearer ${token}`}});
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Failed to load expeditions");
+        window.adminExpeditions=d;
+        const categoryLabels={cinematic_expedition:"Cinematic Expedition",journey_film:"Journey Film",social_capture:"Social Capture"};
+        table.innerHTML=d.map(x=>`<tr><td>${x.id}</td><td>${x.title||""}</td><td>${categoryLabels[x.category]||x.category}</td><td>${x.tagline||""}</td><td>${x.features||""}</td><td><span class="role-badge role-${x.status}">${x.status}</span></td><td><div class="action-buttons"><button class="edit-btn" type="button" onclick="editExpedition(${x.id})">Edit</button><button class="delete-btn" type="button" onclick="deleteExpedition(${x.id})">Delete</button></div></td></tr>`).join("")||`<tr><td colspan="7">No expeditions found.</td></tr>`;
+    }catch(e){
+        msg.textContent=e.message;
+        table.innerHTML=`<tr><td colspan="7">Failed to load expeditions.</td></tr>`;
+    }
+}
+
+function resetCinematicForm(){
+    document.getElementById("cinematicForm").reset();
+    document.getElementById("cinematicId").value="";
+    document.getElementById("cinematicImagePreview").style.display="none";
+}
+
+function editExpedition(id){
+    const x=(window.adminExpeditions||[]).find(v=>v.id==id);
+    if(!x)return;
+    document.getElementById("cinematicId").value=x.id;
+    document.getElementById("cinematicTitle").value=x.title||"";
+    document.getElementById("cinematicCategory").value=x.category||"";
+    document.getElementById("cinematicTagline").value=x.tagline||"";
+    document.getElementById("cinematicDescription").value=x.description||"";
+    document.getElementById("cinematicFeatures").value=x.features||"";
+    document.getElementById("cinematicImage").value=x.image||"";
+    document.getElementById("cinematicPrice").value=x.price_range||"";
+    document.getElementById("cinematicStatus").value=x.status||"active";
+    if(x.image){
+        const p=document.getElementById("cinematicImagePreview");
+        p.src=x.image.startsWith("images/")?"/"+x.image:x.image;
+        p.style.display="block";
+    }
+    document.getElementById("cinematicForm").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function deleteExpedition(id){
+    if(!confirm("Delete this expedition?"))return;
+    try{
+        const r=await fetch(`${API_URL}/cinematic/${id}`,{method:"DELETE",headers:{Authorization:`Bearer ${token}`}});
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Delete failed");
+        document.getElementById("cinematicMessage").textContent=d.message||"Expedition deleted";
+        resetCinematicForm();
+        loadExpeditions();
+    }catch(e){
+        document.getElementById("cinematicMessage").textContent=e.message;
+    }
+}
+
+document.getElementById("cinematicForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const id=document.getElementById("cinematicId").value;
+    const body={
+        title:document.getElementById("cinematicTitle").value.trim(),
+        category:document.getElementById("cinematicCategory").value,
+        tagline:document.getElementById("cinematicTagline").value.trim(),
+        description:document.getElementById("cinematicDescription").value.trim(),
+        features:document.getElementById("cinematicFeatures").value.trim(),
+        image:document.getElementById("cinematicImage").value.trim(),
+        price_range:document.getElementById("cinematicPrice").value.trim(),
+        status:document.getElementById("cinematicStatus").value
+    };
+    try{
+        const r=await fetch(`${API_URL}/cinematic`+(id?`/${id}`:""),{
+            method:id?"PUT":"POST",
+            headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},
+            body:JSON.stringify(body)
+        });
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Save failed");
+        document.getElementById("cinematicMessage").textContent=d.message||"Expedition saved";
+        resetCinematicForm();
+        loadExpeditions();
+    }catch(e){
+        document.getElementById("cinematicMessage").textContent=e.message;
+    }
+});
+
+document.getElementById("cinematicImage").addEventListener("input",e=>{
+    const p=document.getElementById("cinematicImagePreview");
+    const v=e.target.value;
+    if(v){p.src=v.startsWith("images/")?"/"+v:v;p.style.display="block";}
+    else{p.style.display="none";}
+});
+
+// ============================
+// PRODUCTION INQUIRIES MANAGEMENT JS
+// ============================
+
+async function loadInquiries(){
+    const table=document.getElementById("inquiriesTable");
+    const msg=document.getElementById("inquiriesMessage");
+    try{
+        const r=await fetch(`${API_URL}/production-inquiries`,{headers:{Authorization:`Bearer ${token}`}});
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Failed to load inquiries");
+        window.adminInquiries=d;
+        if(!d.length){
+            table.innerHTML=`<tr><td colspan="9">No production inquiries yet.</td></tr>`;
+            return;
+        }
+        table.innerHTML=d.map(x=>{
+            const statusClass="status-"+x.status;
+            const dateStr=x.travel_date?new Date(x.travel_date).toLocaleDateString():"-";
+            const briefText=(x.brief||"").substring(0,60)+(x.brief&&x.brief.length>60?"...":"");
+            return `<tr>
+                <td>${x.id}</td>
+                <td>${x.package||""}</td>
+                <td>${x.name||""}</td>
+                <td>${x.email||""}</td>
+                <td>${x.destination||""}</td>
+                <td>${dateStr}</td>
+                <td class="td-brief" title="${(x.brief||"").replace(/"/g,"&quot;")}">${briefText}</td>
+                <td><span class="status-badge ${statusClass}">${x.status}</span></td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="search-btn" type="button" onclick="updateInquiryStatus(${x.id},'contacted')">Contacted</button>
+                        <button class="edit-btn" type="button" onclick="updateInquiryStatus(${x.id},'closed')">Close</button>
+                        <button class="delete-btn" type="button" onclick="deleteInquiry(${x.id})">Delete</button>
+                    </div>
+                </td>
+            </tr>`;
+        }).join("");
+    }catch(e){
+        msg.textContent=e.message;
+        table.innerHTML=`<tr><td colspan="9">Failed to load inquiries.</td></tr>`;
+    }
+}
+
+async function updateInquiryStatus(id,status){
+    try{
+        const r=await fetch(`${API_URL}/production-inquiries/${id}/status`,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},
+            body:JSON.stringify({status})
+        });
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Update failed");
+        document.getElementById("inquiriesMessage").textContent=d.message||"Status updated";
+        loadInquiries();
+    }catch(e){
+        document.getElementById("inquiriesMessage").textContent=e.message;
+    }
+}
+
+async function deleteInquiry(id){
+    if(!confirm("Delete this production inquiry?"))return;
+    try{
+        const r=await fetch(`${API_URL}/production-inquiries/${id}`,{
+            method:"DELETE",
+            headers:{Authorization:`Bearer ${token}`}
+        });
+        const d=await r.json();
+        if(!r.ok)throw new Error(d.message||"Delete failed");
+        document.getElementById("inquiriesMessage").textContent=d.message||"Inquiry deleted";
+        loadInquiries();
+    }catch(e){
+        document.getElementById("inquiriesMessage").textContent=e.message;
+    }
+}
+
+loadExpeditions();
+loadInquiries();
+</script>
 
 </body>
 </html>
-```

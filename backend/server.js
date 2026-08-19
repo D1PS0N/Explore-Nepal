@@ -12,6 +12,8 @@ const guideRoutes = require("./routes/guideRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
+const cinematicRoutes = require("./routes/cinematicRoutes");
+const productionInquiryRoutes = require("./routes/productionInquiryRoutes");
 
 const app = express();
 
@@ -33,6 +35,8 @@ app.use("/api/guides", guideRoutes);
 app.use("/api/favorites", favoriteRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/weather", weatherRoutes);
+app.use("/api/cinematic", cinematicRoutes);
+app.use("/api/production-inquiries", productionInquiryRoutes);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
