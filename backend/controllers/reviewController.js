@@ -52,7 +52,45 @@ const getReviews = (req, res) => {
     });
 };
 
+const getAllReviews = (req, res) => {
+    Review.getAll((err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({
+                success: false,
+                message: "Failed to load reviews"
+            });
+        }
+        res.status(200).json(results);
+    });
+};
+
+const deleteReview = (req, res) => {
+    const { id } = req.params;
+    Review.deleteById(id, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({
+                success: false,
+                message: "Failed to delete review"
+            });
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Review not found"
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Review deleted successfully"
+        });
+    });
+};
+
 module.exports = {
     addReview,
-    getReviews
+    getReviews,
+    getAllReviews,
+    deleteReview
 };

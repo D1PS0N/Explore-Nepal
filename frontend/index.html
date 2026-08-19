@@ -1044,6 +1044,9 @@ p{ line-height:var(--lh-body); }
 #gallery .gallery-card video{ display:block; width:100%; height:100%; object-fit:cover; }
 
 /* ---------- favorites ---------- */ .favorite-btn{position:absolute;top:14px;right:14px;z-index:10;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.95);color:#B4232C;font-size:25px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(20,23,28,.18);transition:transform .2s ease,background .2s ease,color .2s ease}.favorite-btn:hover{transform:scale(1.08);background:#fff}.favorite-btn.active{background:#B4232C;color:#fff}.dest-card{position:relative}
+
+
+
 </style>
 <style>
 /* Help Center typography refinement */
@@ -2562,6 +2565,124 @@ footer#contact{
 #recommendGrid .dest-card{ min-height:180px; }
 @media(max-width:1100px){ #recommendGrid .dest-card{ grid-column:span 3; } }
 @media(max-width:600px){ #recommendGrid .dest-card{ grid-column:span 6; min-height:160px; } }
+
+/* ---------- HELP CENTER CONTACT FORM ---------- */
+
+.help-contact{
+  max-width:650px;
+  margin:34px auto 0;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.14);
+  text-align:left;
+}
+
+.help-contact-title{
+  color:#fff;
+  font-family:var(--disp);
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.help-contact-subtitle{
+  color:rgba(255,255,255,.65);
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+
+.help-contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.help-contact-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.help-contact-form input,
+.help-contact-form textarea{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:8px;
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  padding:11px 13px;
+  font-family:var(--body);
+  font-size:13px;
+  outline:none;
+}
+
+.help-contact-form input{
+  height:44px;
+}
+
+.help-contact-form textarea{
+  min-height:92px;
+  resize:vertical;
+}
+
+.help-contact-form input::placeholder,
+.help-contact-form textarea::placeholder{
+  color:rgba(255,255,255,.48);
+}
+
+.help-contact-form input:focus,
+.help-contact-form textarea:focus{
+  border-color:rgba(240,166,63,.65);
+  background:rgba(255,255,255,.10);
+}
+
+.help-contact-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-top:2px;
+}
+
+.help-contact-actions button{
+  border:0;
+  border-radius:999px;
+  background:var(--marigold);
+  color:var(--ink);
+  padding:10px 18px;
+  font-family:var(--body);
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.help-contact-actions button:hover{
+  background:#ffc15d;
+  transform:translateY(-1px);
+}
+
+#contactInquiryMessage{
+  color:var(--marigold);
+  font-size:12px;
+}
+
+@media(max-width:700px){
+  .help-contact{
+    margin-top:28px;
+  }
+
+  .help-contact-row{
+    grid-template-columns:1fr;
+  }
+
+  .help-contact-actions{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:8px;
+  }
+}
+
 </style>
 
 </head>
@@ -3500,6 +3621,51 @@ footer#contact{
 </div>
 <div class="header-help-results" id="headerHelpResults"></div>
 <div class="header-help-answer" id="headerHelpAnswer"><strong id="headerHelpAnswerTitle"></strong><p id="headerHelpAnswerText"></p></div>
+
+<div class="help-contact">
+  <div class="help-contact-title">Still need help?</div>
+  <p class="help-contact-subtitle">
+    Send us a message and our team will get back to you.
+  </p>
+
+  <form id="contactInquiryForm" class="help-contact-form">
+
+    <div class="help-contact-row">
+      <input
+        type="text"
+        id="contactName"
+        placeholder="Your name"
+        required
+      />
+
+      <input
+        type="email"
+        id="contactEmail"
+        placeholder="Your email"
+        required
+      />
+    </div>
+
+    <input
+      type="text"
+      id="contactSubject"
+      placeholder="Subject"
+    />
+
+    <textarea
+      id="contactMessage"
+      placeholder="Tell us how we can help..."
+      rows="4"
+      required
+    ></textarea>
+
+    <div class="help-contact-actions">
+      <button type="submit">Send Message</button>
+      <div id="contactInquiryMessage"></div>
+    </div>
+
+  </form>
+</div>
 </div>
 </section>
 <div class="footer-visual">
@@ -3521,10 +3687,11 @@ footer#contact{
 <div class="f-col"><h4>Contact</h4><ul><li>info@explorenepal.com</li><li>+977-01-56489009</li><li>Kathmandu, Nepal</li></ul></div>
 </div>
 <div class="footer-bottom">
-<p>© 2026 Explore Nepal. All rights reserved.</p>
+<p>&copy; 2026 Explore Nepal. All rights reserved.</p>
 <ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul>
 </div>
 </div>
+
 </footer>
 <script>
 const API_BASE = 'https://explore-nepal-backend.onrender.com';
@@ -5892,7 +6059,35 @@ loadGuides("all");
 // ================================
 
 async function loadRecommendations(interests){const grid=document.getElementById("recommendGrid"),sub=document.getElementById("recSubhead"),dest=document.getElementById("destGrid");if(!grid||!dest||!sub)return;if(!interests||!interests.length){grid.style.display="none";sub.style.display="none";dest.style.display="grid";return;}dest.style.display="none";grid.style.display="grid";sub.style.display="";try{const r=await fetch(`${API_BASE}/api/destinations/recommendations?interests=${encodeURIComponent(interests.join(","))}`);const data=await r.json();if(!r.ok)throw new Error(data.message||"Failed to load recommendations");const imgs={Pokhara:"assets/image_01.jpg",Chitwan:"assets/image_03.jpg",Ghandruk:"assets/image_07.jpg",Solukhumbu:"assets/image_02.jpg",Bandipur:"assets/image_08.jpg",Kathmandu:"assets/image_04.png",Bhaktapur:"assets/image_05.png",Lalitpur:"assets/image_04.jpg",Mustang:"assets/image_05.jpg","Rara Lake":"assets/image_01.webp",Manang:"assets/image_06.jpg",Lumbini:"assets/image_06.png",Janakpur:"assets/image_09.jpg"};grid.innerHTML=data.map(function(d){const image=imgs[d.name]||"";return `<div class="dest-card has-photo" data-destination="${d.name||""}" role="button" tabindex="0"><img class="dest-card-photo" src="${image}" alt="${d.name||""}" onerror="this.style.display='none'"><div class="dest-inner"><div class="dest-loc">${d.location||""}</div><h3>${d.name||""}</h3><div class="dest-known"><span>Known for</span>${d.attractions||""}</div><span class="dest-open">Explore places</span></div></div>`}).join("");grid.querySelectorAll(".dest-card").forEach(function(card){card.onclick=function(){openDestination(card.dataset.destination);};card.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openDestination(card.dataset.destination);}};});}catch(e){console.error("Recommendation error:",e);grid.innerHTML="<p>Unable to load recommendations right now.</p>";}}document.getElementById("recommendGrid").addEventListener("click",function(e){const card=e.target.closest(".dest-card");if(card)openDestination(card.dataset.destination);});document.querySelectorAll(".interest-chip input").forEach(function(cb){cb.addEventListener("change",function(){cb.closest(".interest-chip").classList.toggle("checked",cb.checked);});});document.getElementById("getRecBtn").addEventListener("click",function(){const selected=Array.from(document.querySelectorAll(".interest-chip input:checked")).map(function(x){return x.value;});loadRecommendations(selected);});</script>
-<script>let activeReviewDestinationId=null;async function loadDestinationReviews(destinationId){const list=document.getElementById("destinationReviews");if(!list)return;list.innerHTML="<div class='journey-empty'>Loading reviews...</div>";try{const response=await fetch(`${API_BASE}/api/reviews/${destinationId}`);const reviews=await response.json();if(!response.ok)throw new Error("Unable to load reviews.");if(!reviews.length){list.innerHTML="<div class='journey-empty'>No reviews yet. Be the first to review this destination.</div>";return;}list.innerHTML=reviews.map(r=>`<div class="journey-card"><div class="journey-main"><strong>${escapeJourneyHTML(r.user_name||"Tourist")}</strong><div class="journey-meta">${"&#9733;".repeat(r.rating)}${"&#9734;".repeat(5-r.rating)}</div>${r.review?`<p>${escapeJourneyHTML(r.review)}</p>`:""}</div></div>`).join("");}catch(error){console.error("Destination reviews error:",error);list.innerHTML="<div class='journey-empty'>Unable to load reviews.</div>";}}async function submitDestinationReview(){const token=getAuthToken(),rating=document.getElementById("destinationReviewRating").value,review=document.getElementById("destinationReviewText").value.trim(),message=document.getElementById("destinationReviewMessage");if(!token){message.textContent="Please log in to submit a review.";return;}if(!activeReviewDestinationId||!rating){message.textContent="Please choose a rating.";return;}try{const response=await fetch(`${API_BASE}/api/reviews`,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({destination_id:activeReviewDestinationId,rating:Number(rating),review})});const data=await response.json();if(!response.ok)throw new Error(data.message||"Failed to submit review.");message.textContent="Review submitted successfully.";document.getElementById("destinationReviewRating").value="";document.getElementById("destinationReviewText").value="";await loadDestinationReviews(activeReviewDestinationId);}catch(error){console.error("Review submission error:",error);message.textContent=error.message;}}document.getElementById("destinationReviewSubmit")?.addEventListener("click",submitDestinationReview);</script></body>
+<script>let activeReviewDestinationId=null;async function loadDestinationReviews(destinationId){const list=document.getElementById("destinationReviews");if(!list)return;list.innerHTML="<div class='journey-empty'>Loading reviews...</div>";try{const response=await fetch(`${API_BASE}/api/reviews/${destinationId}`);const reviews=await response.json();if(!response.ok)throw new Error("Unable to load reviews.");if(!reviews.length){list.innerHTML="<div class='journey-empty'>No reviews yet. Be the first to review this destination.</div>";return;}list.innerHTML=reviews.map(r=>`<div class="journey-card"><div class="journey-main"><strong>${escapeJourneyHTML(r.user_name||"Tourist")}</strong><div class="journey-meta">${"&#9733;".repeat(r.rating)}${"&#9734;".repeat(5-r.rating)}</div>${r.review?`<p>${escapeJourneyHTML(r.review)}</p>`:""}</div></div>`).join("");}catch(error){console.error("Destination reviews error:",error);list.innerHTML="<div class='journey-empty'>Unable to load reviews.</div>";}}async function submitDestinationReview(){const token=getAuthToken(),rating=document.getElementById("destinationReviewRating").value,review=document.getElementById("destinationReviewText").value.trim(),message=document.getElementById("destinationReviewMessage");if(!token){message.textContent="Please log in to submit a review.";return;}if(!activeReviewDestinationId||!rating){message.textContent="Please choose a rating.";return;}try{const response=await fetch(`${API_BASE}/api/reviews`,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({destination_id:activeReviewDestinationId,rating:Number(rating),review})});const data=await response.json();if(!response.ok)throw new Error(data.message||"Failed to submit review.");message.textContent="Review submitted successfully.";document.getElementById("destinationReviewRating").value="";document.getElementById("destinationReviewText").value="";await loadDestinationReviews(activeReviewDestinationId);}catch(error){console.error("Review submission error:",error);message.textContent=error.message;}}document.getElementById("destinationReviewSubmit")?.addEventListener("click",submitDestinationReview);
+
+// ---------- Contact Inquiry Form ----------
+document.getElementById("contactInquiryForm")?.addEventListener("submit",async function(e){
+    e.preventDefault();
+    const msg=document.getElementById("contactInquiryMessage");
+    const name=document.getElementById("contactName").value.trim();
+    const email=document.getElementById("contactEmail").value.trim();
+    const subject=document.getElementById("contactSubject").value.trim();
+    const message=document.getElementById("contactMessage").value.trim();
+    if(!name||!email||!message){
+        msg.textContent="Please fill in all required fields.";
+        return;
+    }
+    try{
+        const response=await fetch(`${API_BASE}/api/contact-inquiries`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({name,email,subject,message})
+        });
+        const data=await response.json();
+        if(!response.ok)throw new Error(data.message||"Failed to send message.");
+        msg.textContent=data.message||"Message sent successfully!";
+        document.getElementById("contactInquiryForm").reset();
+    }catch(error){
+        msg.textContent=error.message||"Failed to send message.";
+    }
+});
+</script></body>
 </html>
 
 

@@ -23,6 +23,41 @@ const createBooking = (
     );
 };
 
+const getAllBookings = (callback) => {
+    const sql = `
+        SELECT b.id, b.user_id, b.destination_id, b.guide_id,
+               b.tour_date, b.notes, b.status, b.created_at,
+               u.full_name AS user_name, u.email AS user_email,
+               g.name AS guide_name,
+               d.name AS destination_name
+        FROM bookings b
+        LEFT JOIN users u ON b.user_id = u.id
+        LEFT JOIN guides g ON b.guide_id = g.id
+        LEFT JOIN destinations d ON b.destination_id = d.id
+        ORDER BY b.created_at DESC
+    `;
+    db.query(sql, callback);
+};
+
+const getBookingById = (id, callback) => {
+    const sql = "SELECT * FROM bookings WHERE id = ?";
+    db.query(sql, [id], callback);
+};
+
+const updateBookingStatus = (id, status, callback) => {
+    const sql = "UPDATE bookings SET status = ? WHERE id = ?";
+    db.query(sql, [status, id], callback);
+};
+
+const deleteBooking = (id, callback) => {
+    const sql = "DELETE FROM bookings WHERE id = ?";
+    db.query(sql, [id], callback);
+};
+
 module.exports = {
-    createBooking
+    createBooking,
+    getAllBookings,
+    getBookingById,
+    updateBookingStatus,
+    deleteBooking
 };

@@ -14,6 +14,7 @@ const reviewRoutes = require("./routes/reviewRoutes");
 const weatherRoutes = require("./routes/weatherRoutes");
 const cinematicRoutes = require("./routes/cinematicRoutes");
 const productionInquiryRoutes = require("./routes/productionInquiryRoutes");
+const contactInquiryRoutes = require("./routes/contactInquiryRoutes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/weather", weatherRoutes);
 app.use("/api/cinematic", cinematicRoutes);
 app.use("/api/production-inquiries", productionInquiryRoutes);
+app.use("/api/contact-inquiries", contactInquiryRoutes);
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
