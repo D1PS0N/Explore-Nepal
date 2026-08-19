@@ -3971,7 +3971,7 @@ const DESTINATION_DETAILS = {
   }
 };
 
-async function loadDestinationsFromAPI(){try{const r=await fetch(`${API_BASE}/api/destinations`);if(!r.ok)return;const api=await r.json();api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=x.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
+async function loadDestinationsFromAPI(){try{const r=await fetch(`${API_BASE}/api/destinations`);if(!r.ok)return;const api=await r.json();const imgs={Pokhara:"assets/image_01.jpg",Chitwan:"assets/image_03.jpg",Ghandruk:"assets/image_07.jpg",Solukhumbu:"assets/image_02.jpg",Bandipur:"assets/image_08.jpg",Kathmandu:"assets/image_04.png",Bhaktapur:"assets/image_05.png",Lalitpur:"assets/image_04.jpg",Mustang:"assets/image_05.jpg","Rara Lake":"assets/image_01.webp",Manang:"assets/image_06.jpg",Lumbini:"assets/image_06.png",Janakpur:"assets/image_09.jpg"};api.forEach(x=>{const d=DESTINATION_DETAILS[x.name];if(d){d.image=imgs[x.name]||d.image;d.intro=x.description;d.location=x.location;d.places=x.attractions.split(",").map(a=>[a.trim(),""]);}})}catch(e){console.error(e)}}
 function openDestination(name){
   const d = DESTINATION_DETAILS[name];
   if(!d) return;
