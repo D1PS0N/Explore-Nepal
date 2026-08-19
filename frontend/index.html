@@ -4443,11 +4443,31 @@ function updatePaymentInstructions(){
 
   if(!selected || !instructions) return;
 
- if(selected.value === 'eSewa'){
+if(selected.value === 'eSewa'){
   instructions.innerHTML = `
     <strong>eSewa Payment Details</strong><br>
     eSewa ID: 9812345678<br>
-    Account Name: Explore Nepal Tourism Pvt. Ltd.
+    Account Name: Explore Nepal Tourism Pvt. Ltd.<br>
+    Please enter your transaction/reference number below.
+  `;
+} else if(selected.value === 'Fonepay'){
+  instructions.innerHTML = `
+    <strong>Fonepay Payment Details</strong><br>
+    Fonepay Merchant: Explore Nepal Tourism Pvt. Ltd.<br>
+    Merchant ID: 9812345678<br>
+    Please enter your transaction/reference number below.
+  `;
+} else if(selected.value === 'Visa'){
+  instructions.innerHTML = `
+    <strong>Visa / Mastercard Payment</strong><br>
+    Enter your card details through the secure payment process.<br>
+    Your payment reference will be recorded with the booking.
+  `;
+} else if(selected.value === 'PayPal'){
+  instructions.innerHTML = `
+    <strong>PayPal Payment</strong><br>
+    PayPal Account: payments@explorenepal.example<br>
+    Please enter your PayPal transaction/reference number below.
   `;
 } else {
   instructions.innerHTML = `
@@ -4455,9 +4475,9 @@ function updatePaymentInstructions(){
     Global IME Bank<br>
     Account Name: Explore Nepal Tourism Pvt. Ltd.<br>
     Account Number: 02400101234567<br>
-    Branch: Thamel, Kathmandu
+    Branch: Thamel, Kathmandu<br>
+    Please enter your transaction/reference number below.
   `;
-}
 }
 
 document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
