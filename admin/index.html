@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -576,7 +576,7 @@ td:first-child {
     </div>
 
 <div class="dashboard-card" id="destinationManagement"><div class="top-bar"><h2>Destination Management</h2><button class="refresh-btn" onclick="loadDestinations()">Refresh</button></div><div id="destinationMessage" class="message"></div><form id="destinationForm"><input type="hidden" id="destinationId"><input id="destinationName" placeholder="Destination name" required><input id="destinationLocation" placeholder="Location"><textarea id="destinationDescription" placeholder="Description"></textarea><label for="destinationImage">Image</label><input id="destinationImage" placeholder="Image path e.g. images/pokhara.jpg"><img id="destinationImagePreview" style="display:none;width:180px;height:110px;object-fit:cover;border-radius:10px;margin:8px 0 14px;"><input id="destinationAttractions" placeholder="Attractions, comma separated"><button class="search-btn" type="submit">Save Destination</button><button class="refresh-btn" type="button" onclick="resetDestinationForm()">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Location</th><th>Image</th><th>Actions</th></tr></thead><tbody id="destinationsTable"><tr><td colspan="5">Loading destinations...</td></tr></tbody></table></div></div><div class="dashboard-card" id="guideManagement"><div class="top-bar"><h2>Guide Management</h2><button class="refresh-btn" type="button">Refresh</button></div><div id="guideAdminMessage" class="message"></div><form id="guideAdminForm"><input type="hidden" id="guideAdminId"><input id="guideAdminName" placeholder="Guide name" required><input id="guideAdminDestination" type="number" min="1" placeholder="Destination ID" required><input id="guideAdminRole" placeholder="Role"><input id="guideAdminExpertise" placeholder="Expertise"><input id="guideAdminLanguages" placeholder="Languages"><input id="guideAdminSpecialties" placeholder="Specialties"><input id="guideAdminContact" placeholder="Contact information"><input id="guideAdminImage" placeholder="Profile image path e.g. images/guide.jpg"><textarea id="guideAdminBio" placeholder="Bio"></textarea><button class="search-btn" type="submit">Save Guide Profile</button><button class="refresh-btn" type="button">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Destination</th><th>Role</th><th>Languages</th><th>Specialties</th><th>Actions</th></tr></thead><tbody id="guidesAdminTable"><tr><td colspan="7">Loading guides...</td></tr></tbody></table></div></div><div class="dashboard-card" id="cinematicManagement"><div class="top-bar"><h2>Cinematic Expedition Management</h2><button class="refresh-btn" type="button" onclick="loadExpeditions()">Refresh</button></div><div id="cinematicMessage" class="message"></div><form id="cinematicForm"><input type="hidden" id="cinematicId"><input id="cinematicTitle" placeholder="Title" required><select id="cinematicCategory" required><option value="">Select category</option><option value="cinematic_expedition">Cinematic Expedition</option><option value="journey_film">Journey Film</option><option value="social_capture">Social Capture</option></select><input id="cinematicTagline" placeholder="Tagline"><textarea id="cinematicDescription" placeholder="Description"></textarea><input id="cinematicFeatures" placeholder="Features, comma separated"><label for="cinematicImage">Image</label><input id="cinematicImage" placeholder="Image path e.g. images/cinematic.jpg"><img id="cinematicImagePreview" style="display:none;width:180px;height:110px;object-fit:cover;border-radius:10px;margin:8px 0 14px;"><input id="cinematicPrice" placeholder="Price range"><select id="cinematicStatus"><option value="active">Active</option><option value="inactive">Inactive</option></select><button class="search-btn" type="submit">Save Expedition</button><button class="refresh-btn" type="button" onclick="resetCinematicForm()">Clear</button></form><div class="table-wrap"><table><thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Tagline</th><th>Features</th><th>Status</th><th>Actions</th></tr></thead><tbody id="expeditionsTable"><tr><td colspan="7">Loading expeditions...</td></tr></tbody></table></div></div><div class="dashboard-card" id="inquiriesManagement"><div class="top-bar"><h2>Production Inquiries</h2><button class="refresh-btn" type="button" onclick="loadInquiries()">Refresh</button></div><div id="inquiriesMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Package</th><th>Name</th><th>Email</th><th>Destination</th><th>Travel Date</th><th>Brief</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inquiriesTable"><tr><td colspan="9">Loading inquiries...</td></tr></tbody></table></div></div></div>
-<div class="dashboard-card" id="bookingManagement"><div class="top-bar"><h2>Booking Management</h2><button class="refresh-btn" type="button" onclick="loadBookings()">Refresh</button></div><div id="bookingsMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Tourist</th><th>Guide</th><th>Destination</th><th>Tour Date</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="bookingsTable"><tr><td colspan="8">Loading bookings...</td></tr></tbody></table></div></div>
+<div class="dashboard-card" id="bookingManagement"><div class="top-bar"><h2>Booking Management</h2><button class="refresh-btn" type="button" onclick="loadBookings()">Refresh</button></div><div id="bookingsMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Tourist</th><th>Guide</th><th>Destination</th><th>Tour Date</th><th>Status</th><th>Payment</th><th>Reference</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="bookingsTable"><tr><td colspan="10">Loading bookings...</td></tr></tbody></table></div></div>
 <div class="dashboard-card" id="reviewsManagement"><div class="top-bar"><h2>Reviews &amp; Ratings</h2><button class="refresh-btn" type="button" onclick="loadAllReviews()">Refresh</button></div><div id="reviewsMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>User</th><th>Destination</th><th>Rating</th><th>Review</th><th>Date</th><th>Actions</th></tr></thead><tbody id="reviewsTable"><tr><td colspan="7">Loading reviews...</td></tr></tbody></table></div></div>
 <div class="dashboard-card" id="contactInquiriesManagement"><div class="top-bar"><h2>Contact Inquiries</h2><button class="refresh-btn" type="button" onclick="loadContactInquiries()">Refresh</button></div><div id="contactInquiriesMessage" class="message"></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="contactInquiriesTable"><tr><td colspan="8">Loading inquiries...</td></tr></tbody></table></div></div>
 </main>
@@ -1011,7 +1011,7 @@ async function loadBookings(){
         if(!r.ok)throw new Error(d.message||"Failed to load bookings");
         window.adminBookings=d;
         if(!d.length){
-            table.innerHTML=`<tr><td colspan="8">No bookings found.</td></tr>`;
+            table.innerHTML=`<tr><td colspan="10">No bookings found.</td></tr>`;
             return;
         }
         table.innerHTML=d.map(b=>{
@@ -1024,20 +1024,28 @@ async function loadBookings(){
                 <td>${b.destination_name||"Dest #"+b.destination_id}</td>
                 <td>${dateStr}</td>
                 <td><span class="status-badge ${statusClass}">${b.status}</span></td>
-                <td class="td-brief" title="${(b.notes||"").replace(/"/g,"&quot;")}">${(b.notes||"").substring(0,30)}${b.notes&&b.notes.length>30?"...":""}</td>
+<td>
+    <strong>${b.payment_method || "Not selected"}</strong>
+    <br>
+    <small>${b.payment_status || "Pending"}</small>
+</td>
+<td>${b.payment_reference || "-"}</td>
+<td class="td-brief" title="${(b.notes||"").replace(/"/g,"&quot;")}">${(b.notes||"").substring(0,30)}${b.notes&&b.notes.length>30?"...":""}</td>
                 <td>
                     <div class="action-buttons">
-                        <button class="search-btn" type="button" onclick="updateBookingStatus(${b.id},'confirmed')">Confirm</button>
-                        <button class="edit-btn" type="button" onclick="updateBookingStatus(${b.id},'completed')">Complete</button>
-                        <button class="refresh-btn" type="button" onclick="updateBookingStatus(${b.id},'cancelled')">Cancel</button>
-                        <button class="delete-btn" type="button" onclick="deleteBooking(${b.id})">Delete</button>
+                       <button class="search-btn" type="button" onclick="updateBookingStatus(${b.id},'confirmed')">Confirm</button>
+<button class="edit-btn" type="button" onclick="updateBookingStatus(${b.id},'completed')">Complete</button>
+<button class="refresh-btn" type="button" onclick="updateBookingStatus(${b.id},'cancelled')">Cancel</button>
+<button class="search-btn" type="button" onclick="updatePaymentStatus(${b.id},'paid')">Mark Paid</button>
+<button class="refresh-btn" type="button" onclick="updatePaymentStatus(${b.id},'rejected')">Reject Payment</button>
+<button class="delete-btn" type="button" onclick="deleteBooking(${b.id})">Delete</button>
                     </div>
                 </td>
             </tr>`;
         }).join("");
     }catch(e){
         msg.textContent=e.message;
-        table.innerHTML=`<tr><td colspan="8">Failed to load bookings.</td></tr>`;
+        table.innerHTML=`<tr><td colspan="10">Failed to load bookings.</td></tr>`;
     }
 }
 
@@ -1054,6 +1062,33 @@ async function updateBookingStatus(id,status){
         loadBookings();
     }catch(e){
         document.getElementById("bookingsMessage").textContent=e.message;
+    }
+}
+
+async function updatePaymentStatus(id, paymentStatus){
+    try{
+        const r = await fetch(`${API_URL}/bookings/${id}/payment-status`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ paymentStatus })
+        });
+
+        const d = await r.json();
+
+        if(!r.ok){
+            throw new Error(d.message || "Payment update failed");
+        }
+
+        document.getElementById("bookingsMessage").textContent =
+            d.message || "Payment status updated";
+
+        loadBookings();
+
+    }catch(e){
+        document.getElementById("bookingsMessage").textContent = e.message;
     }
 }
 
@@ -1212,3 +1247,6 @@ loadContactInquiries();
 
 </body>
 </html>
+
+
+

@@ -7,11 +7,13 @@ const createNewBooking = (req, res) => {
     const userId = req.user.id;
 
     const {
-        destinationId,
-        guideId,
-        tourDate,
-        notes
-    } = req.body;
+    destinationId,
+    guideId,
+    tourDate,
+    notes,
+    paymentMethod,
+    paymentReference
+} = req.body;
 
     // Validate required fields
     if (!destinationId || !guideId || !tourDate) {
@@ -22,12 +24,14 @@ const createNewBooking = (req, res) => {
     }
 
     createBooking(
-        userId,
-        destinationId,
-        guideId,
-        tourDate,
-        notes || null,
-        (err, result) => {
+    userId,
+    destinationId,
+    guideId,
+    tourDate,
+    notes || null,
+    paymentMethod || null,
+    paymentReference || null,
+    (err, result) => {
 
             if (err) {
                 console.error("Booking creation error:", err);
@@ -94,6 +98,42 @@ const updateBookingStatus = (req, res) => {
     });
 };
 
+const updateBookingPaymentStatus = (req, res) => {
+    const { id } = req.params;
+    const { paymentStatus } = req.body;
+
+    const validStatuses = ["pending", "paid", "rejected"];
+
+    if (!validStatuses.includes(paymentStatus)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid payment status"
+        });
+    }
+
+    bookingModel.updatePaymentStatus(id, paymentStatus, (err, result) => {
+        if (err) {
+            console.error("Payment status error:", err);
+            return res.status(500).json({
+                success: false,
+                message: "Failed to update payment status"
+            });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Booking not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Payment status updated"
+        });
+    });
+};
+
 const deleteBooking = (req, res) => {
     const { id } = req.params;
     bookingModel.deleteBooking(id, (err, result) => {
@@ -121,5 +161,6 @@ module.exports = {
     createNewBooking,
     getAllBookings,
     updateBookingStatus,
+    updateBookingPaymentStatus,
     deleteBooking
 };

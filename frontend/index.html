@@ -563,6 +563,35 @@ header.hero{
 .pay-paypal{ background:#003087; }
 .pay-paypal .pal{ color:#00A6E4; font-style:italic; }
 .pay-label{ font-family:var(--mono); font-size:11.5px; color:var(--ink-mute); margin-right:2px; }
+/* ADD HERE */
+.payment-options{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.payment-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 14px;
+  border:1px solid rgba(20,23,28,.15);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  background:#fff;
+}
+
+.payment-option input{
+  accent-color:var(--green);
+}
+
+.payment-option:has(input:checked){
+  border-color:var(--green);
+  background:rgba(35,119,75,.08);
+}
+
+/* END ADD */
 .g-avatar{
   width:50px;
   height:50px;
@@ -3590,13 +3619,33 @@ footer#contact{
 </div>
 <div class="field"><label for="bookGroup">Group size</label><input id="bookGroup" min="1" type="number" value="2"/></div>
 <div class="field"><label for="bookNote">Note to guide</label><input id="bookNote" placeholder="Fitness level, dates flexible, etc."/></div>
-<div class="pay-row" style="margin:4px 0 16px">
-<span class="pay-label">Pay with</span>
-<span class="pay-badge pay-visa">VISA</span>
-<span class="pay-badge pay-esewa">eSewa</span>
-<span class="pay-badge pay-fonepay">fonepay</span>
-<span class="pay-badge pay-paypal">Pay<span class="pal">Pal</span></span>
+<div class="field">
+<label>Payment method</label>
+<div class="payment-options">
+<label class="payment-option">
+<input type="radio" name="paymentMethod" value="Bank Transfer" checked>
+<span>Bank Transfer</span>
+</label>
+<label class="payment-option">
+<input type="radio" name="paymentMethod" value="eSewa">
+<span>eSewa</span>
+</label>
 </div>
+</div>
+
+<div id="paymentInstructions" style="margin:8px 0 16px;padding:12px;border-radius:8px;background:rgba(35,119,75,.08);font-size:13px;color:var(--ink-soft);">
+  <strong>Bank Transfer Details</strong><br>
+  Global IME Bank<br>
+  Account Name: Explore Nepal Tourism Pvt. Ltd.<br>
+  Account Number: 02400101234567<br>
+  Branch: Thamel, Kathmandu<br>
+</div>
+
+<div class="field">
+  <label for="paymentReference">Payment reference <span style="font-weight:500;color:var(--ink-mute)">(optional)</span></label>
+  <input id="paymentReference" type="text" placeholder="Transaction/reference number">
+</div>
+
 <button class="btn btn-primary" onclick="mockBook()">Send request</button>
 </div>
 </div>
@@ -4376,6 +4425,33 @@ Object.assign(GUIDE_STATUS_BY_NAME, {
 let isLoggedIn = false;
 let pendingBooking = null;
 
+function updatePaymentInstructions(){
+  const selected = document.querySelector('input[name="paymentMethod"]:checked');
+  const instructions = document.getElementById('paymentInstructions');
+
+  if(!selected || !instructions) return;
+
+ if(selected.value === 'eSewa'){
+  instructions.innerHTML = `
+    <strong>eSewa Payment Details</strong><br>
+    eSewa ID: 9812345678<br>
+    Account Name: Explore Nepal Tourism Pvt. Ltd.
+  `;
+} else {
+  instructions.innerHTML = `
+    <strong>Bank Transfer Details</strong><br>
+    Global IME Bank<br>
+    Account Name: Explore Nepal Tourism Pvt. Ltd.<br>
+    Account Number: 02400101234567<br>
+    Branch: Thamel, Kathmandu
+  `;
+}
+}
+
+document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+  input.addEventListener('change', updatePaymentInstructions);
+});
+
 function showBookingModal(name, loc, guideId, destinationId){
   document.getElementById('bookGuideName').textContent = name;
   document.getElementById('bookGuideLoc').textContent = loc;
@@ -4588,6 +4664,8 @@ async function mockBook(){
   const startDate = document.getElementById('bookDate').value;
   const groupSize = document.getElementById('bookGroup').value || '1';
   const note = document.getElementById('bookNote').value.trim();
+const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'Bank Transfer';
+const paymentReference = document.getElementById('paymentReference')?.value.trim() || '';
 
   if(!startDate){
     showToast('Choose a start date before sending your request.', 'error');
@@ -4613,11 +4691,13 @@ async function mockBook(){
         'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify({
-        destinationId: destinationId,
-        guideId: guideId,
-        tourDate: startDate,
-        notes: bookingNotes
-      })
+  destinationId: destinationId,
+  guideId: guideId,
+  tourDate: startDate,
+  notes: bookingNotes,
+  paymentMethod: paymentMethod,
+  paymentReference: paymentReference
+})
     });
 
     const data = await response.json();
