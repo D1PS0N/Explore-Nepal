@@ -3,6 +3,7 @@ const destinationModel = require("../models/destinationModel");
 const getDestinations = (req, res) => {
     destinationModel.getAllDestinations((err, results) => {
         if (err) {
+            console.error("DESTINATIONS ERROR:", err);
             return res.status(500).json({
                 message: "Error fetching destinations"
             });
